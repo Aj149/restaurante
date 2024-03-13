@@ -1,0 +1,40 @@
+
+  <div class="fondo sombra col-lg-4 col-md-8 col-sm-7 col-11 shadowss position-absolute top-50 start-50 translate-middle rounded-3  border-black">
+        <div class="container rounded-top-3 p-2">
+            <div class="row">
+              <div class="col-6 text-light text-center">
+                <h4 class="mt-lg-4 mt-md-4">INGRESO</h4>
+                <h6>Bienvenidos al <i>BLOCK</i></h6>
+              </div>
+              <div class="col-6">
+                <img width="50%" class="rounded-4" src="https://image.lexica.art/full_webp/52fe994b-660e-41e2-a8f1-f621a719a781">
+              </div>
+            </div>
+          </div>
+        <form class="custom-form p-3" method="post">
+            <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label text-light">NOMBRE DE USUARIO</label>
+          <input class="form-control" type="nombreUsuario" [(ngModel)]="NombreUsuario" name="nombreUsuario" placeholder="nombreUsuario" required="required"/>
+        </div>
+        <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label text-light mt-2">CLAVE</label>
+          <input
+          class="form-control"
+          [type]="hide ? 'password' : 'text'"
+            [(ngModel)]="clave"
+            name="clave"
+            placeholder="clave"
+            required="clave"
+          />
+        </div>
+        <div class="text-center mt-3">
+          <button class="rounded w-50 bg-dark text-light" href="/" type="submit" (click)="Acceder()">Acceder</button>
+          <div class="mt-2">
+          <a class="text-black" [routerLink]="['./register']">Regístrate</a>
+        </div>
+
+        </div>
+        </form>
+</div>
+
+

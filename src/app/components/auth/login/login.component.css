@@ -1,0 +1,6 @@
+.sombra {
+    box-shadow: -20px 20px 8px -8px rgba(0, 0, 0, 0.5);
+  }
+  .fondo{
+    background-image: url("fondo.jpg");
+}
