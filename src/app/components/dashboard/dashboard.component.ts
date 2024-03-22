@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 
 
 
+
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -19,4 +20,5 @@ export class DashboardComponent {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   }
+  
 }

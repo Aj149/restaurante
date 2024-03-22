@@ -1,26 +1,20 @@
-.fondo::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
+/* texto conoce... */
+.uno {
+  position: fixed;
   width: 100%;
-  height: 100%;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+  top: 0;
+  z-index: 1002; /* Ajusta este valor según sea necesario */
 }
 
-hr{
-  opacity: 1;
-}
-
-
-  
-    
+/* texto principal */
     .nose {
       font-family: "Dancing Script", cursive;
       font-optical-sizing: auto;
       font-weight: 600;
       font-style: normal;
     }
+
+    /* texto descriptivo */
     .dancing-script-personal {
       font-family: "Dancing Script", cursive;
       font-optical-sizing: auto;
@@ -32,11 +26,41 @@ hr{
   font-weight: 400;
   font-style: normal;
     }
-
+    
+/* navbar fijo */
     .navbar {
       position: fixed;
       width: 100%;
-      top: 0;
-      z-index: 1000; /* Ajusta este valor según sea necesario */
+      top: 30px;
+      z-index: 1001; 
+    }
+
+    /* imagen fondo carrusel */
+    .parallax {
+      background-image: url("../../../assets/special_menu_bg.jpg");
+    
+      background-attachment: fixed;
+      
+      background-size: cover;
+    
+      height: 550px;
+    }
+    /* fondo principal */
+    .parallax1 {
+      /* La imagen de fondo */
+      background-image: url("../../../assets/banner.jpg");
+    
+      background-attachment: fixed;
+    
+      background-size: cover;
+    
+      height: 700px;
+    
+      @media (max-width: 768px) {
+
+        height: 400px;
+      }
     }
     
+
+   
