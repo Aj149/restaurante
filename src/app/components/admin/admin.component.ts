@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet} from '@angular/router';
+import { ListReservasComponent } from './list-reservas/list-reservas.component';
 
 @Component({
   selector: 'app-admin',

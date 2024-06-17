@@ -4,7 +4,8 @@ import { FormularioService } from '../../../services/formulario.service';
 import { reserva } from '../../../models/reserva';
 import { BuscadorPipe } from '../../../pipe/buscador.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { BehaviorSubject, Subject, debounceTime, distinctUntilChanged } from 'rxjs';
+import { BehaviorSubject, Subject, debounceTime, distinctUntilChanged, timeout } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-reservas',
@@ -80,23 +81,41 @@ ngOnInit(): void {
     });
   }
 
-
-
-borrar(id_reserva: number) {
-  if (confirm('¿Está seguro que desea eliminar la reserva?')) {
-    this.formularioService.delete(id_reserva).subscribe({
-      next: (response: any) => {
-        console.log('reserva eliminada correctamente', response);
-        alert('Reserva eliminada correctamente');
-        window.location.reload();
-        this.cargarReservas();
-      },
-      error: (error: any) => {
-        console.error('Error al eliminar la reserva', error);
-        alert('Error al eliminar la reserva');
-      }
-    });
-  }
+  borrar(id_reserva: number): void {
+  Swal.fire({
+    title: "¿Estás seguro?",
+    text: "¿Deseas eliminar este registro?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sí, eliminar",
+    cancelButtonText: "Cancelar"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.formularioService.delete(id_reserva).subscribe({
+        next: (response: any) => {
+          console.log('Usuario eliminado correctamente', response);
+          Swal.fire(
+            'Eliminado!',
+            'El registro ha sido eliminado correctamente.',
+            'success'
+          );
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000);
+        },
+        error: (error: any) => {
+          console.error('Error al eliminar el registro', error);
+          Swal.fire(
+            'Error!',
+            'Hubo un problema al eliminar el registro.',
+            'error'
+          );
+        }
+      });
+    }
+  });
 }
 
 }

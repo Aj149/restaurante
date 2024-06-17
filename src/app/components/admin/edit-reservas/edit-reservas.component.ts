@@ -22,7 +22,7 @@ export class EditReservasComponent {
     lugar:'',
     n_personas: 0,
     fecha: new Date(),
-    hora: "",
+    hora: '',
   }
 
   constructor(
@@ -67,19 +67,22 @@ export class EditReservasComponent {
         this.formularioService.update(id_reserva, this.reservas).subscribe(
           (data: any) => {
             this.toastr.success(data.message, 'Reserva editada correctamente', {
-              timeOut: 3000, positionClass: 'toast-top-center'
+              timeOut: 7000, positionClass: 'toast-top-center'
             });
             this.volver();
           },
           (err: any) => {
             this.toastr.error(err.error.message, 'El error es:', {
-              timeOut: 3000, positionClass: 'toast-top-center',
+              timeOut: 7000, positionClass: 'toast-top-center',
             });
           }
         );
       }
     });
   }
+
+
+
 
   volver(): void {
     this.router.navigate(['/admin/listaDeReservas']);

@@ -1,4 +1,4 @@
-<div class="container">
+
   <h1 class="mt-3">Reservas</h1>
 <div class="search-bar w-25 mt-3">
   <input type="text" class="search" style="border: 1px dashed #000;" class="form-control" placeholder="BUSCAR RESERVA" (keyup)="onSearch($event)">
@@ -44,5 +44,3 @@
   </table>
   <pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente">
   </pagination-controls>
-</div>
-<router-outlet></router-outlet>
