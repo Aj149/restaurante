@@ -1,0 +1,34 @@
+/* logos de redes */
+.redes {
+    width: 35px;
+  }
+  .nautilus {
+    font-family: 'Nautilus Pompilius';
+  }
+  .roboto{
+    font-family: 'Roboto';
+  }
+  .parallax3 {
+    position: relative; /* Añade posición relativa para poder ajustar el z-index */
+    background-attachment: fixed;
+    background-size: cover;
+    height: 400px;
+    z-index: 0; /* Ajusta el z-index para que sea inferior al de la imagen overlay */
+    @media (max-width: 768px) {
+      height: 300px;
+    }
+  }
+  .overlay1 {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 95%;
+    background-image: url(../../../../assets/footer_background.png);
+    z-index: 1;
+    @media screen and (max-width: 992px) {
+      height: 520px;
+  }
+    @media screen and (max-width: 576px) {
+      height: 720px;
+   }
+  }

@@ -1,32 +1,43 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { NavigationStart, Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { routes } from '../../../app.routes';
+import { AuthService } from '../../../services/auth.service';
+import { filter } from 'rxjs/operators';
+
+
+
+
+
+
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule,CommonModule, RouterLink],
+  imports: [FormsModule,CommonModule, RouterLink ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  NombreUsuario: string = '';
-  clave: string = '';
-  hide: boolean = true;
+  nombreUsuario: string = 'adrian';
+  clave: string = 'asdf';
+  hide = true;
+  
+  
 
-  constructor(private router: Router) {
-    this.NombreUsuario = "";
-    this.clave = "";
-    this.hide = true;
+  constructor(private router: Router, private authService: AuthService) {
+   
   }
 
+  
+  login(){
 
-
-
-  Acceder(){
-this.router.navigate(['/dashboard']);
   }
-}
+
+ 
+  }
+  
+  
+
+
 

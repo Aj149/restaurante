@@ -14,7 +14,7 @@
         <form class="custom-form p-3" method="post">
             <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label text-light">NOMBRE DE USUARIO</label>
-          <input class="form-control" type="nombreUsuario" [(ngModel)]="NombreUsuario" name="nombreUsuario" placeholder="nombreUsuario" required="required"/>
+          <input class="form-control" type="nombreUsuario" [(ngModel)]="nombreUsuario" name="nombreUsuario" placeholder="nombreUsuario" required="required"/>
         </div>
         <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label text-light mt-2">CLAVE</label>
@@ -28,10 +28,7 @@
           />
         </div>
         <div class="text-center mt-3">
-          <button class="rounded w-50 bg-dark text-light" href="/" type="submit" (click)="Acceder()">Acceder</button>
-          <div class="mt-2">
-          <a class="text-black" [routerLink]="['./register']">Regístrate</a>
-        </div>
+          <button class="rounded w-50 bg-dark text-light" type="submit" (click)="login()">Acceder</button>
 
         </div>
         </form>

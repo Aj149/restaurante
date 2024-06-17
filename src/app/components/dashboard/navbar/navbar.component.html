@@ -1,0 +1,45 @@
+<h5 class="uno text-center p-1 text-light fixed-top" style="background-color: rgb(231, 91, 30); width: 100%;">
+  <i class="conoce"> CONOCE UN NUEVO MUNDO</i>
+</h5>
+
+  <nav class="w-100 navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDark"
+        aria-controls="navbarDark" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- En tu archivo HTML -->
+      <div class="collapse navbar-collapse show" id="navbarDark">
+        <ul class="navbar-nav me-auto mb-2 mb-xl-0 mx-auto">
+          <li>
+            <img src="../../../assets/logo.png" class="w-75" alt="">
+          </li>
+          <li class="nav-item ms-lg-5">
+            <button class="nav-link active conoce" aria-current="page" (click)="scrollTo('INICIO')" routerLink="/dashboard">INICIO</button>
+          </li>
+          <li class="nav-item ms-lg-5">
+            <button class="nav-link active conoce" aria-current="page" routerLink="/dashboard" (click)="scrollTo('NOSOTROS')">SOBRE NOSOTROS</button>
+          </li>
+          <li class="nav-item ms-lg-5">
+            <button class="nav-link active conoce" aria-current="page"
+              routerLink="/dashboard" (click)="scrollTo('ESPECIALIDADES')">ESPECIALIDADES</button>
+          </li>
+          <li class="nav-item ms-lg-5">
+            <button class="nav-link active conoce" aria-current="page"
+              routerLink="/dashboard" (click)="scrollTo('INSTALACIONES')">INSTALACIONES</button>
+          </li>
+          <li class="nav-item ms-lg-5">
+            <button class="nav-link active conoce" aria-current="page"
+              routerLink="/dashboard" (click)="scrollTo('PERSONAL')">PERSONAL</button>
+          </li>
+          <li class="nav-item ms-lg-5">
+            <button class="nav-link active conoce" aria-current="page"
+              routerLink="/dashboard" (click)="scrollTo('RESERVAR')">RESERVACIONES</button>
+          </li>
+          <li class="nav-item ms-lg-5">
+            <img class="redes" src="../../../assets/administrador.png" routerLink="/login" alt="">
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>

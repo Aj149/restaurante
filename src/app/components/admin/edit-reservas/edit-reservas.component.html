@@ -1,0 +1,47 @@
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-4 mx-auto">
+                <form (ngSubmit)="Update()">
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre"
+                        [(ngModel)]="reservas.nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Telefono</label>
+                        <input type="number" class="form-control" id="telf" name="telefono"
+                        [(ngModel)]="reservas.telefono" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Numero de personas</label>
+                        <input type="text" class="form-control" id="N_personas" name="N_personas"
+                        [(ngModel)]="reservas.n_personas" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Hora</label>
+                        <input type="text" class="form-control" id="hora" name="hora"
+                        [(ngModel)]="reservas.hora" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Email</label>
+                        <input type="email" class="form-control" id="correo" name="correo"
+                        [(ngModel)]="reservas.email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Lugar</label>
+                        <input type="text" class="form-control" id="lugar" name="lugar"
+                        [(ngModel)]="reservas.lugar" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Fecha</label>
+                        <input type="date" class="form-control" id="fecha" name="fecha"
+                        [(ngModel)]="reservas.fecha" required>
+                    </div>
+                    <button type="submit" class="color-boton border-0 mt-4 rounded-pill mb-1 w-100 p-2 h4">Editar</button>
+                  <button class="btn btn-danger border-0 mt-4 rounded-pill mb-1 text-white w-100 p-2" (click)="volver()">volver</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<router-outlet></router-outlet>

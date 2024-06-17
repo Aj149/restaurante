@@ -1,0 +1,13 @@
+.navbar {
+  width: 100%;
+  position: fixed;
+  top: 30px;
+  z-index: 1000; /* Cambia el valor de z-index */
+}
+.uno {
+  position: fixed;
+  z-index: 1001; /* Asegúrate de que el z-index del texto sea mayor */
+}
+.redes {
+  width: 35px;
+}

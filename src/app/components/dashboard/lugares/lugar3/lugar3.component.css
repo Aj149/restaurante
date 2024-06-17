@@ -1,0 +1,58 @@
+.lugar1 {
+    margin-top: 10%;
+  }
+  
+  .nautilus {
+    font-family: 'Nautilus Pompilius';
+  }
+  .roboto{
+    font-family: 'Roboto';
+  }
+  
+  .fondo {
+    background-image: url('../../../../../assets/formulario.png');
+  
+  }
+  
+  /* carrusel con texto */
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .cards_item {
+    display: flex;
+    padding: 1rem;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .card_image {
+    max-height: 450px;
+    margin-top: -24px;
+    img {
+      object-fit: cover;
+    }
+  }
+  
+  .card {
+    background: linear-gradient(to top, rgb(0, 0, 0), transparent), rgb(0, 0, 0);
+    box-shadow: 0 -20px 40px -14px rgb(0, 0, 0);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  .card_content {
+    z-index: 1;
+    box-shadow: rgb(0, 0, 0) -5px -15px 15px;
+  }
+  
+  .card_title {
+    font-family: 'Lobster', cursive;
+    font-size: 72px;
+    margin-top: -60px;
+  }

@@ -1,17 +1,11 @@
-/* texto conoce... */
-.uno {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1002; /* Ajusta este valor según sea necesario */
-}
 
+/* fuentes de texto */
 /* texto principal */
-    .nose {
-      font-family: "Dancing Script", cursive;
-      font-optical-sizing: auto;
-      font-weight: 600;
-      font-style: normal;
+    .nautilus {
+      font-family: 'Nautilus Pompilius';
+    }
+    .roboto{
+      font-family: 'Roboto';
     }
 
     /* texto descriptivo */
@@ -26,41 +20,322 @@
   font-weight: 400;
   font-style: normal;
     }
-    
-/* navbar fijo */
-    .navbar {
-      position: fixed;
-      width: 100%;
-      top: 30px;
-      z-index: 1001; 
-    }
+  
+  /* fuentes termina */
 
+  /* fondos efecto parallax */
     /* imagen fondo carrusel */
     .parallax {
-      background-image: url("../../../assets/special_menu_bg.jpg");
-    
+      background-image: url("../../../assets/fondo_carrusel.png");
       background-attachment: fixed;
-      
       background-size: cover;
-    
       height: 550px;
+      @media (max-width: 768px) {
+        height: 450px;
+      }
     }
+    
     /* fondo principal */
     .parallax1 {
-      /* La imagen de fondo */
       background-image: url("../../../assets/banner.jpg");
-    
       background-attachment: fixed;
-    
       background-size: cover;
-    
       height: 700px;
-    
       @media (max-width: 768px) {
-
+        height: 400px;
+      }
+    }
+    /* fondo del team */
+    .parallax2{
+      background-image: url("../../../assets/team_bj.png");
+      background-attachment: fixed;
+      background-size: cover;
+      height: 700px;
+      @media (max-width: 768px) {
+        height: 600px;
+      }
+    }
+    /* fondo del footer junto con el overlay */
+    .parallax3 {
+      position: relative; /* Añade posición relativa para poder ajustar el z-index */
+      background-image: url("../../../assets/fondo_email.png");
+      background-attachment: fixed;
+      background-size: cover;
+      height: 400px;
+      z-index: 0; /* Ajusta el z-index para que sea inferior al de la imagen overlay */
+      @media (max-width: 768px) {
         height: 400px;
       }
     }
     
-
    
+
+/* hover imagenes de carrucel */
+    .hovereffect {
+      width: 150%;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+      text-align: center;
+      cursor: default;
+      border-radius: 10px;
+    }
+    .hovereffect .overlay {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+  
+    }   
+    .hovereffect img {
+      -webkit-transition: all 0.4s ease-in;
+      transition: all 0.4s ease-in;
+    }
+    .hovereffect:hover img {
+      filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feColorMatrix type="matrix" color-interpolation-filters="sRGB" values="0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0 0 0 1 0" /><feGaussianBlur stdDeviation="3" /></filter></svg>#filter');
+      filter: grayscale(1) blur(3px);
+      -webkit-filter: grayscale(1) blur(3px);
+      -webkit-transform: scale(1.2);
+      -ms-transform: scale(1.2);
+      transform: scale(1.2);
+    }
+    .hovereffect h2 {
+      text-transform: uppercase;
+      text-align: center;
+      position: relative;
+      font-size: 17px;
+      padding: 10px;
+      margin: 10px 0 0 0;
+      background: rgba(0, 0, 0, 0.6);
+    }
+    .hovereffect a.info {
+      display: inline-block;
+      text-decoration: none;
+      padding: 7px 14px;
+      border: 1px solid #fff;
+      margin: 100px 0 0 0;
+      background-color: transparent;
+    }
+    .hovereffect a.info:hover {
+      box-shadow: 0 0 5px #fff;
+    }
+    .hovereffect a.info, .hovereffect h2 {
+      -webkit-transform: scale(0.7);
+      -ms-transform: scale(0.7);
+      transform: scale(0.7);
+      -webkit-transition: all 0.4s ease-in;
+      transition: all 0.4s ease-in;
+      opacity: 0;
+      filter: alpha(opacity=0);
+      color: #fff;
+      text-transform: uppercase;
+    }
+    .hovereffect:hover a.info, .hovereffect:hover h2 {
+      opacity: 1;
+      filter: alpha(opacity=100);
+      -webkit-transform: scale(1);
+      -ms-transform: scale(1);
+      transform: scale(1);
+    }
+  
+  
+    /* fondo de carrusel de lugares */
+    .fondo-semi-transparente {
+      background-color: rgb(245, 245, 245);
+      box-shadow: 0 0 10px 5px rgb(245, 245, 245);
+      border-radius: 10px;
+      width: 100%;
+      height: 500px;
+      @media (max-width: 768px) {
+        height: 800px;
+      }
+    }
+    /* fonts de texto */
+    .montserrat {
+      font-family: "Montserrat", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 200;
+      font-style: normal;
+    }
+
+/* botones team */
+    .boton{
+      background:rgb(231, 91, 30);
+      color:#fff;
+      position:relative;
+      height:40px;
+      font-size:1.4em;
+      padding:0 1em;
+      transition:800ms ease all;
+      outline:none;
+    }
+    .boton:hover{
+      background:#fff;
+      color:rgb(231, 91, 30);
+    }
+    .boton:before,button:after{
+      content:'';
+      position:absolute;
+      top:0;
+      right:0;
+      height:2px;
+      width:0;
+      background:rgb(231, 91, 30);
+      transition:400ms ease all;
+    }
+    .boton:after{
+      right:inherit;
+      top:inherit;
+      left:0;
+      bottom:0;
+    }
+    .boton:hover:before,.boton:hover:after{
+      width:100%;
+      transition:800ms ease all;
+    }
+    
+    /* efecto corazon */
+
+  .heart-container{
+  position: relative;
+  width: 40px;
+}
+
+.heart {
+  font-size: 48px;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s ease-out;
+}
+
+.heart.clicked {
+  transform: translate(-50%, -150%);
+}
+
+
+
+    /* input de comentarios */
+.input1{
+  width: 100%;
+  height: 60px;
+  
+}
+/* imagen enviar */
+.img1{
+  width: 90%;
+  margin-left: 50%;
+  margin-top: 60%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s ease-out;
+
+}
+/* contenedor hover */
+.enviar-container {
+  width: 51px;
+  height: 60px;
+  margin-left: 506px;
+  margin-top: -58px;
+}
+
+.enviar-border {
+  height: 58px;
+  margin-top: -2%;
+  border: 1px dashed rgb(255, 255, 255);
+  display: inline-block;
+  transition: background-color 0.3s ease-out;
+  border-radius: 8px;
+  background-color: rgb(218, 91, 30);
+}
+
+.enviar-container:hover .enviar-border {
+  background-color: rgb(255, 255, 255);
+  border: 1px dashed rgb(218, 91, 30);
+}
+/* efecto enviar */
+.enviar.clicked {
+  transform: translate(-50%, -150%);
+}
+
+@media screen and (max-width: 992px) {
+  .input1 {
+    width: 100%; /* Reducir el ancho del input */
+    margin-left: -15%; /* Centrar el input horizontalmente */
+  }
+  .img1 {
+    width: 70%; /* Reducir el ancho de la imagen */
+    margin-left: 50%; /* Centrar la imagen horizontalmente */
+    margin-top: 60%; /* Ajustar la posición vertical de la imagen */
+  }
+  .enviar-container {
+    margin-left: 288px; /* Centrar el contenedor horizontalmente */
+    margin-top: -58px; /* Ajustar la posición vertical del contenedor */
+  }
+}
+/* pantallas pequeñas celulares */
+@media screen and (max-width: 576px) {
+  .input1 {
+    margin-left: 35px;
+    width: 80%; /* Reducir aún más el ancho del input */
+  }
+  .img1 {
+    width: 50%; /* Reducir aún más el ancho de la imagen */
+    margin-top: 55%; /* Ajustar aún más la posición vertical de la imagen */
+  }
+  .enviar-container {
+    width: 50px; /* Reducir aún más el ancho del contenedor de enviar */
+    height: 40px; /* Reducir aún más la altura del contenedor de enviar */
+    margin-left: 273px; /* Centrar aún más el contenedor horizontalmente */
+    margin-top: -58px; /* Ajustar aún más la posición vertical del contenedor */
+  }
+}
+
+@media screen and (min-width: 363px) and (max-width: 575px) {
+  .enviar-container {
+    width: 50px; /* Reducir aún más el ancho del contenedor de enviar */
+    height: 45px; /* Reducir aún más la altura del contenedor de enviar */
+    margin-left: 303px; /* Centrar aún más el contenedor horizontalmente */
+    margin-top: -58px; /* Ajustar aún más la posición vertical del contenedor */
+  }
+}
+
+
+/* imagenes de las instalaciones */
+
+.hover-container .hover-item .imagen {
+  transition: transform 0.5s ease; /* Transición suave en transformación */
+}
+
+.hover-container:hover .hover-item .imagen {
+  transform: scale(1.1); /* Efecto zoom en la imagen */
+}
+
+.shadow-effect {
+  box-shadow: 0px 9px 9px rgba(0, 0, 0, 0.9); /* Offset X, Offset Y, Blur Radius, Spread Radius, Color */
+}
+
+
+/* imagenes sobre nosotros */
+.galeria2{
+  display: flex;
+  height: 20rem;
+  gap: 1rem;
+}
+.galeria2 > div{
+  flex: 1;
+  border-radius:1rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  transition: all .8s cubic-bezier(0.25, .4, .45, 1.4);
+}
+.galeria2 > div:hover{
+  flex: 5;
+}
+
+
+
