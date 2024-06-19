@@ -1,3 +1,37 @@
-<div>
-    <h1>hola comentariaos</h1>
-</div>
+
+<h1 class="mt-3">Comentarios</h1>
+<table class="table table-dark mt-4">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Email</th>
+        <th scope="col">comentario</th>
+        <th scope="col">ver</th>
+        <th scope="col">editar</th>
+        <th scope="col">eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(comentario of comentario | paginate: { itemsPerPage: 9, currentPage: page }; track comentario){
+      <tr>
+            <td class="col">{{comentario.id_comentario}}</td>
+            <td class="col">{{comentario.nombre}}</td>
+            <td class="col">{{comentario.email}}</td>
+            <td class="col">{{comentario.comentario}}</td>
+            <td class="col"><button class="btn btn-outline-primary" routerLink="/detalle/{{comentario.id_comentario}}"><i class="far fa-eye"></i> Ver</button></td>
+            <td class="col">
+              <button class="btn btn-outline-warning" [routerLink]="['/admin/editarcomentario', comentario.id_comentario]">
+                <i class="far fa-edit"></i> Editar
+              </button>
+            </td>
+            
+            
+            <td class="col"><button class="btn btn-outline-danger" (click)="comentario.id_comentario  !== undefined ? borrar(comentario.id_comentario) : null"><i class="far fa-trash-alt"></i> Eliminar</button></td>
+      
+          </tr>
+        }  
+    </tbody>
+  </table>
+  <pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente">
+  </pagination-controls>

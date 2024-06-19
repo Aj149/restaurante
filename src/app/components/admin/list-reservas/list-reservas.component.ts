@@ -4,7 +4,7 @@ import { FormularioService } from '../../../services/formulario.service';
 import { reserva } from '../../../models/reserva';
 import { BuscadorPipe } from '../../../pipe/buscador.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { BehaviorSubject, Subject, debounceTime, distinctUntilChanged, timeout } from 'rxjs';
+import { BehaviorSubject, debounceTime, distinctUntilChanged, timeout } from 'rxjs';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -18,7 +18,7 @@ export class ListReservasComponent implements OnInit  {
 
   nombre = '';
   public page!: number;
-  // buscar reserva
+  
   searchTerm$ = new BehaviorSubject<string>('');
   
  
@@ -41,9 +41,9 @@ export class ListReservasComponent implements OnInit  {
   }
   
   onSearch(event: Event): void {
-    if (event.target instanceof HTMLInputElement) { // Verificar si el target es un input
-      const searchTerm = event.target.value; // Obtener el valor del input
-      this.searchTerm$.next(searchTerm); // Enviar el valor al Subject
+    if (event.target instanceof HTMLInputElement) {
+      const searchTerm = event.target.value;
+      this.searchTerm$.next(searchTerm); 
     }
   }
 
@@ -65,21 +65,11 @@ listarReservas(): void {
 }
 
 ngOnInit(): void {
-  this.cargarReservas();
   this.listarReservas();
   this.filterList();
 }
 
- cargarReservas(): void {
-    this.formularioService.obtenerReserva().subscribe({
-      next: (data: reserva[]) => {
-        this.reservas = data;
-      },
-      error: (err: any) => {
-        console.log(err);
-      }
-    });
-  }
+
 
   borrar(id_reserva: number): void {
   Swal.fire({

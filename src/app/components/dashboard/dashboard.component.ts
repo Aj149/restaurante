@@ -9,6 +9,8 @@ import { reserva } from '../../models/reserva';
 import { FormularioService } from '../../services/formulario.service';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { Comentarios } from '../../models/comentarios';
+import { ComentariosService } from '../../services/comentarios.service';
 
 
 
@@ -34,18 +36,28 @@ export class DashboardComponent {
   lugar = '';
   fecha = new Date()
 
+
+  formularioMensaje: FormGroup
   formulario: FormGroup;
   isFormSubmitted: boolean = false;
+  FormSubmitted: boolean = false;
+
 
 
   constructor(
     private likeService: LikesService,
     private formularioService: FormularioService,
-    private router : Router,
-    private toastr: ToastrService
+    private mensajeService: ComentariosService,
 
   ) {
-    this.formulario = new FormGroup({
+    this.formularioMensaje = new FormGroup({
+      nombre: new FormControl("",[Validators.required, Validators.pattern('^[a-zA-Z\s]*$')]),
+      email: new FormControl('',[Validators.required,Validators.email] ),
+      comentario: new FormControl ("", [Validators.required])
+
+    })
+    this.formulario = new FormGroup
+    ({
       
       nombre: new FormControl("",[Validators.required, Validators.pattern('^[a-zA-Z\s]*$')]),
       email: new FormControl('',[Validators.required,Validators.email] ),
@@ -65,21 +77,41 @@ export class DashboardComponent {
       const nuevaReserva: reserva = {
         nombre: formValues.nombre,
         email: formValues.email,
-        telefono: +formValues.telefono,  // Convierte a número
+        telefono: +formValues.telefono,  
         lugar: formValues.lugar,
-        n_personas: +formValues.n_personas,  // Convierte a número
+        n_personas: +formValues.n_personas, 
         fecha: formValues.fecha,
-        hora: formValues.hora  // Convierte a número
+        hora: formValues.hora
       };
       console.log(nuevaReserva); // Verifica los datos aquí
       this.formularioService.agregarReserva(nuevaReserva).subscribe(
         response => {
           console.log('Reserva creada con éxito', response);
-          // Manejar la respuesta aquí, por ejemplo, mostrar un mensaje de éxito
         },
         error => {
           console.error('Error al crear la reserva', error);
-          // Manejar el error aquí, por ejemplo, mostrar un mensaje de error
+        }
+      );
+    }
+  }
+
+  // para agregar mensajes
+  agregarMensaje() {
+    this.FormSubmitted = true;
+    if (this.formularioMensaje.valid) {
+      const formValues = this.formularioMensaje.value;
+      const nuevoMensaje: Comentarios = {
+        nombre: formValues.nombre,
+        email: formValues.email,
+        comentario: formValues.comentario
+      };
+      console.log(nuevoMensaje);
+      this.mensajeService.agregarMensaje(nuevoMensaje).subscribe(
+        response => {
+          console.log('Mensaje creado con éxito', response);
+        },
+        error => {
+          console.error('Error al enviar el mensaje', error);
         }
       );
     }

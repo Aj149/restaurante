@@ -413,20 +413,64 @@
 
 <div class="parallax3 mt-5">
   <div class="text-center" style="display: flex; justify-content: center;">
-    <div class="mt-5"> 
-      <h1 class="nautilus text-white mt-5">COMENTARIOS</h1>
-      <h6 class="mt-5 roboto text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h6>
+    <div class="mt-2"> 
+      <h1 class="nautilus text-white">COMENTARIOS</h1>
+      <h6 class="roboto text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h6>
+
+      <form [formGroup]="formularioMensaje" class="needs-validation">
+<div class="container">
+  <div class="row">
+
+      <div class="col-lg-6 col-sm-12 mt-4">
+        <div class="form-group">
+          <div class="input-group has-validation">
+            <input type="text" style="border: 1px dashed #000;" class="form-control" id="name" aria-describedby="nombreHelp" name="nombre"  placeholder="Nombre y Apellido" formControlName="nombre">
+          </div>
+          <div class="text-danger" >
+          @if(formularioMensaje.get('nombre')?.invalid && (FormSubmitted || formularioMensaje.get('nombre')?.touched || formularioMensaje.get('nombre')?.dirty)){
+            @if(formularioMensaje.get('nombre')?.errors?.['required']){
+              Este campo es requerido}
+            @if(formularioMensaje.get('nombre')?.errors?.['pattern'])
+            {No ingrese numeros}
+          }
+    </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 col-sm-12 mt-4">
+        <div class="form-group">
+          <input type="email" style="border: 1px dashed #000;" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" placeholder="Enter email" formControlName="email">
+          <div class="text-danger" >
+            @if(formularioMensaje.get('email')?.invalid && (FormSubmitted || formularioMensaje.get('email')?.touched || formularioMensaje.get('email')?.dirty)){
+              @if(formularioMensaje.get('email')?.errors?.['required']){
+                Este campo es requerido}
+              @if(formularioMensaje.get('email')?.errors?.['pattern'])
+              {Ingrese un correo electronico}
+            }
+      </div>
+        </div>
+        </div>
+    </div>
+  </div>
 
       
       <div class="form-group mt-5">
-        <input type="text" style="border: 1px dashed #ffffff;" class="form-control input1" id="exampleHora" aria-describedby="horaHelp" placeholder="Deje su comentario">
+        <input type="text" style="border: 1px dashed #ffffff;" class="form-control input1" id="comentario" aria-describedby="comentarioHelp" name="comentario" placeholder="Deje su comentario" formControlName="comentario">
+        <div class="text-danger" >
+          @if(formularioMensaje.get('comentario')?.invalid && (FormSubmitted || formularioMensaje.get('comentario')?.touched || formularioMensaje.get('comentario')?.dirty)){
+            @if(formularioMensaje.get('comentario')?.errors?.['required']){
+              Este campo es requerido}
+          }
+    </div>
       </div>
       
       <div class="enviar-container">
         <div class="enviar-border">
-          <img id="enviar" class="enviar img1" src="../../../assets/enviar1.png" alt="">
+          <img id="enviar" class="enviar img1" (click)="agregarMensaje()"   src="../../../assets/enviar1.png" alt="">
         </div>
       </div>
+      
+    </form>
   </div>
 </div>
 </div>
