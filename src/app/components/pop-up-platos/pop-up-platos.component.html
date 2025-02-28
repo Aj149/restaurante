@@ -1,0 +1,25 @@
+<div class="container">
+    @if(isVisible){
+        
+        <div class="overlay w-100 h-100 position-fixed top-0 start-0">
+            <div class="popup rounded col-6 position-fixed top-50 start-50 translate-middle">
+                <div class="container ps-5">
+
+                    <div class="row">
+                        <h6 class="col-12 pt-3 ">Has elegido...</h6>
+                        <h2 class="col-12">{{ titulo }}</h2>
+                    </div>
+                    <div class="row">
+                        <img [src]="imagen" alt="{{ titulo }}" class="col-4  rounded-4">
+                        <p class="col-8">{{ descripcion }}</p>
+                    </div>
+                    <div class="row">
+                        <p><strong>Precio:</strong> ${{ precio }}</p>
+                        <button (click)="closePopup()">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

@@ -15,6 +15,8 @@ import { Personal2Component } from './components/dashboard/personal/personal2/pe
 import { Personal3Component } from './components/dashboard/personal/personal3/personal3.component';
 import { ListReservasComponent } from './components/admin/list-reservas/list-reservas.component';
 import { EditReservasComponent } from './components/admin/edit-reservas/edit-reservas.component';
+import { Component } from '@angular/core';
+import { PopUpPlatosComponent } from './components/pop-up-platos/pop-up-platos.component';
 
 
 
@@ -63,4 +65,7 @@ children:[
     {path: 'lugar3', component: Lugar3Component},
     {path: 'lugar4', component: Lugar4Component},
 ]},
+
+
+{path: 'popUp', component: PopUpPlatosComponent}
 ];

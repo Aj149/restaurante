@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { AdminComponent } from '../admin.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { Comentarios } from '../../../models/comentarios';
 import { ComentariosService } from '../../../services/comentarios.service';
 import Swal from 'sweetalert2';
+import { Comentarios } from '../../../models/dashboard';
 
 @Component({
   selector: 'app-comentarios',

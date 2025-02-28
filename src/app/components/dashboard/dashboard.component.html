@@ -62,9 +62,9 @@
       <div class="hovereffect">
           <img class="img-thumbnail" src="../../../assets/carrusel1.png" alt="">
           <div class="overlay">
-             <h2>Hover effect 3</h2>
-             <a class="info" href="#">link here</a>
-          </div>
+            <h2>palto 1</h2>
+            <button class="info" (click)="showPopup1()">Abrir Popup 1</button>
+         </div>
       </div>
   </div></ng-template>
     <ng-template carouselSlide>
@@ -72,8 +72,8 @@
       <div class="hovereffect">
           <img class="img-thumbnail" src="../../../assets/carrusel2.jpg" alt="">
           <div class="overlay">
-             <h2>Hover effect 3</h2>
-             <a class="info" href="#">link here</a>
+             <h2>palto 2</h2>
+             <a class="info" routerLink="/Especiales/Plato_2">link here</a>
           </div>
       </div>
   </div>
@@ -82,26 +82,25 @@
       <div class="hovereffect">
           <img class="img-thumbnail" src="../../../assets/carrusel3.jpg" alt="">
           <div class="overlay">
-             <h2>Hover effect 3</h2>
-             <a class="info" href="#">link here</a>
-          </div>
+            <h2>palto 3</h2>
+            <a class="info" routerLink="/Especiales/Plato_3">link here</a>
+         </div>
       </div>
   </div></ng-template>
     <ng-template carouselSlide> <div class="col-6 mx-5 d-block">
       <div class="hovereffect">
           <img class="img-thumbnail" src="../../../assets/carrusel2.jpg" alt="">
           <div class="overlay">
-             <h2>Hover effect 3</h2>
-             <a class="info" href="#">link here</a>
-          </div>
+            <h2>palto 4</h2>
+            <a class="info" routerLink="/Especiales/Plato_4">link here</a>
+         </div>
       </div>
   </div></ng-template>
   </owl-carousel-o>
 </div>
     </div>
   </div>
-  </div>
-
+</div>
 
   <div id="INSTALACIONES" class="mb-5"></div>
 
@@ -470,9 +469,18 @@
         </div>
       </div>
       
+      
     </form>
   </div>
 </div>
 </div>
 <app-footer></app-footer>
-</div>
+<app-pop-up-platos 
+      *ngIf="isPopupVisible"
+      [titulo]="popupTitulo"
+      [descripcion]="popupDescripcion"
+      [imagen]="popupImagen"
+      [precio]="popupPrecio"
+      [isVisible]="isPopupVisible"
+      (close)="closePopup()">
+    </app-pop-up-platos>

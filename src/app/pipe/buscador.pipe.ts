@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { reserva } from '../models/reserva';
+import { reserva } from '../models/dashboard';
 import { info } from 'console';
 
 @Pipe({

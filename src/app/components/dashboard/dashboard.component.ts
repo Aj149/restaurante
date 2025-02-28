@@ -4,13 +4,16 @@ import { CarouselModule,OwlOptions } from 'ngx-owl-carousel-o';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { LikesService } from '../../services/likes.service';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { reserva } from '../../models/reserva';
+import {  FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormularioService } from '../../services/formulario.service';
 import { CommonModule } from '@angular/common';
-import { ToastrService } from 'ngx-toastr';
-import { Comentarios } from '../../models/comentarios';
 import { ComentariosService } from '../../services/comentarios.service';
+import Swal from 'sweetalert2';
+import { Comentarios, reserva } from '../../models/dashboard';
+import { HttpClient } from '@angular/common/http';
+import { PopUpPlatosComponent } from '../pop-up-platos/pop-up-platos.component';
+
+
 
 
 
@@ -20,7 +23,7 @@ import { ComentariosService } from '../../services/comentarios.service';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterLink,CarouselModule,NavbarComponent, FooterComponent,FormsModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink, CarouselModule, NavbarComponent, FooterComponent, FormsModule, PopUpPlatosComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
@@ -28,28 +31,41 @@ import { ComentariosService } from '../../services/comentarios.service';
 
 export class DashboardComponent {
 
-  nombre='';
-  telefono = 0;
-  n_personas = 0;
-  hora = 0;
-  email = '';
-  lugar = '';
-  fecha = new Date()
-
-
   formularioMensaje: FormGroup
   formulario: FormGroup;
   isFormSubmitted: boolean = false;
   FormSubmitted: boolean = false;
+  
+  // 4popup platos especiales
+  isPopupVisible = true;
 
+  // Datos del popup
+  popupTitulo = '';
+  popupDescripcion = '';
+  popupImagen = '';
+  popupPrecio = 0;
+
+  // 1para los lugares
+  lugares: string[] = [];
+  capacidades: { [key: string]: number } = {};
+  maxPersonas: number = 0;
 
 
   constructor(
+    // 1para los lugares
+    private fb: FormBuilder, private http: HttpClient,
     private likeService: LikesService,
     private formularioService: FormularioService,
     private mensajeService: ComentariosService,
 
   ) {
+    // 1para los lugares
+    this.formulario = this.fb.group({
+      lugar: ['', Validators.required],
+      numeroPersonas: ['', [Validators.required, Validators.min(1)]],
+    });
+
+
     this.formularioMensaje = new FormGroup({
       nombre: new FormControl("",[Validators.required, Validators.pattern('^[a-zA-Z\s]*$')]),
       email: new FormControl('',[Validators.required,Validators.email] ),
@@ -69,6 +85,44 @@ export class DashboardComponent {
     })
   }
 
+
+// 1para los lugares
+  // ngOnInit() {
+  //   this.http.get<any>('http://localhost:8000/reserva/lugares').subscribe(data => {
+  //     console.log('Data:', data);
+  //     this.lugares = data.lugares;
+  //     this.capacidades = data.capacidades;
+  //   });
+
+  //   this.formulario.get('lugar')?.valueChanges.subscribe(selectedLugar => {
+  //     this.maxPersonas = this.capacidades[selectedLugar] || 0;
+  //     console.log('Max Personas:', this.maxPersonas);
+  //     this.updateNumeroPersonasValidators();
+  //   });
+  // }
+
+  updateNumeroPersonasValidators() {
+    const numeroPersonasControl = this.formulario.get('numeroPersonas');
+    if (numeroPersonasControl) {
+      numeroPersonasControl.setValidators([
+        Validators.required,
+        Validators.min(1),
+        Validators.max(this.maxPersonas),
+      ]);
+      numeroPersonasControl.updateValueAndValidity();
+      console.log('Validators:', numeroPersonasControl.validator);
+    }
+  }
+
+  onSubmit() {
+    this.isFormSubmitted = true;
+    if (this.formulario.valid) {
+      console.log(this.formulario.value);
+      // Aquí puedes manejar el envío de la reserva al backend.
+    } else {
+      console.log('Formulario Inválido', this.formulario.errors);
+    }
+  }
 
   agregarReserva() {
     this.isFormSubmitted = true;
@@ -95,27 +149,49 @@ export class DashboardComponent {
     }
   }
 
+
+
+
+
+
+
   // para agregar mensajes
-  agregarMensaje() {
+  agregarMensaje(): void {
     this.FormSubmitted = true;
     if (this.formularioMensaje.valid) {
-      const formValues = this.formularioMensaje.value;
-      const nuevoMensaje: Comentarios = {
-        nombre: formValues.nombre,
-        email: formValues.email,
-        comentario: formValues.comentario
-      };
-      console.log(nuevoMensaje);
-      this.mensajeService.agregarMensaje(nuevoMensaje).subscribe(
-        response => {
-          console.log('Mensaje creado con éxito', response);
-        },
-        error => {
-          console.error('Error al enviar el mensaje', error);
-        }
-      );
+        const formValues = this.formularioMensaje.value;
+        const nuevoMensaje: Comentarios = {
+            nombre: formValues.nombre,
+            email: formValues.email,
+            comentario: formValues.comentario
+        };
+        console.log(nuevoMensaje);
+        this.mensajeService.agregarMensaje(nuevoMensaje).subscribe(
+            response => {
+                Swal.fire({
+                    title: 'Enviado!',
+                    text: 'El mensaje ha sido enviado correctamente.',
+                    icon: 'success',
+                    background: "#27272a",
+                    color: "#fafafa",
+                    confirmButtonColor: "rgb(218, 91, 30)"
+                });  
+            },
+            error => {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Hubo un problema al enviar el mensaje.',
+                    icon: 'error',
+                    background: "#27272a",
+                    color: "#fafafa",
+                    confirmButtonColor: "#d33"
+                });
+            }
+        );
     }
-  }
+}
+
+
   
 
   
@@ -199,9 +275,6 @@ export class DashboardComponent {
 
 // servicio para cargar el corazon a otro componente
 
-
-
-
 incrementClickCount() {
   this.likeService.incrementClickCount();
 }
@@ -241,6 +314,19 @@ handleClick1(enviarId: string): void {
 }
 
 
+// 4pop up para los Platos especiales
+
+  showPopup1() {
+    this.popupTitulo = 'Plato 1';
+    this.popupDescripcion = 'Lorem ipsum dolor sit amet,onsectepidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum dsf lo. ident, sunt in culpa qui officia deserunt mollit anim id est laborum dsf loident, sunt in culpa qui officia deserunt mollit anim id est laborum dsf loident, sunt in culpa qui officia deserunt mollit anim id est laborum dsf lo'
+    this.popupImagen = '../../../assets/carrusel1.png';
+    this.popupPrecio = 10;
+    this.isPopupVisible = true;
+  }
+
+  closePopup() {
+    this.isPopupVisible = false;
+  }
 
 
 }

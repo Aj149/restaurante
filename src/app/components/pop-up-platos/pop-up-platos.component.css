@@ -1,0 +1,9 @@
+.overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000; /* Asegúrate de que este valor sea alto */
+}
+
+.popup {
+  background-color: rgb(238, 232, 232);
+  z-index: 1001; /* Un valor mayor que el del overlay */
+}

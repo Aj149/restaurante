@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { reserva } from '../../../models/reserva';
+
 import { FormularioService } from '../../../services/formulario.service';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { reserva } from '../../../models/dashboard';
 
 @Component({
   selector: 'app-edit-reservas',
@@ -21,7 +22,7 @@ export class EditReservasComponent {
     telefono: 0,
     lugar:'',
     n_personas: 0,
-    fecha: new Date(),
+    fecha: '',
     hora: '',
   }
 

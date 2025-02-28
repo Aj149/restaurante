@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { FormularioService } from '../../../services/formulario.service';
-import { reserva } from '../../../models/reserva';
+
 import { BuscadorPipe } from '../../../pipe/buscador.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, timeout } from 'rxjs';
 import Swal from 'sweetalert2';
+import { reserva } from '../../../models/dashboard';
 
 @Component({
   selector: 'app-list-reservas',
