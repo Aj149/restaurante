@@ -42,6 +42,7 @@ export class DashboardComponent {
   // Datos del popup
   popupTitulo = '';
   popupDescripcion = '';
+  descripcion1 = '';
   popupImagen = '';
   popupPrecio = 0;
 
