@@ -19,4 +19,5 @@ export class PopUpPlatosComponent {
   closePopup() {
     this.close.emit();
   }
+
 }

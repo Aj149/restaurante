@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { CarouselModule,OwlOptions } from 'ngx-owl-carousel-o';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
@@ -318,9 +318,30 @@ handleClick1(enviarId: string): void {
 // 4pop up para los Platos especiales
 
   showPopup1() {
-    this.popupTitulo = 'Plato 1';
-    this.popupDescripcion = 'Lorem ipsum dolor sit amet,onsectepidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum dsf lo. ident, sunt in culpa qui officia deserunt mollit anim id est laborum dsf loident, sunt in culpa qui officia deserunt mollit anim id est laborum dsf loident, sunt in culpa qui officia deserunt mollit anim id est laborum dsf lo'
+    this.popupTitulo = 'Ceviche';
+    this.popupDescripcion = 'El ceviche es un plato fresco y ligero típico de la costa del Perú, aunque también se consume en otros países de América Latina. Consiste en pescado o mariscos crudos marinados en jugo de limón, mezclados con cebolla roja, ají, cilantro y sal. Se sirve con camote (batata), choclo (maíz) y cancha (maíz tostado).'
     this.popupImagen = '../../../assets/carrusel1.png';
+    this.popupPrecio = 10;
+    this.isPopupVisible = true;
+  }
+  showPopup2() {
+    this.popupTitulo = 'Paella';
+    this.popupDescripcion = 'La paella es un plato emblemático de la cocina española, originario de la región de Valencia. Se prepara con arroz, azafrán, verduras (como judías verdes y tomate), y una variedad de carnes o mariscos, como pollo, conejo, mejillones, gambas y calamares. Se cocina en una paellera, una sartén ancha y poco profunda.'
+    this.popupImagen = '../../../assets/carrusel2.jpg';
+    this.popupPrecio = 10;
+    this.isPopupVisible = true;
+  }
+  showPopup3() {
+    this.popupTitulo = 'Tacos al Pastor';
+    this.popupDescripcion = 'Los tacos al pastor son uno de los platillos más icónicos de la cocina mexicana. Se preparan con carne de cerdo marinada en una mezcla de chiles y especias, cocinada en un trompo (asador vertical). La carne se sirve en tortillas de maíz, acompañada de piña, cebolla, cilantro y salsa. ¡Una explosión de sabores!'
+    this.popupImagen = '../../../assets/carrusel3.jpg';
+    this.popupPrecio = 10;
+    this.isPopupVisible = true;
+  }
+  showPopup4() {
+    this.popupTitulo = 'Feijoada';
+    this.popupDescripcion = 'La feijoada es un plato tradicional de Brasil, considerado el plato nacional. Es un guiso espeso hecho con frijoles negros, carnes de cerdo (como costillas, tocino y chorizo) y carne seca. Se sirve con arroz, farofa (harina de yuca tostada), col rizada y rodajas de naranja para equilibrar los sabores.'
+    this.popupImagen = '../../../assets/carrusel4.png';
     this.popupPrecio = 10;
     this.isPopupVisible = true;
   }
