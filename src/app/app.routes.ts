@@ -18,12 +18,13 @@ import { EditReservasComponent } from './components/admin/edit-reservas/edit-res
 import { Component } from '@angular/core';
 import { PopUpPlatosComponent } from './components/dashboard/pop-up-platos/pop-up-platos.component';
 import { CarritoComponent } from './components/dashboard/carrito/carrito.component';
+import { LoginClComponent } from './components/auth/login-cl/login-cl.component';
 
 
 
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/carrito', pathMatch: 'full' },
+  { path: '', redirectTo: '/login-cliente', pathMatch: 'full' },
 
     { path: 'login', component: LoginComponent, },
 
@@ -69,5 +70,7 @@ children:[
 
 
 {path: 'popUp', component: PopUpPlatosComponent},
-{path: 'carrito', component: CarritoComponent}
+{path: 'carrito', component: CarritoComponent},
+{path: 'login-cliente', component: LoginClComponent}
+
 ];

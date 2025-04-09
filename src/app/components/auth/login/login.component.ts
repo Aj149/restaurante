@@ -14,7 +14,7 @@ import { filter } from 'rxjs/operators';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule,CommonModule, RouterLink ],
+  imports: [FormsModule,CommonModule ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
