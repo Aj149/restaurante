@@ -1,0 +1,126 @@
+<div style="margin-top: 10%">
+    <!-- Ajusta el valor según la altura de tu navbar -->
+    <app-navbar></app-navbar>
+    <hr class="tomate">
+    <div class="text-center">
+        <h1 class="nautilus">Mi</h1>
+        <h1 class="roboto">CARRITO</h1>
+    </div>
+    <div class="beige col-lg-4 col-md-6 col-sm-12">
+        <h2 class=" text-center roboto text-white">Detalle del pedido</h2>
+    </div>
+
+    <div class="container mt-5">
+        <!-- Fila principal centrada -->
+        <div class="row justify-content-center">
+            <!-- Columna de 4 unidades, centrada en la fila -->
+            <div class="col-lg-5 col-md-6 col-sm-12 pb-5">
+                <div class="container color rounded-2 p-3">
+                    <div class="row roboto mt-3 text-center">
+                        <div class="col">
+                            <h2>Hola Adrian</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mt-3">
+                            <div class="d-flex align-items-center">
+                                <img class="telf me-4" src="../../../../assets/telefonoCarrito.png" alt="" />
+                                <div>
+                                    <span class="roboto fs-5">Teléfono&nbsp;</span><b>0242487698 / 0548761685</b>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col mt-3">
+                            <div class="d-flex align-items-start">
+                                <img class="direc me-3" src="../../../../assets/direcCarrito.png" alt="" />
+                                <div class="ms-3">
+                                    <span class="roboto d-block">CALDERON</span>
+                                    <b>CARAPUNGO</b>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="d-flex align-items-center">
+                    <img class="plato me-5" src="../../../../assets/carrusel1.png" alt="" />
+                    <div>
+                        <span class="roboto fs-5">Aji de gallina---$20</span>
+                        <p>x1</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5 mb-5">
+        <!-- Fila principal centrada -->
+        <div class="row justify-content-center">
+            <!-- Columna de 4 unidades, centrada en la fila -->
+            <div class="col-lg-4 col-md-6 col-sm-12 pb-5">
+                <h2 class="fs-5 mb-3">Resumen Final</h2>
+                <div class="d-flex justify-content-between mb-2 bg-light">
+                    <span class="fw-normal">Total Parcial</span>
+                    <strong class="fw-bold">S/ 58.00</strong>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span class="fw-normal">Envío</span>
+                    <strong class="fw-bold">S/ 10.00</strong>
+                </div>
+                <div class="d-flex justify-content-between pt-3 border-top bg-light">
+                    <span class="fw-normal">Total</span>
+                    <strong class="fw-bold">S/ 68.00</strong>
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-12">
+                            <div class="card shadow-lg">
+                                <div class="card-header text-white beige text-center">
+                                    <h4>Pago con Tarjeta de Crédito</h4>
+                                </div>
+                                <div class="card-body">
+                                    <form id="payment-form">
+                                        <div class="mb-3">
+                                            <label for="cardName" class="form-label">Nombre del titular</label>
+                                            <input type="text" class="form-control" id="cardName"
+                                                placeholder="Adrián Churuchumbi" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="cardNumber" class="form-label">Número de tarjeta</label>
+                                            <input type="text" class="form-control" id="cardNumber"
+                                                placeholder="1234 5678 9012 3456" maxlength="19" required>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="expiryDate" class="form-label">Fecha de expiración</label>
+                                                <input type="text" class="form-control" id="expiryDate"
+                                                    placeholder="MM/AA" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="cvv" class="form-label">CVV</label>
+                                                <input type="text" class="form-control" id="cvv" placeholder="123"
+                                                    maxlength="4" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="amount" class="form-label">Monto a pagar</label>
+                                            <input type="number" class="form-control" id="amount" placeholder="$20.00"
+                                                required>
+                                        </div>
+
+                                        <button type="submit" class="btn boton w-100">Realizar Pedido</button>
+                                    </form>
+                                </div>
+                            </div>
+            </div>
+            
+
+        </div>
+    </div>
+
+    <app-footer></app-footer>
+</div>

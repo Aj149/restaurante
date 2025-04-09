@@ -1,7 +1,64 @@
 
 html, body { height: 100%; }
 body { margin: 0; padding: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-  
+
+  /* colores */
 .tomate {
-    background-color:  rgb(231, 91, 30); /* Azul */
+    background-color:  #e75b1e; /* Tomate */
 }
+.beige {
+    background-color:  #E0CAA6; /* Beige */
+}
+
+/* fuentes */
+.nautilus {
+  font-family: 'Dancing Script', sans-serif;
+                                                
+  }
+
+  .roboto{
+    font-family: 'Quicksand', sans-serif;
+    font-family: 'Quicksand Book Oblique', sans-serif;
+    font-family: 'Quicksand Book', sans-serif;
+    font-family: 'Quicksand Dash', sans-serif;
+    font-family: 'Quicksand Light Oblique', sans-serif;
+    font-family: 'Quicksand Light', sans-serif;
+    font-family: 'Quicksand Bold Oblique', sans-serif;
+    font-family: 'Quicksand Bold', sans-serif;  
+  }
+
+  /* 1estilos para todos los botones */
+  .boton{
+    background:rgb(231, 91, 30);
+    color:#fff;
+    position:relative;
+    height:40px;
+    font-size:1.4em;
+    padding:0 1em;
+    transition:800ms ease all;
+    outline:none;
+  }
+  .boton:hover{
+    background:#fff;
+    color:rgb(231, 91, 30);
+  }
+  .boton:before,button:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background:rgb(231, 91, 30);
+    transition:400ms ease all;
+  }
+  .boton:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+  }
+  .boton:hover:before,.boton:hover:after{
+    width:100%;
+    transition:800ms ease all;
+  }

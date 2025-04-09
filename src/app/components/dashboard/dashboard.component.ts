@@ -11,7 +11,7 @@ import { ComentariosService } from '../../services/comentarios.service';
 import Swal from 'sweetalert2';
 import { Comentarios, reserva } from '../../models/dashboard';
 import { HttpClient } from '@angular/common/http';
-import { PopUpPlatosComponent } from '../pop-up-platos/pop-up-platos.component';
+import { PopUpPlatosComponent } from './pop-up-platos/pop-up-platos.component';
 
 
 
@@ -37,7 +37,7 @@ export class DashboardComponent {
   FormSubmitted: boolean = false;
   
   // 4popup platos especiales
-  isPopupVisible = true;
+  isPopupVisible = false;
 
   // Datos del popup
   popupTitulo = '';

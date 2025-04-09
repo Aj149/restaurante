@@ -16,13 +16,14 @@ import { Personal3Component } from './components/dashboard/personal/personal3/pe
 import { ListReservasComponent } from './components/admin/list-reservas/list-reservas.component';
 import { EditReservasComponent } from './components/admin/edit-reservas/edit-reservas.component';
 import { Component } from '@angular/core';
-import { PopUpPlatosComponent } from './components/pop-up-platos/pop-up-platos.component';
+import { PopUpPlatosComponent } from './components/dashboard/pop-up-platos/pop-up-platos.component';
+import { CarritoComponent } from './components/dashboard/carrito/carrito.component';
 
 
 
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/carrito', pathMatch: 'full' },
 
     { path: 'login', component: LoginComponent, },
 
@@ -67,5 +68,6 @@ children:[
 ]},
 
 
-{path: 'popUp', component: PopUpPlatosComponent}
+{path: 'popUp', component: PopUpPlatosComponent},
+{path: 'carrito', component: CarritoComponent}
 ];

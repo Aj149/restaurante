@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-pop-up-platos',
@@ -16,8 +16,31 @@ export class PopUpPlatosComponent {
   @Input() isVisible: boolean = false;
   @Output() close = new EventEmitter<void>(); // Evento para cerrar el popup
 
+
   closePopup() {
     this.close.emit();
   }
+
+
+
+  @HostListener('document:keydown.escape', ['$event'])
+  onEscKey(event: KeyboardEvent) {
+    this.closePopup();
+  }
+
+  count: number = 0;
+
+increment() {
+  if (this.count < 10) {
+    this.count++;
+  }
+}
+
+decrement() {
+  if (this.count > 0) {
+    this.count--;
+  }
+}
+
 
 }

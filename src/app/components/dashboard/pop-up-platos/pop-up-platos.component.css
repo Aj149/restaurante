@@ -5,9 +5,16 @@
 
 .popup {
   background-color: rgb(238, 232, 232);
+  height: 105%;
   z-index: 1001; /* Un valor mayor que el del overlay */
   animation: fadeInScale 0.60s ease-out;
 }
+
+  img {
+    max-width: 70%;
+    height: auto;
+    margin-left: 13%;
+  } 
 
 @keyframes fadeInScale {
   0% {
