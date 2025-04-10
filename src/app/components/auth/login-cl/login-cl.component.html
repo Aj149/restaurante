@@ -1,16 +1,50 @@
-<form>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+<app-navbar></app-navbar>
+
+
+  <div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="col-md-6 col-lg-4 shadow-lg p-5 rounded beige">
+      
+      <h1 class="nautilus text-center mb-4">Iniciar Sesión</h1>
+      
+      <form>
+      <!-- Email -->
+      <div class="mb-3">
+        <label for="email" class="form-label roboto">Correo electrónico</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+          <input type="email" class="form-control roboto" id="email" placeholder="correo@ejemplo.com" required>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="mb-3">
+        <label for="password" class="form-label roboto">Contraseña</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+          <input type="password" class="form-control" placeholder="••••••••" id="password" required>
+        </div>
+      </div>
+      
+      <!-- Recordarme y Olvidé contraseña -->
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="remember">
+          <label class="form-check-label roboto" for="remember">Recuérdame</label>
+        </div>
+        <a href="#" class="roboto">¿Olvidaste tu contraseña?</a>
+      </div>
+      
+      <!-- Botón -->
+      <div class="d-grid">
+        <button type="submit" class="btn boton roboto" routerLink="/carrito">Iniciar sesión</button>
+      </div>
+    </form>
+
+    <!-- Registro -->
+    <div class="mt-4 text-center roboto">
+      <p>¿No tienes una cuenta? <a href="" routerLink="/register-cliente">Regístrate</a></p>
     </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-    </div>
-    <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-      <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+    
+  </div>
+</div>
+<app-footer></app-footer>

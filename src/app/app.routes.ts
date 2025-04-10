@@ -19,58 +19,67 @@ import { Component } from '@angular/core';
 import { PopUpPlatosComponent } from './components/dashboard/pop-up-platos/pop-up-platos.component';
 import { CarritoComponent } from './components/dashboard/carrito/carrito.component';
 import { LoginClComponent } from './components/auth/login-cl/login-cl.component';
+import { RegisterClComponent } from './components/auth/register-cl/register-cl.component';
 
 
 
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/login-cliente', pathMatch: 'full' },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
 
-    { path: 'login', component: LoginComponent, },
+  { path: 'login', component: LoginComponent, },
 
-    { path: 'admin', component: AdminComponent,
-        
-  children:[
-    {path: 'likes', component: LikesComponent},
-    {path: 'comentarios', component: ComentariosComponent,},
-    {path: 'listaDeReservas', component: ListReservasComponent},
-    {path: 'editarReserva/:id_reserva', component: EditReservasComponent}
-    
-  ]},
+  {
+    path: 'admin', component: AdminComponent,
+
+    children: [
+      { path: 'likes', component: LikesComponent },
+      { path: 'comentarios', component: ComentariosComponent, },
+      { path: 'listaDeReservas', component: ListReservasComponent },
+      { path: 'editarReserva/:id_reserva', component: EditReservasComponent }
+
+    ]
+  },
 
 
 
 
 
-    {path: 'dashboard',
+  {
+    path: 'dashboard',
     component: DashboardComponent,
-children:[
-    {path: '', component: DashboardComponent},
-    
-]},
+    children: [
+      { path: '', component: DashboardComponent },
+    ]
+  },
 
 
-{path: 'personal',
-component: PersonalComponent,
-children:[
-    {path: 'personal1', component: Personal1Component},
-    {path: 'personal2', component: Personal2Component},
-    {path: 'personal3', component: Personal3Component},
-    
-]},
+  {
+    path: 'personal',
+    component: PersonalComponent,
+    children: [
+      { path: 'personal1', component: Personal1Component },
+      { path: 'personal2', component: Personal2Component },
+      { path: 'personal3', component: Personal3Component },
 
-  {path: 'lugares',
+    ]
+  },
+
+  {
+    path: 'lugares',
     component: LugaresComponent,
-children:[
-    {path: 'lugar1', component: Lugar1Component},
-    {path: 'lugar2', component: Lugar2Component},
-    {path: 'lugar3', component: Lugar3Component},
-    {path: 'lugar4', component: Lugar4Component},
-]},
+    children: [
+      { path: 'lugar1', component: Lugar1Component },
+      { path: 'lugar2', component: Lugar2Component },
+      { path: 'lugar3', component: Lugar3Component },
+      { path: 'lugar4', component: Lugar4Component },
+    ]
+  },
 
 
-{path: 'popUp', component: PopUpPlatosComponent},
-{path: 'carrito', component: CarritoComponent},
-{path: 'login-cliente', component: LoginClComponent}
+  { path: 'popUp', component: PopUpPlatosComponent },
+  { path: 'carrito', component: CarritoComponent },
+  { path: 'login-cliente', component: LoginClComponent },
+  { path: 'register-cliente', component: RegisterClComponent },
 
 ];

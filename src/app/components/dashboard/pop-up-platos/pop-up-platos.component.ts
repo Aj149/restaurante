@@ -1,9 +1,10 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-pop-up-platos',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './pop-up-platos.component.html',
   styleUrl: './pop-up-platos.component.css'
 })
