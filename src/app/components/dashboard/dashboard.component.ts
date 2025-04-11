@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CarouselModule,OwlOptions } from 'ngx-owl-carousel-o';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -9,16 +9,10 @@ import { FormularioService } from '../../services/formulario.service';
 import { CommonModule } from '@angular/common';
 import { ComentariosService } from '../../services/comentarios.service';
 import Swal from 'sweetalert2';
-import { Comentarios, reserva } from '../../models/dashboard';
+import { Comentarios, Platos, reserva } from '../../models/dashboard';
 import { HttpClient } from '@angular/common/http';
 import { PopUpPlatosComponent } from './pop-up-platos/pop-up-platos.component';
-
-
-
-
-
-
-
+import { PlatosService } from '../../services/platos.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -37,15 +31,44 @@ export class DashboardComponent {
   FormSubmitted: boolean = false;
   
   // 4popup platos especiales
+
   isPopupVisible = false;
+  platos: Platos[] = [];
+platosEspeciales: Platos[] = [];
+platoSeleccionado!: Platos;
 
-  // Datos del popup
-  popupTitulo = '';
-  popupDescripcion = '';
-  descripcion1 = '';
-  popupImagen = '';
-  popupPrecio = 0;
+// 4traer platos
 
+  ngOnInit(): void {
+    if (this.platos) {
+      this.traerPlatos();
+    }
+  }
+
+  traerPlatos(): void {
+    this.platosService.obtenerPlatos().subscribe(
+      (data) => {
+        this.platos = data;
+        this.platosEspeciales = this.platos.slice(0, 4); // primeros 4 platos
+      },
+      (error) => {
+        console.error('Error al cargar los platos', error);
+      }
+    );
+  }
+
+
+
+// 4abre y cierra el popup de los platos especiales
+abrirPopup(plato: Platos) {
+  this.platoSeleccionado = plato;
+  this.isPopupVisible = true;
+}
+
+  closePopup() {
+    this.isPopupVisible = false;
+  }
+  
   // 1para los lugares
   lugares: string[] = [];
   capacidades: { [key: string]: number } = {};
@@ -58,6 +81,7 @@ export class DashboardComponent {
     private likeService: LikesService,
     private formularioService: FormularioService,
     private mensajeService: ComentariosService,
+    private platosService: PlatosService,
 
   ) {
     // 1para los lugares
@@ -313,42 +337,5 @@ handleClick1(enviarId: string): void {
     }, 600);
   }
 }
-
-
-// 4pop up para los Platos especiales
-
-  showPopup1() {
-    this.popupTitulo = 'Ceviche';
-    this.popupDescripcion = 'El ceviche es un plato fresco y ligero típico de la costa del Perú, aunque también se consume en otros países de América Latina. Consiste en pescado o mariscos crudos marinados en jugo de limón, mezclados con cebolla roja, ají, cilantro y sal. Se sirve con camote (batata), choclo (maíz) y cancha (maíz tostado).'
-    this.popupImagen = '../../../assets/carrusel1.png';
-    this.popupPrecio = 10;
-    this.isPopupVisible = true;
-  }
-  showPopup2() {
-    this.popupTitulo = 'Paella';
-    this.popupDescripcion = 'La paella es un plato emblemático de la cocina española, originario de la región de Valencia. Se prepara con arroz, azafrán, verduras (como judías verdes y tomate), y una variedad de carnes o mariscos, como pollo, conejo, mejillones, gambas y calamares. Se cocina en una paellera, una sartén ancha y poco profunda.'
-    this.popupImagen = '../../../assets/carrusel2.jpg';
-    this.popupPrecio = 10;
-    this.isPopupVisible = true;
-  }
-  showPopup3() {
-    this.popupTitulo = 'Tacos al Pastor';
-    this.popupDescripcion = 'Los tacos al pastor son uno de los platillos más icónicos de la cocina mexicana. Se preparan con carne de cerdo marinada en una mezcla de chiles y especias, cocinada en un trompo (asador vertical). La carne se sirve en tortillas de maíz, acompañada de piña, cebolla, cilantro y salsa. ¡Una explosión de sabores!'
-    this.popupImagen = '../../../assets/carrusel3.jpg';
-    this.popupPrecio = 10;
-    this.isPopupVisible = true;
-  }
-  showPopup4() {
-    this.popupTitulo = 'Feijoada';
-    this.popupDescripcion = 'La feijoada es un plato tradicional de Brasil, considerado el plato nacional. Es un guiso espeso hecho con frijoles negros, carnes de cerdo (como costillas, tocino y chorizo) y carne seca. Se sirve con arroz, farofa (harina de yuca tostada), col rizada y rodajas de naranja para equilibrar los sabores.'
-    this.popupImagen = '../../../assets/carrusel4.png';
-    this.popupPrecio = 10;
-    this.isPopupVisible = true;
-  }
-
-  closePopup() {
-    this.isPopupVisible = false;
-  }
-
 
 }

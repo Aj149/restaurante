@@ -1,5 +1,6 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, Output, ViewChild } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Component, ElementRef, EventEmitter, HostListener, Inject, Input, Output, ViewChild } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { Platos } from '../../../models/dashboard';
 
 @Component({
   selector: 'app-pop-up-platos',
@@ -10,38 +11,46 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 })
 export class PopUpPlatosComponent {
 
-  @Input() titulo: string='hola';
-  @Input() descripcion: string='';
-  @Input() imagen: string="";
-  @Input() precio: number= 0;
   @Input() isVisible: boolean = false;
   @Output() close = new EventEmitter<void>(); // Evento para cerrar el popup
+  @Input() plato!: Platos;
 
+  count: number = 0;
+  total: number = 0;
 
+  ngOnInit() {
+    console.log('Plato recibido:', this.plato);
+  }
+  
+
+  // 1cerrar el popup con ESC
   closePopup() {
     this.close.emit();
   }
-
-
-
   @HostListener('document:keydown.escape', ['$event'])
   onEscKey(event: KeyboardEvent) {
     this.closePopup();
   }
+  
 
-  count: number = 0;
 
-increment() {
-  if (this.count < 10) {
-    this.count++;
+// 2sumar, restar y calcular los platos que quieres
+  increment() {
+    if (this.count < 10) {
+      this.count++;
+      this.calcularTotal();
+    }
   }
-}
 
-decrement() {
-  if (this.count > 0) {
-    this.count--;
+  decrement() {
+    if (this.count > 0) {
+      this.count--;
+      this.calcularTotal();
+    }
   }
-}
 
+  calcularTotal() {
+    this.total = this.count * this.plato.precio;
+  }
 
 }

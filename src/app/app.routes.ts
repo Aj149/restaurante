@@ -20,6 +20,7 @@ import { PopUpPlatosComponent } from './components/dashboard/pop-up-platos/pop-u
 import { CarritoComponent } from './components/dashboard/carrito/carrito.component';
 import { LoginClComponent } from './components/auth/login-cl/login-cl.component';
 import { RegisterClComponent } from './components/auth/register-cl/register-cl.component';
+import { EditPlatosEsComponent } from './components/admin/edit-platos-es/edit-platos-es.component';
 
 
 
@@ -36,6 +37,7 @@ export const routes: Routes = [
       { path: 'likes', component: LikesComponent },
       { path: 'comentarios', component: ComentariosComponent, },
       { path: 'listaDeReservas', component: ListReservasComponent },
+      { path: 'editarPlatos', component: EditPlatosEsComponent },
       { path: 'editarReserva/:id_reserva', component: EditReservasComponent }
 
     ]

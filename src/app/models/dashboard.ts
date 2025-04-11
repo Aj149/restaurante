@@ -17,3 +17,11 @@ export class Comentarios{
     email: string='';
     comentario: string='';
 }
+
+export class Platos{
+    id_plato?: number=0;
+    nombre: string='';
+    descripcion: string='';
+    imagen: string='';
+    precio: number=0;
+}

@@ -9,7 +9,7 @@ import { Comentarios } from '../../../models/dashboard';
 @Component({
   selector: 'app-comentarios',
   standalone: true,
-  imports: [RouterOutlet,AdminComponent, RouterLink, NgxPaginationModule],
+  imports: [RouterLink, NgxPaginationModule],
   templateUrl: './comentarios.component.html',
   styleUrl: './comentarios.component.css'
 })

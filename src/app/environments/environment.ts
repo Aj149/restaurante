@@ -1,6 +1,7 @@
 export const environment = {
     production: false,
-    reservasURL: 'http://localhost:8080/reserva',
+    reservasURL: 'http://localhost:8000/reserva',
     comentariosURL:  'http://localhost:8000/comentarios',
+    platosURL: 'http://localhost:8000/platos',
   }
   

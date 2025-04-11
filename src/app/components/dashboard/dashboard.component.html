@@ -59,31 +59,31 @@
   <owl-carousel-o  [options]="customOptions" #owlCar>
     <ng-template carouselSlide> 
       <div class="col-6 mx-5 d-block">
-      <div class="hovereffect">
-          <img class="img-thumbnail" src="../../../assets/carrusel1.png" alt="">
-          <div class="overlay">
-            <h2>Ceviche</h2>
-            <a class="info" (click)="showPopup1()">Descripción</a>
-         </div>
-      </div>
+          <div class="hovereffect">
+            <img class="img-thumbnail" [src]="platosEspeciales[0].imagen" alt="Foto de una paella deliciosa">
+              <div class="overlay">
+                <h2>{{platosEspeciales[0].nombre}}</h2>
+                <a class="info" (click)="abrirPopup(platosEspeciales[0])">Descripción</a>
+             </div>
+          </div>
   </div></ng-template>
     <ng-template carouselSlide>
       <div class="col-6 mx-5 d-block">
       <div class="hovereffect">
-          <img class="img-thumbnail" src="../../../assets/carrusel2.jpg" alt="">
+          <img class="img-thumbnail" src="{{platosEspeciales[1].imagen}}" alt="">
           <div class="overlay">
-             <h2>Paella</h2>
-             <a class="info" (click)="showPopup2()">Descripción</a>
+             <h2>{{platosEspeciales[1].nombre}}</h2>
+             <a class="info" (click)="abrirPopup(platosEspeciales[1])">Descripción</a>
           </div>
       </div>
   </div>
 </ng-template>
     <ng-template carouselSlide> <div class="col-6 mx-5 d-block">
       <div class="hovereffect">
-          <img class="img-thumbnail" src="../../../assets/carrusel3.jpg" alt="">
+          <img class="img-thumbnail" src="{{platosEspeciales[2].imagen}}" alt="">
           <div class="overlay">
-            <h2>Tacos al Pastor</h2>
-            <a class="info" (click)="showPopup3()">Descripción</a>
+            <h2>{{platosEspeciales[2].nombre}}</h2>
+            <a class="info" (click)="abrirPopup(platosEspeciales[2])">Descripción</a>
          </div>
       </div>
   </div>
@@ -91,10 +91,10 @@
     <ng-template carouselSlide> 
       <div class="col-6 mx-5 d-block">
       <div class="hovereffect">
-          <img class="img-thumbnail" src="../../../assets/carrusel4.png" alt="">
+          <img class="img-thumbnail" src="{{platosEspeciales[3].imagen}}" alt="">
           <div class="overlay">
-            <h2>Feijoada</h2>
-            <a class="info" (click)="showPopup4()">Descripción</a>
+            <h2>{{platosEspeciales[3].nombre}}</h2>
+            <a class="info" (click)="abrirPopup(platosEspeciales[3])">Descripción</a>
          </div>
       </div>
   </div>
@@ -480,10 +480,7 @@
 <app-footer></app-footer>
 <app-pop-up-platos 
       *ngIf="isPopupVisible"
-      [titulo]="popupTitulo"
-      [descripcion]="popupDescripcion"
-      [imagen]="popupImagen"
-      [precio]="popupPrecio"
+      [plato]="platoSeleccionado"
       [isVisible]="isPopupVisible"
       (close)="closePopup()">
     </app-pop-up-platos>

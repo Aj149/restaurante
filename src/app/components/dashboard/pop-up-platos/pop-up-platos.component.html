@@ -8,8 +8,8 @@
                 <!-- Aquí va el contenido del popup -->
                 <div class="container">
                     <div class="row justify-content-end align-items-center">
-                        <div class="col-auto tomate text-end rounded-bottom-2">
-                        <h5 class="mb-0"><strong>Precio:</strong> ${{ precio }}</h5>
+                        <div class="popup-content col-auto tomate text-end rounded-bottom-2">
+                            <h5 class="mb-0"><strong>Precio:</strong> ${{ plato.precio }}</h5>
                         </div>
                         <div class="col-auto text-end ms-2">
                         <button type="button" class="btn-close btn-outline-secondary" aria-label="Close" (click)="closePopup()" ></button>
@@ -19,25 +19,31 @@
                         <h2 class="tituloComida">Has elegido...</h2>
                     </div>
                     <div class="row">
-                        <h2 class="col">{{ titulo }}</h2>
+                        <h2 class="col">{{ plato.nombre }}</h2>
                     </div>
                     <div class="row">
                         <div class="col-sm-6 col-md-8 col-lg-4">
-                        <img [src]="imagen" alt="{{ titulo }}" class="img img-fluid rounded-4">
+                        <img [src]="plato.imagen" alt="" class="img img-fluid rounded-4">
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-8 mt-4">
-                        <p><strong>Descripcion: </strong>{{ descripcion }}</p>
+                        <p><strong>Descripcion: </strong>{{ plato.descripcion }}</p>
                         </div>
                     </div>
                     <div class="row justify-content-end">
                         <div class="col-auto pe-4">
                           <div class="d-flex align-items-center">
                             <!-- Contador -->
-                            <div class="d-flex align-items-center me-3">
-                              <button class=" tomate px-3 rounded-start border-0" (click)="decrement()" [disabled]="count === 0">-</button>
+                            <div class="d-flex align-items-center me-4">
+                              <button class="tomate px-3 rounded-start border-0" (click)="decrement()" [disabled]="count === 0">-</button>
                               <input type="text" class="text-center border-1" [value]="count" readonly style="width: 60px;" />
-                              <button class=" tomate px-3 rounded-end border-0" (click)="increment()" [disabled]="count === 10">+</button>
-                            </div>  
+                              <button class="tomate px-3 rounded-end border-0" (click)="increment()" [disabled]="count === 10">+</button>
+                            </div>
+                      
+                            <!-- Info de precios -->
+                            <div class="me-4 text-start">
+                              <p class="m-0"><strong>Total:</strong> ${{ total.toFixed(2) }}</p>
+                            </div>
+                      
                             <!-- Botón Pedir -->
                             <button type="button" class="boton border-0 rounded-2 cursor-pointer" routerLink="/login-cliente">Pedir</button>
                           </div>
