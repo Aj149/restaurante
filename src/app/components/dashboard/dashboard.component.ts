@@ -14,11 +14,12 @@ import { HttpClient } from '@angular/common/http';
 import { PopUpPlatosComponent } from './pop-up-platos/pop-up-platos.component';
 import { PlatosService } from '../../services/platos.service';
 import { LugaresService } from '../../services/lugares.service';
+import { PopUpLugaresComponent } from "./pop-up-lugares/pop-up-lugares.component";
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterLink, CarouselModule, NavbarComponent, FooterComponent, FormsModule, PopUpPlatosComponent],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink, CarouselModule, NavbarComponent, FooterComponent, FormsModule, PopUpPlatosComponent, PopUpLugaresComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
@@ -74,6 +75,8 @@ platoSeleccionado!: Platos;
     );
   }
 
+  
+
 
 
 // 4abre y cierra el popup de los platos especiales
@@ -88,11 +91,21 @@ abrirPopup(plato: Platos) {
 
   // 5para los lugares del carrusel
   
+  abrirPopupLugar(lugar: Lugares) {
+    this.lugarSeleccionado = lugar;
+    this.mostrarPopUp = true;
+    console.log('Mostrar popup:', this.mostrarPopUp);
+    console.log('Lugar seleccionado:', this.lugarSeleccionado); // Verifica si el lugar está siendo asignado correctamente
+  }
   
   
+    cerrarPopup() {
+      this.mostrarPopUp = false;
+    }
 
   
   // 1para los lugares
+  mostrarPopUp = false;
   lugares: Lugares[] = [];
   lugaresEspeciales: Lugares[] = [];
   lugarSeleccionado!: Lugares;

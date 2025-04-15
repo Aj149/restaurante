@@ -160,7 +160,7 @@
                 </div>
                 <div class="mt-4 text-end">
                   <button class="boton border-0 rounded-2 cursor-pointer mx-3 mb-2" (click)="abrirPopup(platosEspeciales[3])">RESERVAR</button>
-                  <button class="boton border-0 rounded-2 cursor-pointer" routerLink="/lugares/lugar1">VER DETALLES</button>
+                  <button class="boton border-0 rounded-2 cursor-pointer" (click)="abrirPopupLugar(lugaresEspeciales[0])">VER DETALLES</button>
 
                 </div>
             </div>
@@ -180,7 +180,7 @@
                 </div>
                 <div class="mt-4 text-end">
                   <button class="boton border-0 rounded-2 cursor-pointer mx-3 mb-2">RESERVAR</button>
-                    <button class="boton border-0 rounded-2 cursor-pointer" routerLink="/lugares/lugar2">VER DETALLES</button>
+                    <button class="boton border-0 rounded-2 cursor-pointer" (click)="abrirPopupLugar(lugaresEspeciales[1])">VER DETALLES</button>
                 </div>
             </div>
           </div>
@@ -199,7 +199,7 @@
                 </div>
                 <div class="mt-4 text-end">
                   <button class="boton border-0 rounded-2 cursor-pointer mx-3 mb-2">RESERVAR</button>
-                    <button class="boton border-0 rounded-2 cursor-pointer" routerLink="/lugares/lugar3">VER DETALLES</button>
+                    <button class="boton border-0 rounded-2 cursor-pointer" (click)="abrirPopupLugar(lugaresEspeciales[2])">VER DETALLES</button>
                 </div>
             </div>
           </div>
@@ -218,7 +218,7 @@
                 </div>
                 <div class="mt-4 text-end">
                   <button class="boton border-0 rounded-2 cursor-pointer mx-3 mb-2">RESERVAR</button>
-                    <button class="boton border-0 rounded-2 cursor-pointer" routerLink="/lugares/lugar4">VER DETALLES</button>
+                    <button class="boton border-0 rounded-2 cursor-pointer" (click)="abrirPopupLugar(lugaresEspeciales[3])">VER DETALLES</button>
                 </div>
             </div>
           </div>
@@ -484,3 +484,10 @@
       [isVisible]="isPopupVisible"
       (close)="closePopup()">
     </app-pop-up-platos>
+    <app-pop-up-lugares
+    *ngIf="mostrarPopUp"
+    [lugar]="lugarSeleccionado"
+  [isVisible]="mostrarPopUp"
+  (close)="cerrarPopup()"
+  >
+</app-pop-up-lugares>

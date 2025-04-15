@@ -21,6 +21,7 @@ import { LoginClComponent } from './components/auth/login-cl/login-cl.component'
 import { RegisterClComponent } from './components/auth/register-cl/register-cl.component';
 import { EditPlatosEsComponent } from './components/admin/edit-platos-es/edit-platos-es.component';
 import { PlatosComponent } from './components/admin/platos/platos.component';
+import { PopUpLugaresComponent } from './components/dashboard/pop-up-lugares/pop-up-lugares.component';
 
 
 
@@ -84,5 +85,7 @@ export const routes: Routes = [
   { path: 'carrito', component: CarritoComponent },
   { path: 'login-cliente', component: LoginClComponent },
   { path: 'register-cliente', component: RegisterClComponent },
+  { path: 'popUpLugares', component: PopUpLugaresComponent }, 
+  // ver si vale las rutas del pop up de lugares y el de platos
 
 ];
