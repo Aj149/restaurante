@@ -1,9 +1,4 @@
 import { Routes } from '@angular/router';
-import { LugaresComponent } from './components/dashboard/lugares/lugares.component';
-import { Lugar1Component } from './components/dashboard/lugares/lugar1/lugar1.component';
-import { Lugar2Component } from './components/dashboard/lugares/lugar2/lugar2.component';
-import { Lugar4Component } from './components/dashboard/lugares/lugar4/lugar4.component';
-import { Lugar3Component } from './components/dashboard/lugares/lugar3/lugar3.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { LikesComponent } from './components/admin/likes/likes.component';
@@ -66,17 +61,6 @@ export const routes: Routes = [
       { path: 'personal2', component: Personal2Component },
       { path: 'personal3', component: Personal3Component },
 
-    ]
-  },
-
-  {
-    path: 'lugares',
-    component: LugaresComponent,
-    children: [
-      { path: 'lugar1', component: Lugar1Component },
-      { path: 'lugar2', component: Lugar2Component },
-      { path: 'lugar3', component: Lugar3Component },
-      { path: 'lugar4', component: Lugar4Component },
     ]
   },
 

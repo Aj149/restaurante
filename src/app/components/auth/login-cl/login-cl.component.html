@@ -4,43 +4,81 @@
       
       <h1 class="nautilus text-center mb-4">Iniciar Sesión</h1>
       
-      <form>
-      <!-- Email -->
-      <div class="mb-3">
-        <label for="email" class="form-label roboto">Correo electrónico</label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
-          <input type="email" class="form-control roboto" id="email" placeholder="correo@ejemplo.com" required>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" autocomplete="on">
+        <!-- Email -->
+        <div class="mb-3">
+          <label for="email" class="form-label roboto">Correo electrónico</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+            <input type="email" class="roboto form-control" id="email" formControlName="email" 
+                   autocomplete="username" [readonly]="isLoading" [attr.aria-busy]="isLoading" 
+                   placeholder="correo@ejemplo.com" required>
+          </div>
+          @if (email?.invalid && (email?.touched || email?.dirty)) {
+            @if (email?.errors?.['required']) {
+              <small class="text-danger">El correo es obligatorio</small>
+            }
+            @if (email?.errors?.['email']) {
+              <small class="text-danger">Formato de correo inválido</small>
+            }
+          }
         </div>
-      </div>
-
-      <!-- Password -->
-      <div class="mb-3">
-        <label for="password" class="form-label roboto">Contraseña</label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-          <input type="password" class="form-control" placeholder="••••••••" id="password" required>
-        </div>
-      </div>
       
-      <!-- Recordarme y Olvidé contraseña -->
-      <div class="d-flex justify-content-between align-items-center mb-3">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="remember">
-          <label class="form-check-label roboto" for="remember">Recuérdame</label>
+        <!-- Password -->
+        <div class="mb-3">
+          <label for="password" class="form-label roboto">Contraseña</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+            <input [type]="showPassword ? 'text' : 'password'" class="form-control" 
+                   placeholder="••••••••" id="password" formControlName="password" 
+                   autocomplete="current-password" [readonly]="isLoading" 
+                   [attr.aria-busy]="isLoading" required>
+            <button class="btn btn-outline-secondary" type="button" 
+                    (click)="togglePasswordVisibility()" tabindex="-1">
+              <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+            </button>
+          </div>
+          @if (password?.invalid && (password?.touched || password?.dirty)) {
+            @if (password?.errors?.['required']) {
+              <small class="text-danger">La contraseña es obligatoria</small>
+            }
+            @if (password?.errors?.['pattern']) {
+              <small class="text-danger">Debe contener al menos una mayúscula, una minúscula y un número</small>
+            }
+            @if (password?.errors?.['minlength']) {
+              <small class="text-danger">La contraseña debe tener al menos 8 caracteres</small>
+            }
+          }
         </div>
-        <a href="#" class="roboto">¿Olvidaste tu contraseña?</a>
-      </div>
+        
+        <!-- Recordarme y Olvidé contraseña -->
+        <div class="d-flex justify-content-between align-items-center mb-3 forgot-password">
+          <a routerLink="/forgot-password" [attr.aria-disabled]="isLoading" class="roboto">
+            ¿Olvidaste tu contraseña?
+          </a>
+        </div>
+        
+        <!-- Botón -->
+        <div class="d-grid">
+          <button type="submit" [disabled]="loginForm.invalid || isLoading" 
+                  [attr.aria-disabled]="loginForm.invalid || isLoading" 
+                  class="submit-button btn boton roboto">
+            @if (!isLoading) {
+              <span>Iniciar sesión</span>
+            }
+            @if (isLoading) {
+              <span>Procesando...</span>
+            }
+          </button>
+        </div>
       
-      <!-- Botón -->
-      <div class="d-grid">
-        <button type="submit" class="btn boton roboto" routerLink="/carrito">Iniciar sesión</button>
-      </div>
-    </form>
-    <!-- Registro -->
-    <div class="mt-4 text-center roboto">
-      <p>¿No tienes una cuenta? <a href="" routerLink="/register-cliente">Regístrate</a></p>
-    </div>
+        <!-- Registro -->
+        <div class="mt-4 text-center roboto signup-link">
+          <p>¿No tienes una cuenta? 
+            <a routerLink="/register-cliente" [attr.aria-disabled]="isLoading">Regístrate</a>
+          </p>
+        </div>
+      </form>
     
   </div>
 </div>
