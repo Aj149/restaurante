@@ -1,32 +1,32 @@
 .overlay {
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1000; /* Asegúrate de que este valor sea alto */
-}
-
-.popup {
-  background-color: rgb(238, 232, 232);
-  height: 105%;
-  z-index: 1001; /* Un valor mayor que el del overlay */
-  animation: fadeInScale 0.60s ease-out;
-}
-
-  img {
-    max-width: 70%;
-    height: auto;
-    margin-left: 13%;
-  } 
-
-@keyframes fadeInScale {
-  0% {
-      opacity: 0;
-      transform: scale(0.8);
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000; /* Asegúrate de que este valor sea alto */
   }
-  100% {
-      opacity: 1;
-      transform: scale(1);
+  
+  .popup {
+    background-color: rgb(238, 232, 232);
+    height: 105%;
+    z-index: 1001; /* Un valor mayor que el del overlay */
+    animation: fadeInScale 0.60s ease-out;
   }
-}
-
-.tituloComida{
-  font-family: 'Dancing Script', sans-serif;                                                
-}
+  
+    img {
+      max-width: 70%;
+      height: auto;
+      margin-left: 13%;
+    } 
+  
+  @keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+  }
+  
+  .tituloComida{
+    font-family: 'Dancing Script', sans-serif;                                                
+  }

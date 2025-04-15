@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostListener, Inject, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, HostListener, Inject, Input, Output, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Platos } from '../../../models/dashboard';
 

@@ -25,3 +25,12 @@ export class Platos{
     imagen: string='';
     precio: number=0;
 }
+
+export class Lugares{
+    id_lugar?: number=0;
+    nombre: string='';
+    descripcion: string='';
+    imagen: string='';
+    precio: number=0;
+    capacidad: number=0;
+}

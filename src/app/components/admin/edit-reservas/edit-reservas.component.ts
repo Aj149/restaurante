@@ -10,7 +10,7 @@ import { reserva } from '../../../models/dashboard';
 @Component({
   selector: 'app-edit-reservas',
   standalone: true,
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule],
   templateUrl: './edit-reservas.component.html',
   styleUrl: './edit-reservas.component.css'
 })

@@ -9,10 +9,11 @@ import { FormularioService } from '../../services/formulario.service';
 import { CommonModule } from '@angular/common';
 import { ComentariosService } from '../../services/comentarios.service';
 import Swal from 'sweetalert2';
-import { Comentarios, Platos, reserva } from '../../models/dashboard';
+import { Comentarios, Lugares, Platos, reserva } from '../../models/dashboard';
 import { HttpClient } from '@angular/common/http';
 import { PopUpPlatosComponent } from './pop-up-platos/pop-up-platos.component';
 import { PlatosService } from '../../services/platos.service';
+import { LugaresService } from '../../services/lugares.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -43,6 +44,9 @@ platoSeleccionado!: Platos;
     if (this.platos) {
       this.traerPlatos();
     }
+    if (this.lugares) {
+      this.traerLugares();
+    }
   }
 
   traerPlatos(): void {
@@ -53,6 +57,19 @@ platoSeleccionado!: Platos;
       },
       (error) => {
         console.error('Error al cargar los platos', error);
+      }
+    );
+  }
+
+  traerLugares(): void {
+    this.lugaresService.obtenerLugares().subscribe(
+      (data) => {
+        this.lugares = data;
+        console.log('Lugares:', this.lugares);
+        this.lugaresEspeciales = this.lugares.slice(0, 4);
+      },
+      (error) => {
+        console.error('Error al cargar lugares:', error);
       }
     );
   }
@@ -68,9 +85,17 @@ abrirPopup(plato: Platos) {
   closePopup() {
     this.isPopupVisible = false;
   }
+
+  // 5para los lugares del carrusel
+  
+  
+  
+
   
   // 1para los lugares
-  lugares: string[] = [];
+  lugares: Lugares[] = [];
+  lugaresEspeciales: Lugares[] = [];
+  lugarSeleccionado!: Lugares;
   capacidades: { [key: string]: number } = {};
   maxPersonas: number = 0;
 
@@ -82,6 +107,7 @@ abrirPopup(plato: Platos) {
     private formularioService: FormularioService,
     private mensajeService: ComentariosService,
     private platosService: PlatosService,
+    private lugaresService: LugaresService,
 
   ) {
     // 1para los lugares

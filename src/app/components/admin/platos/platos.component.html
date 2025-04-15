@@ -1,0 +1,24 @@
+<h1>Platos Especiales</h1>
+<div class="row">
+    @for (platos of plato; track platos) {
+
+        <div class="col-md-4 mb-4" >
+            <div class="card h-100">
+                <img
+                [src]="platos.imagen"
+                class="card-img-top"
+                alt="{{ platos.nombre }}"
+          style="object-fit: cover; height: 200px;"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ platos.nombre }}</h5>
+          <p class="card-text">{{ platos.descripcion }}</p>
+          <p class="card-text"><strong>Precio:</strong> ${{ platos.precio }}</p>
+          <button class="" [routerLink]="['/admin/editarPlato', platos.id_plato]">Editar</button>
+        </div>
+      </div>
+    </div>
+    
+}
+  </div>
+  

@@ -15,12 +15,12 @@ import { Personal2Component } from './components/dashboard/personal/personal2/pe
 import { Personal3Component } from './components/dashboard/personal/personal3/personal3.component';
 import { ListReservasComponent } from './components/admin/list-reservas/list-reservas.component';
 import { EditReservasComponent } from './components/admin/edit-reservas/edit-reservas.component';
-import { Component } from '@angular/core';
 import { PopUpPlatosComponent } from './components/dashboard/pop-up-platos/pop-up-platos.component';
 import { CarritoComponent } from './components/dashboard/carrito/carrito.component';
 import { LoginClComponent } from './components/auth/login-cl/login-cl.component';
 import { RegisterClComponent } from './components/auth/register-cl/register-cl.component';
 import { EditPlatosEsComponent } from './components/admin/edit-platos-es/edit-platos-es.component';
+import { PlatosComponent } from './components/admin/platos/platos.component';
 
 
 
@@ -37,8 +37,9 @@ export const routes: Routes = [
       { path: 'likes', component: LikesComponent },
       { path: 'comentarios', component: ComentariosComponent, },
       { path: 'listaDeReservas', component: ListReservasComponent },
-      { path: 'editarPlatos', component: EditPlatosEsComponent },
-      { path: 'editarReserva/:id_reserva', component: EditReservasComponent }
+      { path: 'editarReserva/:id_reserva', component: EditReservasComponent },
+      { path: 'listaDePlatos', component: PlatosComponent },
+      { path: 'editarPlato/:id_plato', component: EditPlatosEsComponent }
 
     ]
   },

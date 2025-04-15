@@ -60,7 +60,7 @@
     <ng-template carouselSlide> 
       <div class="col-6 mx-5 d-block">
           <div class="hovereffect">
-            <img class="img-thumbnail" [src]="platosEspeciales[0].imagen" alt="Foto de una paella deliciosa">
+            <img class="img-thumbnail" src="{{platosEspeciales[0].imagen}}" alt="{{platosEspeciales[0].nombre}}">
               <div class="overlay">
                 <h2>{{platosEspeciales[0].nombre}}</h2>
                 <a class="info" (click)="abrirPopup(platosEspeciales[0])">Descripción</a>
@@ -70,7 +70,7 @@
     <ng-template carouselSlide>
       <div class="col-6 mx-5 d-block">
       <div class="hovereffect">
-          <img class="img-thumbnail" src="{{platosEspeciales[1].imagen}}" alt="">
+          <img class="img-thumbnail" src="{{platosEspeciales[1].imagen}}" alt="{{platosEspeciales[1].nombre}}">
           <div class="overlay">
              <h2>{{platosEspeciales[1].nombre}}</h2>
              <a class="info" (click)="abrirPopup(platosEspeciales[1])">Descripción</a>
@@ -80,7 +80,7 @@
 </ng-template>
     <ng-template carouselSlide> <div class="col-6 mx-5 d-block">
       <div class="hovereffect">
-          <img class="img-thumbnail" src="{{platosEspeciales[2].imagen}}" alt="">
+          <img class="img-thumbnail" src="{{platosEspeciales[2].imagen}}" alt="{{platosEspeciales[2].nombre}}">
           <div class="overlay">
             <h2>{{platosEspeciales[2].nombre}}</h2>
             <a class="info" (click)="abrirPopup(platosEspeciales[2])">Descripción</a>
@@ -91,7 +91,7 @@
     <ng-template carouselSlide> 
       <div class="col-6 mx-5 d-block">
       <div class="hovereffect">
-          <img class="img-thumbnail" src="{{platosEspeciales[3].imagen}}" alt="">
+          <img class="img-thumbnail" src="{{platosEspeciales[3].imagen}}" alt="{{platosEspeciales[3].nombre}}">
           <div class="overlay">
             <h2>{{platosEspeciales[3].nombre}}</h2>
             <a class="info" (click)="abrirPopup(platosEspeciales[3])">Descripción</a>
@@ -149,17 +149,17 @@
             <div class="container hover-container">
               <div class="row">
                   <div class="col-lg-3 col-sm-12 col-md-6 rounded-4 hover-item mt-4">
-                    <img src="../../../assets/lugar1.jpg" class="imagen rounded-2 shadow-effect" alt="...">
+                    <img src="{{lugaresEspeciales[0].imagen}}" class="imagen rounded-2 shadow-effect" alt="...">
                   </div>
                   <div class="col-lg-9 col-sm-12 col-md-6 hover-item mt-4">
-                    <h1 class="nautilus" style="color:rgb(231, 91, 30);">LUGAR 1</h1>
+                    <h1 class="nautilus" style="color:rgb(231, 91, 30);">{{lugaresEspeciales[0].nombre}}</h1>
                     <div>
-                      <p class="roboto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum placeat vitae neque exercitationem beatae necessitatibus enim eos illo quisquam quod aliquam tenetur praesentium debitis modi, commodi mollitia suscipit alias totam.</p>
+                      <p class="roboto">{{lugaresEspeciales[0].descripcion}}</p>
                     </div>
                   </div>
                 </div>
                 <div class="mt-4 text-end">
-                  <button class="boton border-0 rounded-2 cursor-pointer mx-3 mb-2">RESERVAR</button>
+                  <button class="boton border-0 rounded-2 cursor-pointer mx-3 mb-2" (click)="abrirPopup(platosEspeciales[3])">RESERVAR</button>
                   <button class="boton border-0 rounded-2 cursor-pointer" routerLink="/lugares/lugar1">VER DETALLES</button>
 
                 </div>
@@ -169,12 +169,12 @@
             <div class="container hover-container">
               <div class="row">
                   <div class="col-lg-3 col-sm-12 col-md-6 rounded-4 hover-item mt-4">
-                    <img src="../../../assets/lugar2.jpg" class="imagen rounded-2 w-75 shadow-effect" alt="...">
+                    <img src="{{lugaresEspeciales[1].imagen}}" class="imagen rounded-2 w-75 shadow-effect" alt="...">
                   </div>
                   <div class="col-lg-9 col-sm-12 col-md-6 hover-item mt-4">
-                    <h1 class="nautilus" style="color:rgb(231, 91, 30);">LUGAR 2</h1>
+                    <h1 class="nautilus" style="color:rgb(231, 91, 30);">{{lugaresEspeciales[1].nombre}}</h1>
                     <div>
-                      <p class="roboto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum placeat vitae neque exercitationem beatae necessitatibus enim eos illo quisquam quod aliquam tenetur praesentium debitis modi, commodi mollitia suscipit alias totam.</p>
+                      <p class="roboto">{{lugaresEspeciales[1].descripcion}}</p>
                     </div>
                   </div>
                 </div>
@@ -188,12 +188,12 @@
             <div class="container hover-container">
               <div class="row">
                   <div class="col-lg-3 col-sm-12 col-md-6 rounded-4 hover-item mt-4">
-                    <img src="../../../assets/lugar3.jpg" class="imagen rounded-2 w-75 shadow-effect" alt="...">
+                    <img src="{{lugaresEspeciales[2].imagen}}" class="imagen rounded-2 w-75 shadow-effect" alt="...">
                   </div>
                   <div class="col-lg-9 col-sm-12 col-md-6 hover-item mt-4">
-                    <h1 class="nautilus" style="color:rgb(231, 91, 30);">LUGAR 3</h1>
+                    <h1 class="nautilus" style="color:rgb(231, 91, 30);">{{lugaresEspeciales[2].nombre}}</h1>
                     <div>
-                      <p class="roboto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum placeat vitae neque exercitationem beatae necessitatibus enim eos illo quisquam quod aliquam tenetur praesentium debitis modi, commodi mollitia suscipit alias totam.</p>
+                      <p class="roboto">{{lugaresEspeciales[2].descripcion}}</p>
                     </div>
                   </div>
                 </div>
@@ -207,12 +207,12 @@
             <div class="container hover-container">
               <div class="row">
                   <div class="col-lg-3 col-sm-12 col-md-6 rounded-4 hover-item mt-4">
-                    <img src="../../../assets/lugar4.jpg" class="imagen rounded-2 w-75 shadow-effect" alt="...">
+                    <img src="{{lugaresEspeciales[3].imagen}}" class="imagen rounded-2 w-75 shadow-effect" alt="...">
                   </div>
                   <div class="col-lg-9 col-sm-12 col-md-6 hover-item mt-4">
-                    <h1 class="nautilus" style="color:rgb(231, 91, 30);">LUGAR 4</h1>
+                    <h1 class="nautilus" style="color:rgb(231, 91, 30);">{{lugaresEspeciales[3].nombre}}</h1>
                     <div>
-                      <p class="roboto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum placeat vitae neque exercitationem beatae necessitatibus enim eos illo quisquam quod aliquam tenetur praesentium debitis modi, commodi mollitia suscipit alias totam.</p>
+                      <p class="roboto">{{lugaresEspeciales[3].descripcion}}</p>
                     </div>
                   </div>
                 </div>
