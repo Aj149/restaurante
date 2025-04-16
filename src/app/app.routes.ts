@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './components/auth/login/login.component';
+import { LoginComponent } from './components/auth/admin/login/login.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { LikesComponent } from './components/admin/likes/likes.component';
 import { ComentariosComponent } from './components/admin/comentarios/comentarios.component';
@@ -12,11 +12,11 @@ import { ListReservasComponent } from './components/admin/list-reservas/list-res
 import { EditReservasComponent } from './components/admin/edit-reservas/edit-reservas.component';
 import { PopUpPlatosComponent } from './components/dashboard/pop-up-platos/pop-up-platos.component';
 import { CarritoComponent } from './components/dashboard/carrito/carrito.component';
-import { LoginClComponent } from './components/auth/login-cl/login-cl.component';
-import { RegisterClComponent } from './components/auth/register-cl/register-cl.component';
 import { EditPlatosEsComponent } from './components/admin/edit-platos-es/edit-platos-es.component';
 import { PlatosComponent } from './components/admin/platos/platos.component';
 import { PopUpLugaresComponent } from './components/dashboard/pop-up-lugares/pop-up-lugares.component';
+import { AuthComponent } from './components/auth/auth.component';
+import { AuthRegisterComponent } from './components/auth/auth/auth-register/auth-register.component';
 
 
 
@@ -67,8 +67,8 @@ export const routes: Routes = [
 
   { path: 'popUp', component: PopUpPlatosComponent },
   { path: 'carrito', component: CarritoComponent },
-  { path: 'login-cliente', component: LoginClComponent },
-  { path: 'register-cliente', component: RegisterClComponent },
+  { path: 'auth', component: AuthComponent },
+  { path: 'auth-register', component: AuthRegisterComponent },
   { path: 'popUpLugares', component: PopUpLugaresComponent }, 
   // ver si vale las rutas del pop up de lugares y el de platos
 
