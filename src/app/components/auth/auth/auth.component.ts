@@ -1,44 +1,41 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NavbarComponent } from "../../dashboard/navbar/navbar.component";
 import { FooterComponent } from "../../dashboard/footer/footer.component";
 import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [NavbarComponent, FooterComponent, RouterLink, NgClass, ReactiveFormsModule],
+  imports: [NavbarComponent, FooterComponent, RouterLink, NgClass, ReactiveFormsModule, JwtModule,],
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.css'
 })
+
 export class AuthComponent {
   loginForm: FormGroup;
-  isLoading: boolean = false;
+  isLoading = false;
   showPassword = false;
-
-togglePasswordVisibility() {
-  this.showPassword = !this.showPassword;
-}
-
 
   constructor(
     private fb: FormBuilder,
-    private auth: AuthService,
-    private router: Router,
-    private toastr: ToastrService,
-    private jwtHelper: JwtHelperService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [
-        Validators.required,
-        Validators.minLength(8),
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/)
-      ]]
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/),
+        ],
+      ],
     });
   }
 
@@ -50,35 +47,26 @@ togglePasswordVisibility() {
     return this.loginForm.get('password');
   }
 
-  onSubmit(): void {
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
+
+  onSubmit() {
     if (this.loginForm.invalid) return;
 
     this.isLoading = true;
 
-    const credentials = this.loginForm.value;
+    const { email, password } = this.loginForm.value;
 
-    this.auth.login(credentials).subscribe({
+    this.authService.login({email, password}).subscribe({
       next: (response) => {
-        // Asumimos que el token viene como `response.token`
-        localStorage.setItem('token', response.token);
-
-        // Opcional: Decodificar y obtener info del usuario
-        const decodedToken = this.jwtHelper.decodeToken(response.token);
-        console.log('Usuario autenticado:', decodedToken);
-
-        this.toastr.success('¡Inicio de sesión exitoso!');
-        this.router.navigate(['/dashboard']); // Cambia por tu ruta principal
+        this.router.navigate(['/carrito']);
       },
       error: (err) => {
-        this.toastr.error('Correo o contraseña incorrectos');
-        console.error(err);
+        console.error('Error al iniciar sesión:', err);
+        // Aquí podrías usar Toastr para notificar al usuario
         this.isLoading = false;
       },
-      complete: () => {
-        this.isLoading = false;
-      }
     });
   }
-
-  
 }

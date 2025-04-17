@@ -18,10 +18,6 @@ export class PopUpPlatosComponent {
   count: number = 0;
   total: number = 0;
 
-  ngOnInit() {
-    console.log('Plato recibido:', this.plato);
-  }
-  
 
   // 1cerrar el popup con ESC
   closePopup() {

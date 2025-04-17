@@ -11,7 +11,7 @@ import { reserva } from '../../../models/dashboard';
 @Component({
   selector: 'app-list-reservas',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, BuscadorPipe, NgxPaginationModule ],
+  imports: [RouterLink, BuscadorPipe, NgxPaginationModule ],
   templateUrl: './list-reservas.component.html',
   styleUrl: './list-reservas.component.css'
 })

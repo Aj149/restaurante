@@ -15,61 +15,67 @@ import { CarritoComponent } from './components/dashboard/carrito/carrito.compone
 import { EditPlatosEsComponent } from './components/admin/edit-platos-es/edit-platos-es.component';
 import { PlatosComponent } from './components/admin/platos/platos.component';
 import { PopUpLugaresComponent } from './components/dashboard/pop-up-lugares/pop-up-lugares.component';
-import { AuthComponent } from './components/auth/auth.component';
-import { AuthRegisterComponent } from './components/auth/auth/auth-register/auth-register.component';
 
+import { AuthRegisterComponent } from './components/auth/auth/auth-register/auth-register.component';
+import { AuthComponent } from './components/auth/auth/auth.component';
+import { authGuard } from './services/auth.guard';
 
 
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-
-  { path: 'login', component: LoginComponent, },
-
+  // Ruta de login (pública)
+  { path: 'login', component: AuthComponent },
+  
+  // Ruta de registro (pública)
+  { path: 'register', component: AuthRegisterComponent },
+  
+  // Admin (protegido)
   {
-    path: 'admin', component: AdminComponent,
-
+    path: 'admin',
+    component: AdminComponent,
+    
     children: [
       { path: 'likes', component: LikesComponent },
-      { path: 'comentarios', component: ComentariosComponent, },
-      { path: 'listaDeReservas', component: ListReservasComponent },
-      { path: 'editarReserva/:id_reserva', component: EditReservasComponent },
-      { path: 'listaDePlatos', component: PlatosComponent },
-      { path: 'editarPlato/:id_plato', component: EditPlatosEsComponent }
-
+      { path: 'comentarios', component: ComentariosComponent },
+      { path: 'lista-de-reservas', component: ListReservasComponent },
+      { path: 'editar-reserva/:id_reserva', component: EditReservasComponent },
+      { path: 'lista-de-platos', component: PlatosComponent },
+      { path: 'editar-plato/:id_plato', component: EditPlatosEsComponent }
     ]
   },
 
-
-
-
-
+  // Dashboard (protegido)
   {
     path: 'dashboard',
     component: DashboardComponent,
-    children: [
-      { path: '', component: DashboardComponent },
-    ]
   },
 
-
+  // Personal (protegido)
   {
     path: 'personal',
     component: PersonalComponent,
     children: [
       { path: 'personal1', component: Personal1Component },
       { path: 'personal2', component: Personal2Component },
-      { path: 'personal3', component: Personal3Component },
-
+      { path: 'personal3', component: Personal3Component }
     ]
   },
 
+  // Extras (protegidos según necesidad)
+  { 
+    path: 'pop-up-platos', 
+    component: PopUpPlatosComponent,
+  },
+  { 
+    path: 'pop-up-lugares', 
+    component: PopUpLugaresComponent,
+  },
+  { 
+    path: 'carrito', component: CarritoComponent, canActivate: [authGuard],
+  },
+  
 
-  { path: 'popUp', component: PopUpPlatosComponent },
-  { path: 'carrito', component: CarritoComponent },
-  { path: 'auth', component: AuthComponent },
-  { path: 'auth-register', component: AuthRegisterComponent },
-  { path: 'popUpLugares', component: PopUpLugaresComponent }, 
-  // ver si vale las rutas del pop up de lugares y el de platos
 
+  // Ruta desconocida (redirigir a dashboard protegido)
+  { path: '**', redirectTo: 'dashboard' }
 ];

@@ -66,7 +66,6 @@ platoSeleccionado!: Platos;
     this.lugaresService.obtenerLugares().subscribe(
       (data) => {
         this.lugares = data;
-        console.log('Lugares:', this.lugares);
         this.lugaresEspeciales = this.lugares.slice(0, 4);
       },
       (error) => {
@@ -94,8 +93,6 @@ abrirPopup(plato: Platos) {
   abrirPopupLugar(lugar: Lugares) {
     this.lugarSeleccionado = lugar;
     this.mostrarPopUp = true;
-    console.log('Mostrar popup:', this.mostrarPopUp);
-    console.log('Lugar seleccionado:', this.lugarSeleccionado); // Verifica si el lugar está siendo asignado correctamente
   }
   
   
