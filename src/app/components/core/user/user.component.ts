@@ -1,22 +1,21 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavbarComponent } from "../../dashboard/navbar/navbar.component";
 import { FooterComponent } from "../../dashboard/footer/footer.component";
 import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
-import { ToastrService } from 'ngx-toastr';
-import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
+import { JwtModule } from '@auth0/angular-jwt';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
-  selector: 'app-auth',
+  selector: 'app-user',
   standalone: true,
   imports: [NavbarComponent, FooterComponent, RouterLink, NgClass, ReactiveFormsModule, JwtModule,],
-  templateUrl: './auth.component.html',
-  styleUrl: './auth.component.css'
+  templateUrl: './user.component.html',
+  styleUrl: './user.component.css'
 })
 
-export class AuthComponent {
+export class UserComponent {
   loginForm: FormGroup;
   isLoading = false;
   showPassword = false;
@@ -37,11 +36,13 @@ export class AuthComponent {
         ],
       ],
     });
+    
   }
 
   get email() {
     return this.loginForm.get('email');
   }
+  
 
   get password() {
     return this.loginForm.get('password');
@@ -50,16 +51,18 @@ export class AuthComponent {
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
+  
+
 
   onSubmit() {
     if (this.loginForm.invalid) return;
-
     this.isLoading = true;
 
     const { email, password } = this.loginForm.value;
 
     this.authService.login({email, password}).subscribe({
       next: (response) => {
+        console.log('Login exitoso:', response);
         this.router.navigate(['/carrito']);
       },
       error: (err) => {
@@ -69,4 +72,7 @@ export class AuthComponent {
       },
     });
   }
+  
+  
+  
 }

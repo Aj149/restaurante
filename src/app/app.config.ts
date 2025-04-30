@@ -6,8 +6,9 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { provideToastr } from 'ngx-toastr';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { JwtModule } from '@auth0/angular-jwt';
-import { jwtInterceptor } from './components/auth/auth/jwt.interceptor';
+import { jwtInterceptor } from './components/core/user/jwt.interceptor';
+
+
 
 
 export const appConfig: ApplicationConfig = {

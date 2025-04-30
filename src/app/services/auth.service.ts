@@ -1,89 +1,134 @@
-import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable, inject, PLATFORM_ID, Inject } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { BehaviorSubject, finalize, tap } from 'rxjs';
+import { BehaviorSubject, catchError, finalize, Observable, tap, throwError } from 'rxjs';
 import { environment } from '../environments/environment';
 import { jwtDecode } from 'jwt-decode';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
-  private readonly TOKEN_KEY = 'access_token';
-  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
-  isLoading = false;
-
   
+  private readonly TOKEN_KEY = 'access_token';
+  private readonly USER_KEY = 'user_data';
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+  public isLoading = new BehaviorSubject<boolean>(false);
 
-  constructor() {
-    
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    this.checkAuthState();
   }
 
-  login(credentials: { email: string; password: string }) {
-    this.isLoading = true;
-    return this.http.post<{ access_token: string }>(`${environment.autUrl}/auth/login`, credentials).pipe(
-      tap(response => {
-        if (response?.access_token) {
-          this.setToken(response.access_token);  // Guardamos el token solo si es válido
-          this.isAuthenticatedSubject.next(true);
-        } 
-         
-        
+  // Método para login
+  login(credentials: { email: string; password: string }): Observable<any> {
+    this.isLoading.next(true);
+    return this.http.post<{ access_token: string }>(
+      `${environment.authUrl}/usuarios/login`, 
+      credentials,
+      { headers: this.getHeaders() }
+    ).pipe(
+      tap(response => this.handleAuthResponse(response)),
+      catchError(error => {
+        this.handleAuthError(error);
+        return throwError(() => error);
       }),
-      finalize(() => this.isLoading = false)
+      finalize(() => this.isLoading.next(false))
     );
   }
-  
 
-  
-
-  logout() {
-    // Eliminar el token del localStorage
-    localStorage.removeItem(this.TOKEN_KEY);  // Limpia el token del localStorage
-  
-    // Cambiar el estado de autenticación
-    this.isAuthenticatedSubject.next(false);
-    window.location.href = '/login';
-    this.router.navigate(['/login']);
+  // Método para registro
+  register(userData: any): Observable<any> {
+    this.isLoading.next(true);
+    return this.http.post<{ access_token: string }>(
+      `${environment.authUrl}/usuarios/registro`,
+      userData,
+      { headers: this.getHeaders() }
+    ).pipe(
+      tap(response => this.handleAuthResponse(response)),
+      catchError(error => {
+        this.handleAuthError(error);
+        return throwError(() => error);
+      }),
+      finalize(() => this.isLoading.next(false))
+    );
   }
-  
 
-  public getToken(): string | null {
-    if (typeof window !== 'undefined') {
-      const token = localStorage.getItem(this.TOKEN_KEY);
-// comentario para saber si ya llego el token
-      return token;
+  // Métodos comunes de autenticación
+  private handleAuthResponse(response: any): void {
+    if (response?.access_token) {
+      this.setToken(response.access_token);
+      this.setUserData(response.user || this.getTokenPayload());
+      this.isAuthenticatedSubject.next(true);
+      this.router.navigate(['/dashboard']);
+    }
+  }
+
+  private handleAuthError(error: any): void {
+    console.error('Authentication error:', error);
+    // Puedes agregar lógica específica para manejar diferentes tipos de errores
+  }
+
+  private getHeaders(): HttpHeaders {
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      // Agregar otros headers necesarios
+    });
+  }
+
+  // Métodos para manejo de token y estado de autenticación
+  getToken(): string | null {
+    if (isPlatformBrowser(this.platformId)) {
+      return localStorage.getItem('token');
     }
     return null;
   }
-  
-  
+
   private setToken(token: string): void {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem(this.TOKEN_KEY, token);
-    }
-  }
-  
-  private checkAuthState(): void {
-    const token = this.getToken();
-    this.isAuthenticatedSubject.next(!!token);  // ← Esto asegura que si hay token, se considere autenticado
+    localStorage.setItem(this.TOKEN_KEY, token);
   }
 
-  getTokenPayload(): any | null {
+  private setUserData(user: any): void {
+    localStorage.setItem(this.USER_KEY, JSON.stringify(user));
+  }
+
+  public getUserData(): any {
+    const userData = localStorage.getItem(this.USER_KEY);
+    return userData ? JSON.parse(userData) : null;
+  }
+
+  public getTokenPayload(): any | null {
     const token = this.getToken();
     if (!token) return null;
     try {
       return jwtDecode(token);
     } catch (e) {
+      console.error('Error decoding token:', e);
       return null;
     }
   }
-  
-  isTokenExpired(): boolean {
+
+  public isAuthenticated(): Observable<boolean> {
+    return this.isAuthenticatedSubject.asObservable();
+  }
+
+  public checkAuthState(): void {
+    const token = this.getToken();
+    const isAuthenticated = !!token && !this.isTokenExpired();
+    this.isAuthenticatedSubject.next(isAuthenticated);
+  }
+
+  public isTokenExpired(): boolean {
     const payload = this.getTokenPayload();
     if (!payload?.exp) return true;
-  
-    const now = Math.floor(Date.now() / 1000);
-    return payload.exp < now;
+    return payload.exp < (Date.now() / 1000);
+  }
+
+  public logout(): void {
+    localStorage.removeItem(this.TOKEN_KEY);
+    localStorage.removeItem(this.USER_KEY);
+    this.isAuthenticatedSubject.next(false);
+    this.router.navigate(['/login']);
+    // window.location.href = '/login'; // Opcional: recarga completa
   }
 }

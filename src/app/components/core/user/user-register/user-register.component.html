@@ -1,0 +1,113 @@
+<app-navbar></app-navbar>
+
+<div class="mt-5 container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="col-md-8 shadow-lg p-5 rounded beige">
+    <h1 class="nautilus text-center mb-4">REGÍSTRATE</h1>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <!-- nombre -->
+        <div class="mb-3 col-md-6 roboto">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="nombre" formControlName="nombre" placeholder="Ej: Mario" />
+          @if (f['nombre'].invalid && f['nombre'].touched) {
+
+            <small class="text-danger">Nombre requerido</small>
+          }
+        </div>
+
+        <!-- apellido -->
+        <div class="mb-3 col-md-6 roboto">
+          <label for="apellido" class="form-label">Apellido</label>
+          <input type="text" class="form-control" id="apellido" formControlName="apellido" placeholder="Ej: Morales" />
+          @if (f['apellido'].invalid && f['apellido'].touched) {
+
+            <small class="text-danger">Apellido requerido</small>
+          }
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Dirección -->
+        <div class="mb-3 col-md-6 roboto">
+          <label for="direccion" class="form-label">Dirección</label>
+          <input type="text" class="form-control" id="direccion" formControlName="direccion" placeholder="Ej: Calle Falsa 123" />
+          @if (f['direccion'].invalid && f['direccion'].touched) {
+
+            <small class="text-danger">Dirección requerida</small>
+          }
+        </div>
+
+        <!-- Teléfono -->
+        <div class="mb-3 col-md-6 roboto">
+          <label for="telefono" class="form-label">Teléfono Móvil</label>
+          <input type="tel" class="form-control" id="telefono" formControlName="telefono" placeholder="Ej: 0991234567" />
+          @if (f['telefono'].invalid && f['telefono'].touched) {
+
+            <small class="text-danger">
+              Teléfono válido requerido (10 dígitos)
+            </small>
+          }
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Email -->
+        <div class="mb-3 col-md-6 roboto">
+          <label for="email" class="form-label">Email electrónico</label>
+          <input type="email" class="form-control" id="email" formControlName="email" placeholder="email@ejemplo.com" />
+          @if (f['email'].invalid && f['email'].touched) {
+            
+            <small class="text-danger">Email válido requerido</small>
+          }
+        </div>
+
+        <!-- Password -->
+        <div class="mb-3 col-md-6 roboto">
+          <label for="password" class="form-label">Password</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              class="form-control"
+              id="password"
+              formControlName="password"
+              placeholder="••••••••"
+              autocomplete="current-password"
+              [readonly]="isLoading"
+              [attr.aria-busy]="isLoading"
+              required
+            />
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              (click)="togglePasswordVisibility()"
+              tabindex="-1"
+            >
+              <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+            </button>
+          </div>
+        
+          @if (f['password'].invalid && f['password'].touched) {
+            <small class="text-danger">
+              Mínimo 6 caracteres, al menos una mayúscula y un número
+            </small>
+          }
+        </div>
+      </div>        
+
+      <!-- Botón -->
+      <div class="d-flex justify-content-center align-items-center mt-4 roboto">
+        <button type="submit" class="btn boton" [disabled]="registerForm.invalid">Registrarse</button>
+      </div>
+      <div class="mt-4 text-center roboto signup-link">
+        <p>¿Ya tienes una cuenta? 
+          <a routerLink="/login" [attr.aria-disabled]="isLoading">Inicia secion</a>
+        </p>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<app-footer></app-footer>

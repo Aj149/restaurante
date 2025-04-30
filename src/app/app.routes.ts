@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './components/auth/admin/login/login.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { LikesComponent } from './components/admin/likes/likes.component';
 import { ComentariosComponent } from './components/admin/comentarios/comentarios.component';
@@ -16,18 +15,18 @@ import { EditPlatosEsComponent } from './components/admin/edit-platos-es/edit-pl
 import { PlatosComponent } from './components/admin/platos/platos.component';
 import { PopUpLugaresComponent } from './components/dashboard/pop-up-lugares/pop-up-lugares.component';
 
-import { AuthRegisterComponent } from './components/auth/auth/auth-register/auth-register.component';
-import { AuthComponent } from './components/auth/auth/auth.component';
 import { authGuard } from './services/auth.guard';
+import { UserComponent } from './components/core/user/user.component';
+import { UserRegisterComponent } from './components/core/user/user-register/user-register.component';
 
 
 
 export const routes: Routes = [
   // Ruta de login (pública)
-  { path: 'login', component: AuthComponent },
+  { path: 'login', component: UserComponent },
   
   // Ruta de registro (pública)
-  { path: 'register', component: AuthRegisterComponent },
+  { path: 'register', component: UserRegisterComponent },
   
   // Admin (protegido)
   {
