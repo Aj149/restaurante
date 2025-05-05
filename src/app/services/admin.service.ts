@@ -1,14 +1,18 @@
-import { Injectable, inject, PLATFORM_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { inject, Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
+
 import { BehaviorSubject, catchError, finalize, Observable, tap, throwError } from 'rxjs';
 import { environment } from '../environments/environment';
-import { jwtDecode } from 'jwt-decode';
-import { isPlatformBrowser } from '@angular/common';
 
-@Injectable({ providedIn: 'root' })
-export class AuthService {
-  private http = inject(HttpClient);
+@Injectable({
+  providedIn: 'root'
+})
+export class AdminService {
+
+private http = inject(HttpClient);
   private router = inject(Router);
   
   private readonly TOKEN_KEY = 'access_token';
@@ -21,10 +25,10 @@ export class AuthService {
   }
 
   // Método para login
-  login(credentials: { email: string; password: string }): Observable<any> {
+  login(credentials: { cedula: string; password: string }): Observable<any> {
     this.isLoading.next(true);
     return this.http.post<{ access_token: string }>(
-      `${environment.authUrl}/usuarios/login`, 
+      `${environment.authUrl}/admin/login`, 
       credentials,
       { headers: this.getHeaders() }
     ).pipe(
@@ -133,10 +137,4 @@ export class AuthService {
     this.router.navigate(['/login']);
     // window.location.href = '/login'; // Opcional: recarga completa
   }
-// recuperar contraseña
-sendRecoveryEmail(email: string) {
-  return this.http.post(`${environment.authUrl}/usuarios/forgot-password`, { email });
-}
-
-  
 }

@@ -30,26 +30,20 @@ export class UserRegisterComponent {
       nombre: ['', [Validators.required, Validators.maxLength(50)]],
       apellido: ['', [Validators.required, Validators.maxLength(50)]],
       direccion: ['', [Validators.required, Validators.maxLength(100)]],
-      telefono: ['', [
-        Validators.required,
-        Validators.pattern(/^[0-9]{10}$/)
-      ]],
-      email: ['', [
-        Validators.required,
-        Validators.email,
-        Validators.maxLength(100)
-      ]],
-      password: ['', [
-        Validators.required,
-        Validators.minLength(8),
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$/)
-      ]]
+      telefono: ['', [Validators.required, Validators.pattern(/^09[0-9]{8}$/)]],
+      email: ['', [ Validators.required, Validators.email, Validators.maxLength(100) ]],
+      password: ['', [ Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&._-]).{8,}$/) ]],
+      website: ['']
     });
   }
 
   get f() { return this.registerForm.controls; }
 
   onSubmit() {
+    if (this.registerForm.get('website')?.value) {
+      console.warn('Bot detectado: no enviar datos');
+      return;
+    }
     if (this.registerForm.invalid) return;
   
     console.log('Datos enviados:', this.registerForm.value);

@@ -18,6 +18,9 @@ import { PopUpLugaresComponent } from './components/dashboard/pop-up-lugares/pop
 import { authGuard } from './services/auth.guard';
 import { UserComponent } from './components/core/user/user.component';
 import { UserRegisterComponent } from './components/core/user/user-register/user-register.component';
+import { LoginAdminComponent } from './components/core/admin/login-admin/login-admin.component';
+import { RecuperarContrasenaComponent } from './components/core/recuperar-contrasena/recuperar-contrasena.component';
+import { ResetPasswordComponent } from './components/core/reset-password/reset-password.component';
 
 
 
@@ -25,8 +28,15 @@ export const routes: Routes = [
   // Ruta de login (pública)
   { path: 'login', component: UserComponent },
   
+  { path: 'admin', component: LoginAdminComponent },
+  
   // Ruta de registro (pública)
   { path: 'register', component: UserRegisterComponent },
+  
+  { path: 'recuperarContraseña', component: RecuperarContrasenaComponent },
+
+  { path: 'reset-password', component: ResetPasswordComponent },
+
   
   // Admin (protegido)
   {

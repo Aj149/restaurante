@@ -2,24 +2,23 @@
   <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="col-md-6 col-lg-4 shadow-lg p-5 rounded beige">
       
-      <h1 class="nautilus text-center mb-4">Iniciar Sesión</h1>
-      
+        <h1 class="nautilus text-center mb-4">Inicio de secion Administradores</h1>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" autocomplete="on">
-       <!-- Email -->
+       <!-- Cedula -->
        <div class="mb-3">
-        <label for="email" class="form-label roboto">Correo electrónico</label>
+        <label for="cedula" class="form-label roboto">Correo electrónico</label>
         <div class="input-group">
           <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
-          <input type="email" class="roboto form-control" id="email" formControlName="email" 
+          <input type="text" class="roboto form-control" id="cedula" formControlName="cedula" 
                  autocomplete="username" [readonly]="isLoading" [attr.aria-busy]="isLoading" 
-                 placeholder="correo@ejemplo.com" required>
+                 placeholder="1723456789" required>
         </div>
-        @if (email?.invalid && (email?.touched || email?.dirty)) {
-          @if (email?.errors?.['required']) {
-            <small class="text-danger">El correo es obligatorio</small>
+        @if (cedula?.invalid && (cedula?.touched || cedula?.dirty)) {
+          @if (cedula?.errors?.['required']) {
+            <small class="text-danger">La cedula es obligatorio</small>
           }
-          @if (email?.errors?.['email']) {
-            <small class="text-danger">Formato de correo inválido</small>
+          @if (cedula?.errors?.['cedula']) {
+            <small class="text-danger">Formato de cedula inválido</small>
           }
         }
       </div>
@@ -53,7 +52,7 @@
         
         <!-- Recordarme y Olvidé contraseña -->
         <div class="d-flex justify-content-between align-items-center mb-3 forgot-password">
-          <a routerLink="/recuperarContraseña" [attr.aria-disabled]="isLoading" class="roboto">
+          <a routerLink="/forgot-password" [attr.aria-disabled]="isLoading" class="roboto">
             ¿Olvidaste tu contraseña?
           </a>
         </div>
@@ -67,18 +66,11 @@
               <span>Iniciar sesión</span>
             }
             @if (isLoading) {
-              <span>Procesando...</span>
-            }
+                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                <span>Procesando...</span>
+              }
+              
           </button>
-        </div>
-  
-
-      
-        <!-- Registro -->
-        <div class="mt-4 text-center roboto signup-link">
-          <p>¿No tienes una cuenta? 
-            <a routerLink="/register" [attr.aria-disabled]="isLoading">Regístrate</a>
-          </p>
         </div>
       </form>
     

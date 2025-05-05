@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { NgClass } from '@angular/common';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthService } from '../../../services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user',
@@ -52,26 +53,54 @@ export class UserComponent {
     this.showPassword = !this.showPassword;
   }
   
-
-
   onSubmit() {
     if (this.loginForm.invalid) return;
     this.isLoading = true;
-
+  
     const { email, password } = this.loginForm.value;
-
-    this.authService.login({email, password}).subscribe({
+  
+    this.authService.login({ email, password }).subscribe({
       next: (response) => {
         console.log('Login exitoso:', response);
         this.router.navigate(['/carrito']);
       },
       error: (err) => {
-        console.error('Error al iniciar sesión:', err);
-        // Aquí podrías usar Toastr para notificar al usuario
         this.isLoading = false;
-      },
+        console.error('Error de login:', err);
+        
+        // Verificar si el error es de tipo Unauthorized (401)
+        if (err.status === 401) {
+          // Si las credenciales son incorrectas
+          if (err.error?.message === "Credenciales inválidas") {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Credenciales inválidas. Por favor, verifica tu email y contraseña.',
+              confirmButtonText: 'Aceptar',
+            });
+          } else {
+            // Otro error que no sea "Credenciales inválidas"
+            Swal.fire({
+              icon: 'error',
+              title: 'Error desconocido',
+              text: 'Ocurrió un error al intentar iniciar sesión. Intenta nuevamente más tarde.',
+              confirmButtonText: 'Aceptar',
+            });
+          }
+        } else {
+          // Error genérico para otros casos no controlados
+          console.error('Error al iniciar sesión:', err);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error desconocido',
+            text: `Ocurrió un error al intentar iniciar sesión. Detalles del error: ${err.message || 'Intenta nuevamente más tarde.'}`,
+            confirmButtonText: 'Aceptar',
+          });
+        }
+      }
     });
   }
+  
   
   
   

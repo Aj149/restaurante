@@ -1,11 +1,11 @@
 import { Component, EventEmitter, HostListener, Inject, Input, Output, ViewChild } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Platos } from '../../../models/dashboard';
 
 @Component({
   selector: 'app-pop-up-platos',
   standalone: true,
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './pop-up-platos.component.html',
   styleUrl: './pop-up-platos.component.css'
 })
@@ -17,6 +17,8 @@ export class PopUpPlatosComponent {
 
   count: number = 0;
   total: number = 0;
+  constructor(private router: Router) {}
+
 
 
   // 1cerrar el popup con ESC
@@ -48,5 +50,26 @@ export class PopUpPlatosComponent {
   calcularTotal() {
     this.total = this.count * this.plato.precio;
   }
+
+  // 5pedir platos para que vayan al carrito
+
+  pedir() {
+    const platoSeleccionado = {
+      id: this.plato.id_plato,
+      nombre: this.plato.nombre,
+      descripcion: this.plato.descripcion,
+      precio: this.plato.precio,
+      imagen: this.plato.imagen,
+      cantidad: this.count,
+      total: this.total
+    };
+  
+    // Puedes usar localStorage o sessionStorage según prefieras
+    localStorage.setItem('platoSeleccionado', JSON.stringify(platoSeleccionado));
+  
+    // Redirige al login
+    this.router.navigate(['/login']);
+  }
+  
 
 }

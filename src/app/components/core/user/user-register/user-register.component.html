@@ -2,7 +2,7 @@
 
 <div class="mt-5 container d-flex justify-content-center align-items-center min-vh-100">
   <div class="col-md-8 shadow-lg p-5 rounded beige">
-    <h1 class="nautilus text-center mb-4">REGÍSTRATE</h1>
+    <h1 class="roboto text-center mb-4">REGÍSTRATE</h1>
 
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div class="row">
@@ -41,7 +41,7 @@
         <!-- Teléfono -->
         <div class="mb-3 col-md-6 roboto">
           <label for="telefono" class="form-label">Teléfono Móvil</label>
-          <input type="tel" class="form-control" id="telefono" formControlName="telefono" placeholder="Ej: 0991234567" />
+          <input type="tel" class="form-control" id="telefono" formControlName="telefono" placeholder="0991234567" />
           @if (f['telefono'].invalid && f['telefono'].touched) {
 
             <small class="text-danger">
@@ -54,7 +54,7 @@
       <div class="row">
         <!-- Email -->
         <div class="mb-3 col-md-6 roboto">
-          <label for="email" class="form-label">Email electrónico</label>
+          <label for="email" class="form-label">Correo electrónico</label>
           <input type="email" class="form-control" id="email" formControlName="email" placeholder="email@ejemplo.com" />
           @if (f['email'].invalid && f['email'].touched) {
             
@@ -64,15 +64,14 @@
 
         <!-- Password -->
         <div class="mb-3 col-md-6 roboto">
-          <label for="password" class="form-label">Password</label>
+          <label for="password" class="form-label">Contraseña</label>
           <div class="input-group">
-            <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+            
             <input
               [type]="showPassword ? 'text' : 'password'"
               class="form-control"
               id="password"
               formControlName="password"
-              placeholder="••••••••"
               autocomplete="current-password"
               [readonly]="isLoading"
               [attr.aria-busy]="isLoading"
@@ -90,11 +89,18 @@
         
           @if (f['password'].invalid && f['password'].touched) {
             <small class="text-danger">
-              Mínimo 6 caracteres, al menos una mayúscula y un número
+              La contraseña debe tener al menos 8 caracteres, incluyendo una mayúscula, una minúscula, un número y un símbolo.
             </small>
           }
         </div>
-      </div>        
+      </div>  
+      
+     <!-- Honeypot Field (oculto con CSS) -->
+<div style="display: none;">
+  <label for="website">Website</label>
+  <input type="text" formControlName="website" id="website" />
+</div>
+
 
       <!-- Botón -->
       <div class="d-flex justify-content-center align-items-center mt-4 roboto">
