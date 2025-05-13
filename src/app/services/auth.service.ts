@@ -5,6 +5,12 @@ import { BehaviorSubject, catchError, finalize, Observable, tap, throwError } fr
 import { environment } from '../environments/environment';
 import { jwtDecode } from 'jwt-decode';
 import { isPlatformBrowser } from '@angular/common';
+import { Usuarios } from '../models/registroUsuario';
+import { MyJwtPayload } from '../models/dashboard';
+
+
+
+
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -36,6 +42,11 @@ export class AuthService {
       finalize(() => this.isLoading.next(false))
     );
   }
+// metodo para devolver el estado de autenticacion
+  public isLoggedIn(): boolean {
+    return this.isAuthenticatedSubject.value;
+  }
+  
 
   // Método para registro
   register(userData: any): Observable<any> {
@@ -93,11 +104,54 @@ export class AuthService {
   private setUserData(user: any): void {
     localStorage.setItem(this.USER_KEY, JSON.stringify(user));
   }
+    // 4para los pedidos en el carrito
+    
 
-  public getUserData(): any {
-    const userData = localStorage.getItem(this.USER_KEY);
-    return userData ? JSON.parse(userData) : null;
-  }
+    saveUserFromToken(token: string): void {
+      try {
+        const decoded = jwtDecode<MyJwtPayload>(token);
+        
+        console.log('Token decodificado:', decoded);  // Revisa si aquí están los campos completos
+    
+        const user = {
+          id: decoded.sub,
+          email: decoded.email,
+          nombre: decoded.nombre,    // Ahora debería estar aquí
+          apellido: decoded.apellido, // Ahora debería estar aquí
+          telefono: decoded.telefono, // Ahora debería estar aquí
+          direccion: decoded.direccion, // Ahora debería estar aquí
+        };
+    
+        localStorage.setItem('userData', JSON.stringify(user));
+      } catch (e) {
+        console.error('Error al decodificar el token JWT:', e);
+      }
+    }
+    
+   
+    
+
+
+    getUserData(): Usuarios | null {
+      const data = localStorage.getItem('userData');
+    
+      if (!data || data === 'undefined') {
+        console.warn('No se encontraron datos válidos del usuario en localStorage.');
+        return null;
+      }
+    
+      try {
+        return JSON.parse(data);
+      } catch (error) {
+        console.error('Error al parsear los datos del usuario:', error);
+        return null;
+      }
+    }
+    
+    
+
+
+  // 4################################
 
   public getTokenPayload(): any | null {
     const token = this.getToken();

@@ -62,6 +62,13 @@ export class UserComponent {
     this.authService.login({ email, password }).subscribe({
       next: (response) => {
         console.log('Login exitoso:', response);
+
+        if (response.access_token) {
+          this.authService.saveUserFromToken(response.access_token);
+          console.log('Usuario guardado:', localStorage.getItem('usuario')); // O el nombre que uses para almacenar
+          
+  }
+
         this.router.navigate(['/carrito']);
       },
       error: (err) => {

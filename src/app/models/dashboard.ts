@@ -34,3 +34,17 @@ export class Lugares{
     precio: number=0;
     capacidad: number=0;
 }
+
+
+
+import { JwtPayload } from 'jwt-decode';
+
+// Si tu token incluye más campos personalizados, extiende JwtPayload:
+export interface MyJwtPayload extends JwtPayload {
+  email: string;
+  nombre: string;
+    apellido: string;
+    telefono: string;
+    direccion: string;
+  // Agrega más campos si el token los incluye
+}
