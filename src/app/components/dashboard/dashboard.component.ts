@@ -15,11 +15,12 @@ import { PopUpPlatosComponent } from './pop-up-platos/pop-up-platos.component';
 import { PlatosService } from '../../services/platos.service';
 import { LugaresService } from '../../services/lugares.service';
 import { PopUpLugaresComponent } from "./pop-up-lugares/pop-up-lugares.component";
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterLink, CarouselModule, NavbarComponent, FooterComponent, FormsModule, PopUpPlatosComponent, PopUpLugaresComponent],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink, CarouselModule, NavbarComponent, FooterComponent, FormsModule, PopUpPlatosComponent, PopUpLugaresComponent, NgxPaginationModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
@@ -47,6 +48,9 @@ platoSeleccionado!: Platos;
     }
     if (this.lugares) {
       this.traerLugares();
+    }
+    if (this.comentario) {
+      this.listarComentarios();
     }
   }
 
@@ -118,6 +122,7 @@ abrirPopup(plato: Platos) {
     private mensajeService: ComentariosService,
     private platosService: PlatosService,
     private lugaresService: LugaresService,
+    private comentariosService: ComentariosService
 
   ) {
     // 1para los lugares
@@ -128,7 +133,7 @@ abrirPopup(plato: Platos) {
 
 
     this.formularioMensaje = new FormGroup({
-      nombre: new FormControl("",[Validators.required, Validators.pattern('^[a-zA-Z\s]*$')]),
+      nombre: new FormControl("",[Validators.required]),
       email: new FormControl('',[Validators.required,Validators.email] ),
       comentario: new FormControl ("", [Validators.required])
 
@@ -251,6 +256,29 @@ abrirPopup(plato: Platos) {
         );
     }
 }
+
+// 2para ver los mensajes
+comentario : Comentarios [] =[];
+  
+  nombre = '';
+  public page!: number;
+
+  get comentariosOrdenados() {
+  return this.comentario.slice().reverse();
+}
+
+
+
+  listarComentarios(): void {
+    this.comentariosService.obtenerMensaje().subscribe({
+      next: (Comentarios: Comentarios[]) => {
+        this.comentario = Comentarios;
+      },
+      error: (err: Error) => {
+        console.log(err);
+      }
+    });
+  }
 
 
   

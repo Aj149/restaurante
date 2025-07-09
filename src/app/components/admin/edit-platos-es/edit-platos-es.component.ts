@@ -85,6 +85,6 @@ export class EditPlatosEsComponent {
   
   
     volver(): void {
-      this.router.navigate(['/admin/listaDePlatos']);
+      this.router.navigate(['/admin/lista-de-platos']);
     }
 }

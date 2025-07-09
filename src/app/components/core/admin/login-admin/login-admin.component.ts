@@ -63,7 +63,7 @@ export class LoginAdminComponent {
       this.adminService.login({ cedula, password }).subscribe({
         next: (response) => {
           console.log('Login exitoso:', response);
-          this.router.navigate(['/carrito']);
+          this.router.navigate(['/admin/likes']);
         },
         error: (err) => {
           console.error('Error al iniciar sesión:', err);

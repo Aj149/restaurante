@@ -14,7 +14,9 @@
           <h5 class="card-title">{{ platos.nombre }}</h5>
           <p class="card-text">{{ platos.descripcion }}</p>
           <p class="card-text"><strong>Precio:</strong> ${{ platos.precio }}</p>
-          <button class="" [routerLink]="['/admin/editarPlato', platos.id_plato]">Editar</button>
+          <button class="" [routerLink]="['/admin/editar-plato', platos.id_plato]">Editar</button>
+
+
         </div>
       </div>
     </div>

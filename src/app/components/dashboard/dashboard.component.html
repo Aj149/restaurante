@@ -300,7 +300,77 @@
   </div>
   </div>
 
-  
+  <div id="BEBIDAS" class="mb-5"></div>
+
+  <div class="container w-75 fondo-semi-negro">
+    <div class="container text-center mt-4">
+  <h1 class="nautilus" style="color:rgb(231, 91, 30);">BEBIDAS</h1>
+
+  <P class="roboto mx-auto d-block w-75 mt-3 text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam neque atque repellendus odio rerum deleniti voluptatibus praesentium tenetur earum, assumenda, laudantium suscipit nihil et in dolores vero doloribus ducimus quasi.</P>
+</div>
+
+<div class="container text-center mt-5">
+  <div class="row align-items-start">
+
+    <!-- Bebida 1 -->
+    <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center mb-4">
+      <img class="rounded me-3" src="../../../assets/bebida 1.jpg" alt="Copa Cabana" style="width: 120px; height: auto;">
+      <div class="text-start">
+       <h2 class="mb-1 nautilus" style="color:tomato">Copa Cabana</h2>
+        <p class="mb-0 text-white roboto">Cóctel tropical con frutas exóticas y ron.</p>
+      </div>
+    </div>
+
+    <!-- Bebida 2 -->
+    <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center mb-4">
+      <img class="rounded me-3" src="../../../assets/bebida 2.jpg" alt="Sunset Punch" style="width: 120px; height: auto;">
+      <div class="text-start">
+        <h2 class="mb-1 nautilus" style="color:tomato">Sunset Punch</h2>
+        <p class="mb-0 text-white roboto">Refrescante bebida con cítricos y soda.</p>
+      </div>
+    </div>
+
+    <!-- Bebida 3 -->
+    <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center mb-4">
+      <img class="rounded me-3" src="../../../assets/bebida 3.jpg" alt="Limonada Verde" style="width: 120px; height: auto;">
+      <div class="text-start">
+        <h2 class="mb-1 nautilus" style="color:tomato">Limonada Verde</h2>
+        <p class="mb-0 text-white roboto">Limonada con hierbabuena, natural y fresca.</p>
+      </div>
+    </div>
+
+    <!-- Bebida 4 -->
+    <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center mb-4">
+      <img class="rounded me-3" src="../../../assets/bebida 4.jpg" alt="Choco Cream" style="width: 120px; height: auto;">
+      <div class="text-start">
+        <h2 class="mb-1 nautilus" style="color:tomato">Choco Cream</h2>
+        <p class="mb-0 text-white roboto">Batido cremoso de chocolate y leche.</p>
+      </div>
+    </div>
+
+    <!-- Bebida 5 -->
+    <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center mb-4">
+      <img class="rounded me-3" src="../../../assets/bebida 5.jpg" alt="Piña Fizz" style="width: 120px; height: auto;">
+      <div class="text-start">
+        <h2 class="mb-1 nautilus" style="color:tomato">Piña Fizz</h2>
+        <p class="mb-0 text-white roboto">Cóctel espumoso de piña con soda.</p>
+      </div>
+    </div>
+
+    <!-- Bebida 6 -->
+    <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center mb-4">
+      <img class="rounded me-3" src="../../../assets/bebida 6.jpg" alt="Berry Cool" style="width: 120px; height: auto;">
+      <div class="text-start">
+        <h2 class="mb-1 nautilus" style="color:tomato">Berry Cool</h2>
+        <p class="mb-0 text-white roboto">Bebida fría de frutos rojos y menta.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+  </div>
+
+
 
 <div id="RESERVAR" class="mb-5"></div>
   <div class="formulario" style="background-image: url(../../../assets/formulario.png);">
@@ -413,10 +483,11 @@
 </div>
 
 
+
 <div class="parallax3 mt-5">
-  <div class="text-center" style="display: flex; justify-content: center;">
+  <div class="text-center d-flex flex-column align-items-center mx-auto" >
     <div class="mt-2"> 
-      <h1 class="nautilus text-white">COMENTARIOS</h1>
+      <h1 class="nautilus" style="color:rgb(231, 91, 30);">COMENTARIOS</h1>
       <h6 class="roboto text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h6>
 
       <form [formGroup]="formularioMensaje" class="needs-validation">
@@ -432,8 +503,6 @@
           @if(formularioMensaje.get('nombre')?.invalid && (FormSubmitted || formularioMensaje.get('nombre')?.touched || formularioMensaje.get('nombre')?.dirty)){
             @if(formularioMensaje.get('nombre')?.errors?.['required']){
               Este campo es requerido}
-            @if(formularioMensaje.get('nombre')?.errors?.['pattern'])
-            {No ingrese numeros}
           }
     </div>
         </div>
@@ -476,6 +545,28 @@
     </form>
   </div>
 </div>
+
+ <div class="comentarios-box mx-auto p-4">
+
+    <div class="comentarios-scroll d-flex flex-column align-items-center mx-auto" style="max-width: 600px;">
+      @for(comentario of comentario.slice().reverse(); track comentario) {
+        <div class="mb-3 p-3 comentario-card w-100">
+          <!-- Nombre y correo -->
+          <div class="d-flex flex-wrap align-items-center mb-2">
+            <strong>
+              <h5 class="mb-0 text-white me-2">{{ comentario.nombre }}</h5>
+            </strong>
+            <strong>
+
+              <p class="mb-0 text-white">{{ comentario.email }}</p>
+            </strong>
+          </div>
+          <!-- Comentario -->
+          <p class="mb-0 text-white">{{ comentario.comentario }}</p>
+        </div>
+      }
+    </div>
+  </div>
 </div>
 <app-footer></app-footer>
 <app-pop-up-platos 
