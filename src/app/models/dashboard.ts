@@ -35,6 +35,25 @@ export class Lugares{
     capacidad: number=0;
 }
 
+export class Personal {
+  id_persona?: number = 0;
+  nombre: string = '';
+  email: string = '';
+  telefono: string = '';
+  direccion: string = '';
+  cedula: number = 0; 
+  nacionalidad: string = '';
+  imagen: string = '';
+  puesto: string = '';
+  fecha_contratacion: string = '';
+  fecha_nacimiento: string = '';
+  salario: number = 0;
+  genero: string = '';
+  jornadaLaboral: string = '';
+  descripcion: string = '';
+}
+
+
 
 
 import { JwtPayload } from 'jwt-decode';

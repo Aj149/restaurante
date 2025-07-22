@@ -1,84 +1,54 @@
+<nav class="navbar navbar-expand-lg bg-dark">
+  <div class="container-fluid">
+     <li>
+            <img src="../../../assets/logo.png" class="w-75" alt="">
+          </li>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-<div class="container-fluid">
-    <div class="row flex-nowrap">
-        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                    <span class="fs-5 d-none d-sm-inline">Menu</span>
-                </a>
-                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                    <li>
-                        <a href="#submenu1"  data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-speedometer2"></i> <img src="../../../assets/corazon.gif" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                            <span class="ms-1 d-none d-sm-inline">Me Encanta</span> </a>
-                            <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                                <li class="w-100">
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Persona</span> 1 </a>
-                            </li>
-                            <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Persona</span> 2 </a>
-                            </li>
-                            <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Persona</span> 3 </a>
-                            </li>
-                            
-                        </ul>
-                    </li>
-                    
-                    
-                    <!-- <li>
-                        <a routerLink="/admin/transferencias" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-people"></i><img src="../../../assets/transferencia.gif" alt="hugenerd" width="30" height="30" class="rounded-circle"> <span class="ms-1 d-none d-sm-inline">Transferencias</span> </a>
-                        </li> -->
-                        <li>
-                        <a routerLink="/admin/lista-de-reservas" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-people"></i><img src="../../../assets/reservas.gif" alt="hugenerd" width="30" height="30" class="rounded-circle"> <span class="ms-1 d-none d-sm-inline">Reservas</span> </a>
-                        </li>
-                        
-                        
-                        <li>
-                            <a routerLink="/admin/comentarios" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-people"></i><img src="../../../assets/comentario.gif" alt="hugenerd" width="30" height="30" class="rounded-circle"> <span class="ms-1 d-none d-sm-inline">Comentarios</span> </a>
-                            </li>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <!-- Menú izquierdo -->
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle roboto fs-5 text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Personal
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item roboto fs-5" routerLink="/personal/personal1">Persona 1</a></li>
+            <li><a class="dropdown-item roboto fs-5" href="/personal/personal2">Persona 2</a></li>
+            <li><a class="dropdown-item roboto fs-5" href="/personal/personal3">Persona 3</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link roboto fs-5 text-white" routerLink="/admin/lista-de-reservas">Reservas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link roboto fs-5 text-white" routerLink="/admin/comentarios">Comentarios</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle roboto fs-5 text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Editar
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item roboto fs-5" routerLink="/admin/lista-de-platos">Platos</a></li>
+            <li><a class="dropdown-item roboto fs-5" routerLink="/admin/lista-de-lugares">Lugares</a></li>
+            <li><a class="dropdown-item roboto fs-5" routerLink="/admin/lista-de-bebidas">Bebidas</a></li>
+          </ul>
+        </li>
+      </ul>
 
-                        <li>
-                            <a routerLink="/admin/lista-de-platos" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-people"></i><img src="" alt="hugenerd" width="30" height="30" class="rounded-circle"> <span class="ms-1 d-none d-sm-inline">Editar platos especiales</span> </a>
-                            </li>
-                        <li>
-                            <a routerLink="/admin/lista-de-bebidas" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-people"></i><img src="" alt="hugenerd" width="30" height="30" class="rounded-circle"> <span class="ms-1 d-none d-sm-inline">Editar platos especiales</span> </a>
-                            </li>
-                        <li>
-                            <a routerLink="/admin/lista-de-lugares" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-people"></i><img src="" alt="hugenerd" width="30" height="30" class="rounded-circle"> <span class="ms-1 d-none d-sm-inline">Editar platos especiales</span> </a>
-                            </li>
-                        <li>
-                            <a routerLink="/admin/empleados" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-people"></i><img src="" alt="hugenerd" width="30" height="30" class="rounded-circle"> <span class="ms-1 d-none d-sm-inline">Editar platos especiales</span> </a>
-                            </li>
-                        </ul>
-                        <hr>
-                        <div class="dropdown pb-4">
-                            <a routerLink="" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="../../../assets/administrador.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                                <span class="d-none d-sm-inline mx-1">ADRIAN</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" routerLink="/login">Cerrar sesión</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="w-75">
-            <router-outlet></router-outlet>
-        </div>
-        <div class="">
-<img class="fondo" src="../../../assets/bienvenidos.jpg" alt="">
-        </div>
+      <!-- Cerrar sesión alineado a la derecha -->
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link text-danger fw-semibold roboto fs-5" routerLink="/login">Cerrar sesión</a>
+        </li>
+      </ul>
     </div>
+  </div>
+</nav>
+ <div>
+<router-outlet></router-outlet>
 </div>
+<img class="fondo" src="../../../assets/fondo comentarios.jpeg" alt="">

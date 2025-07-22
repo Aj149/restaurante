@@ -21,6 +21,7 @@ import { UserRegisterComponent } from './components/core/user/user-register/user
 import { LoginAdminComponent } from './components/core/admin/login-admin/login-admin.component';
 import { RecuperarContrasenaComponent } from './components/core/recuperar-contrasena/recuperar-contrasena.component';
 import { ResetPasswordComponent } from './components/core/reset-password/reset-password.component';
+import { PopUpPersonalComponent } from './components/dashboard/pop-up-personal/pop-up-personal.component';
 
 
 
@@ -71,6 +72,8 @@ export const routes: Routes = [
   },
 
   // Extras (protegidos según necesidad)
+  {path: 'pop-up-personal', component: PopUpPersonalComponent},
+  
   { 
     path: 'pop-up-platos', 
     component: PopUpPlatosComponent,

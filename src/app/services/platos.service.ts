@@ -70,10 +70,22 @@ export class PlatosService {
       localStorage.setItem('carrito', JSON.stringify(items));
     }
     
+    // codigo que hace que me salga este error: ERROR ReferenceError: localStorage is not defined
     private loadCart(): Pedido[] {
-      const data = localStorage.getItem('carrito');
-      return data ? JSON.parse(data) : [];
+  if (typeof window !== 'undefined') {
+    const data = localStorage.getItem('carrito');
+    if (data) {
+      try {
+        return JSON.parse(data);
+      } catch (e) {
+        console.error('Error al parsear el carrito:', e);
+        localStorage.removeItem('carrito'); // opcional: limpiar dato corrupto
+      }
     }
+  }
+  return [];
+}
+
       
       
 

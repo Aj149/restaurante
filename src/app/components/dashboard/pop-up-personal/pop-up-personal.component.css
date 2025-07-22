@@ -1,0 +1,25 @@
+.overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000; /* Asegúrate de que este valor sea alto */
+  }
+  
+  .popup {
+    z-index: 1001; /* Un valor mayor que el del overlay */
+    animation: fadeInScale 0.60s ease-out;
+  }
+
+  
+
+  
+  
+  
+  @keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+  }

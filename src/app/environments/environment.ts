@@ -7,5 +7,6 @@ export const environment = {
     platosURL: 'http://localhost:8000/platos',
     lugarUrl: 'http://localhost:8000/lugares',
     authUrl: 'http://localhost:8000',
+    personalURL: 'http://localhost:8000/personal'
   }
   

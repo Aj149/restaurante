@@ -9,18 +9,20 @@ import { FormularioService } from '../../services/formulario.service';
 import { CommonModule } from '@angular/common';
 import { ComentariosService } from '../../services/comentarios.service';
 import Swal from 'sweetalert2';
-import { Comentarios, Lugares, Platos, reserva } from '../../models/dashboard';
+import { Comentarios, Lugares, Personal, Platos, reserva } from '../../models/dashboard';
 import { HttpClient } from '@angular/common/http';
 import { PopUpPlatosComponent } from './pop-up-platos/pop-up-platos.component';
 import { PlatosService } from '../../services/platos.service';
 import { LugaresService } from '../../services/lugares.service';
 import { PopUpLugaresComponent } from "./pop-up-lugares/pop-up-lugares.component";
 import { NgxPaginationModule } from 'ngx-pagination';
+import { PopUpPersonalComponent } from "./pop-up-personal/pop-up-personal.component";
+import { PersonalService } from '../../services/personal.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterLink, CarouselModule, NavbarComponent, FooterComponent, FormsModule, PopUpPlatosComponent, PopUpLugaresComponent, NgxPaginationModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink, CarouselModule, NavbarComponent, FooterComponent, FormsModule, PopUpPlatosComponent, PopUpLugaresComponent, NgxPaginationModule, PopUpPersonalComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
@@ -40,7 +42,7 @@ export class DashboardComponent {
 platosEspeciales: Platos[] = [];
 platoSeleccionado!: Platos;
 
-// 4traer platos
+// 4traer platos, lugares, comentarios y personal
 
   ngOnInit(): void {
     if (this.platos) {
@@ -52,6 +54,22 @@ platoSeleccionado!: Platos;
     if (this.comentario) {
       this.listarComentarios();
     }
+    if (this.personal) {
+      this.traerPersonal();
+    }
+  }
+
+  traerPersonal(): void {
+    this.PersonalService.obtenerPersonal().subscribe(
+      (data) => {
+        this.personal = data;
+        this.personalEspeciales = this.personal.slice(0, 4);
+        console.log('estas son las personas',this.personalEspeciales); // <-- esto deberías ver lleno de objetos
+      },
+      (error) => {
+        console.error('Error al cargar el personal', error);
+      }
+    );
   }
 
   traerPlatos(): void {
@@ -104,6 +122,21 @@ abrirPopup(plato: Platos) {
       this.mostrarPopUp = false;
     }
 
+    // 2abre y cierra el pop up del personal
+    abrirPopupPersonal(personal: Personal) {
+  this.personalSelecionado = personal;
+  this.mostrarPopUpPersonal = true;
+}
+
+  cerrarPopupPersonal() {
+    this.mostrarPopUpPersonal = false;
+  }
+
+    // 2pop up personal
+    mostrarPopUpPersonal = true;       // cambiar a false para que no se muestre al inicio
+    personal: Personal[] = [];
+  personalEspeciales: Personal[] = [];
+    personalSelecionado!: Personal;
   
   // 1para los lugares
   mostrarPopUp = false;
@@ -121,6 +154,7 @@ abrirPopup(plato: Platos) {
     private formularioService: FormularioService,
     private mensajeService: ComentariosService,
     private platosService: PlatosService,
+    private PersonalService: PersonalService,
     private lugaresService: LugaresService,
     private comentariosService: ComentariosService
 

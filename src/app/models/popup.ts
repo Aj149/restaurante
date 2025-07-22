@@ -3,6 +3,6 @@ export class Pedido {
     nombre: string = ''; // Cambia de 'plato' a 'nombre'
     cantidad: number = 0;
     precio: number = 0;
-    imagen: string = ''; // Agrega la propiedad imagen
+    imagen: string = '';
     total: number = 0;
   }

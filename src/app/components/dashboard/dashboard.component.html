@@ -149,10 +149,10 @@
             <div class="container hover-container">
               <div class="row">
                   <div class="col-lg-3 col-sm-12 col-md-6 rounded-4 hover-item mt-4">
-                    <img src="{{lugaresEspeciales[0]?.imagen}}" class="imagen rounded-2 shadow-effect" alt="...">
+                    <img src="{{lugaresEspeciales[0].imagen}}" class="imagen rounded-2 shadow-effect" alt="...">
                   </div>
                   <div class="col-lg-9 col-sm-12 col-md-6 hover-item mt-4">
-                    <h1 class="nautilus" style="color:rgb(231, 91, 30);">{{lugaresEspeciales[0]?.nombre}}</h1>
+                    <h1 class="nautilus" style="color:rgb(231, 91, 30);">{{lugaresEspeciales[0].nombre}}</h1>
                     <div>
                       <p class="roboto">{{lugaresEspeciales[0].descripcion}}</p>
                     </div>
@@ -244,13 +244,13 @@
         <owl-carousel-o  [options]="customOptions3" #owlCar>
           <ng-template carouselSlide> 
             <div class="card mx-5 d-block" style="width: 18rem;">
-              <img src="../../../assets/team.jpg" class="card-img-top" alt="...">
+              <img src="{{personalEspeciales[0].imagen}}" class="card-img-top" alt="...">
               <div class="card-body">
-                <h5 class="card-title">TEAM</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <h5 class="card-title">{{personalEspeciales[0].nombre}}</h5>
+                <p class="card-text">descripcion pendiente en la base de datos</p>
                 <div class="row">
                 <div class="col">
-                  <button class="boton border-0 rounded-2  cursor-pointer" routerLink="/personal/personal1">info</button>
+                  <button class="boton border-0 rounded-2  cursor-pointer" (click)="abrirPopupPersonal(personalEspeciales[0])">info</button>
               </div>
               <div class="col heart-container">
                 <img id="heart1" src="../../../assets/corazon.png" class="heart w-25" >
@@ -582,3 +582,9 @@
   (close)="cerrarPopup()"
   >
 </app-pop-up-lugares>
+<app-pop-up-personal
+  *ngIf="mostrarPopUpPersonal"
+  [personal]="personalSelecionado"
+  [isVisible]="mostrarPopUpPersonal"
+  (close)="cerrarPopupPersonal()">
+</app-pop-up-personal>
