@@ -22,7 +22,7 @@ import { PersonalService } from '../../services/personal.service';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterLink, CarouselModule, NavbarComponent, FooterComponent, FormsModule, PopUpPlatosComponent, PopUpLugaresComponent, NgxPaginationModule, PopUpPersonalComponent],
+  imports: [ReactiveFormsModule, CommonModule, CarouselModule, NavbarComponent, FooterComponent, FormsModule, PopUpPlatosComponent, PopUpLugaresComponent, NgxPaginationModule, PopUpPersonalComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
@@ -133,7 +133,7 @@ abrirPopup(plato: Platos) {
   }
 
     // 2pop up personal
-    mostrarPopUpPersonal = true;       // cambiar a false para que no se muestre al inicio
+    mostrarPopUpPersonal = false;
     personal: Personal[] = [];
   personalEspeciales: Personal[] = [];
     personalSelecionado!: Personal;
@@ -231,11 +231,12 @@ abrirPopup(plato: Platos) {
       const nuevaReserva: reserva = {
         nombre: formValues.nombre,
         email: formValues.email,
-        telefono: +formValues.telefono,  
+        telefono: +formValues.telefono,
         lugar: formValues.lugar,
-        n_personas: +formValues.n_personas, 
+        n_personas: +formValues.n_personas,
         fecha: formValues.fecha,
-        hora: formValues.hora
+        hora: formValues.hora,
+        detalles: formValues.detalles
       };
       console.log(nuevaReserva); // Verifica los datos aquí
       this.formularioService.agregarReserva(nuevaReserva).subscribe(

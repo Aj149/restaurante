@@ -1,146 +1,163 @@
-
 <div>
 
   <app-navbar></app-navbar>
   <div id="INICIO" class="mb-5"></div>
   <div class="parallax1">
-  <div class="position-relative">
-    <div class="position-absolute" style=" transform: translateY(140%); width: 100%;">
-      <div class="text-center">
-        <p class="nautilus fs-1" style="color: #ffffff">UN PARAISO ESCONDIDO</p>
-        <hr style=" border:none; height: 3px; background-color: rgb(255, 255, 255);">
-        <p class="nautilus fs-1" style="color: #ffffff;">EN EL VALLE DE LOS CHILLOS</p>
+    <div class="position-relative">
+      <div class="position-absolute" style=" transform: translateY(140%); width: 100%;">
+        <div class="text-center">
+          <p class="nautilus fs-1" style="color: #ffffff">UN PARAISO ESCONDIDO</p>
+          <hr style=" border:none; height: 3px; background-color: rgb(255, 255, 255);">
+          <p class="nautilus fs-1" style="color: #ffffff;">EN EL VALLE DE LOS CHILLOS</p>
+        </div>
       </div>
     </div>
   </div>
-  </div>
 
-<div id="NOSOTROS" class="mb-5"></div>
-<div class="">
-  <div class="container">
+  <div id="NOSOTROS" class="mb-5"></div>
+  <div class="">
+    <div class="container">
       <div class="row">
-          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-              <div>
-                  <h1 class="nautilus" style="color: rgb(231, 91, 30);"> Sobre Nosotros </h1>
-                  <h3>IT STARTED, QUITE SIMPLY, LIKE THIS...</h3>
-                  <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusm incididunt ut labore et dolore magna aliqua. Ut enim ad minim venia, nostrud exercitation ullamco. </p>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <div>
+            <h1 class="nautilus" style="color: rgb(231, 91, 30);"> Sobre Nosotros </h1>
+            <h3>IT STARTED, QUITE SIMPLY, LIKE THIS...</h3>
+            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusm incididunt ut labore et dolore
+              magna aliqua. Ut enim ad minim venia, nostrud exercitation ullamco. </p>
 
-                  <p> Aenean commodo ligula eget dolor aenean massa. Cum sociis nat penatibu set magnis dis parturient montes, nascetur ridiculus mus. quam felisorat, ultricies nec, Aenean commodo ligula eget dolor penatibu set magnis is parturient montes, nascetur ridiculus mus. quam felisorat, ultricies nec, pellentesque eu, pretium quis, sem. quat massa quis enim. Donec vitae sapien ut libero venenatis fauci Nullam quis ante. Etiam sit amet rci eget eros. </p>
+            <p> Aenean commodo ligula eget dolor aenean massa. Cum sociis nat penatibu set magnis dis parturient montes,
+              nascetur ridiculus mus. quam felisorat, ultricies nec, Aenean commodo ligula eget dolor penatibu set
+              magnis is parturient montes, nascetur ridiculus mus. quam felisorat, ultricies nec, pellentesque eu,
+              pretium quis, sem. quat massa quis enim. Donec vitae sapien ut libero venenatis fauci Nullam quis ante.
+              Etiam sit amet rci eget eros. </p>
 
-                  <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusm incididunt ut labore et dolore magna aliqua. Ut enim ad minim venia, nostrud exercitation ullamco. </p>
-              </div>
+            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusm incididunt ut labore et dolore
+              magna aliqua. Ut enim ad minim venia, nostrud exercitation ullamco. </p>
           </div>
-          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-              <div>
-                  <div class="galeria2">
-                    <div style="background-image: url(../../../assets/lugar5.jpg);"></div>
-                    <div style="background-image: url(../../../assets/lugar6.jpg);"></div>
-                    <div style="background-image: url(../../../assets/lugar7.jpg);"></div>
-                    <div style="background-image: url(../../../assets/lugar8.jpg);"></div>
-                    <div style="background-image: url(../../../assets/lugar9.jpg);"></div>
-                    <div style="background-image: url(../../../assets/lugar10.jpg);"></div>
-                  </div>
-              </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <div>
+            <div class="galeria2">
+              <div style="background-image: url(../../../assets/lugar5.jpg);"></div>
+              <div style="background-image: url(../../../assets/lugar6.jpg);"></div>
+              <div style="background-image: url(../../../assets/lugar7.jpg);"></div>
+              <div style="background-image: url(../../../assets/lugar8.jpg);"></div>
+              <div style="background-image: url(../../../assets/lugar9.jpg);"></div>
+              <div style="background-image: url(../../../assets/lugar10.jpg);"></div>
+            </div>
           </div>
+        </div>
       </div>
+    </div>
   </div>
-</div>
 
 
   <div id="ESPECIALIDADES" class="mb-5"></div>
 
   <div class="position-relative">
     <div class="parallax">
-    <div class="position-absolute text-center mt-lg-1" style="top: 0%; width: 100%;">
-      <p class="fs-1 nautilus" style="margin-bottom: 0; color:rgb(231, 91, 30);">ESPECIALIDADES</p>
-      <p class="roboto text-white p-lg-4 ">Lo mejor en comida en un solo lugar.</p>
-     
-      <div class="container mx-auto d-block">
-  <owl-carousel-o  [options]="customOptions" #owlCar>
-    <ng-template carouselSlide> 
-      <div class="col-6 mx-5 d-block">
-          <div class="hovereffect">
-            <img class="img-thumbnail" src="{{platosEspeciales[0].imagen}}" alt="{{platosEspeciales[0].nombre}}">
-              <div class="overlay">
-                <h2>{{platosEspeciales[0].nombre}}</h2>
-                <a class="info" (click)="abrirPopup(platosEspeciales[0])">Descripción</a>
-             </div>
-          </div>
-  </div></ng-template>
-    <ng-template carouselSlide>
-      <div class="col-6 mx-5 d-block">
-      <div class="hovereffect">
-          <img class="img-thumbnail" src="{{platosEspeciales[1].imagen}}" alt="{{platosEspeciales[1].nombre}}">
-          <div class="overlay">
-             <h2>{{platosEspeciales[1].nombre}}</h2>
-             <a class="info" (click)="abrirPopup(platosEspeciales[1])">Descripción</a>
-          </div>
+      <div class="position-absolute text-center mt-lg-1" style="top: 0%; width: 100%;">
+        <p class="fs-1 nautilus" style="margin-bottom: 0; color:rgb(231, 91, 30);">ESPECIALIDADES</p>
+        <p class="roboto text-white p-lg-4 ">Lo mejor en comida en un solo lugar.</p>
+
+        <div class="container mx-auto d-block">
+          <owl-carousel-o [options]="customOptions" #owlCar>
+            <ng-template carouselSlide>
+              <div class="col-6 mx-5 d-block">
+                <div class="hovereffect">
+                  <img class="img-thumbnail" src="{{platosEspeciales[0].imagen}}" alt="{{platosEspeciales[0].nombre}}">
+                  <div class="overlay">
+                    <h2>{{platosEspeciales[0].nombre}}</h2>
+                    <a class="info" (click)="abrirPopup(platosEspeciales[0])">Descripción</a>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+            <ng-template carouselSlide>
+              <div class="col-6 mx-5 d-block">
+                <div class="hovereffect">
+                  <img class="img-thumbnail" src="{{platosEspeciales[1].imagen}}" alt="{{platosEspeciales[1].nombre}}">
+                  <div class="overlay">
+                    <h2>{{platosEspeciales[1].nombre}}</h2>
+                    <a class="info" (click)="abrirPopup(platosEspeciales[1])">Descripción</a>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+            <ng-template carouselSlide>
+              <div class="col-6 mx-5 d-block">
+                <div class="hovereffect">
+                  <img class="img-thumbnail" src="{{platosEspeciales[2].imagen}}" alt="{{platosEspeciales[2].nombre}}">
+                  <div class="overlay">
+                    <h2>{{platosEspeciales[2].nombre}}</h2>
+                    <a class="info" (click)="abrirPopup(platosEspeciales[2])">Descripción</a>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+            <ng-template carouselSlide>
+              <div class="col-6 mx-5 d-block">
+                <div class="hovereffect">
+                  <img class="img-thumbnail" src="{{platosEspeciales[3].imagen}}" alt="{{platosEspeciales[3].nombre}}">
+                  <div class="overlay">
+                    <h2>{{platosEspeciales[3].nombre}}</h2>
+                    <a class="info" (click)="abrirPopup(platosEspeciales[3])">Descripción</a>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </owl-carousel-o>
+        </div>
       </div>
-  </div>
-</ng-template>
-    <ng-template carouselSlide> <div class="col-6 mx-5 d-block">
-      <div class="hovereffect">
-          <img class="img-thumbnail" src="{{platosEspeciales[2].imagen}}" alt="{{platosEspeciales[2].nombre}}">
-          <div class="overlay">
-            <h2>{{platosEspeciales[2].nombre}}</h2>
-            <a class="info" (click)="abrirPopup(platosEspeciales[2])">Descripción</a>
-         </div>
-      </div>
-  </div>
-</ng-template>
-    <ng-template carouselSlide> 
-      <div class="col-6 mx-5 d-block">
-      <div class="hovereffect">
-          <img class="img-thumbnail" src="{{platosEspeciales[3].imagen}}" alt="{{platosEspeciales[3].nombre}}">
-          <div class="overlay">
-            <h2>{{platosEspeciales[3].nombre}}</h2>
-            <a class="info" (click)="abrirPopup(platosEspeciales[3])">Descripción</a>
-         </div>
-      </div>
-  </div>
-</ng-template>
-  </owl-carousel-o>
-</div>
     </div>
   </div>
-</div>
 
   <div id="INSTALACIONES" class="mb-5"></div>
 
-<div class="container text-center mt-4">
-  <h1 class="nautilus" style="color:rgb(231, 91, 30);">INSTALACIONES</h1>
+  <div class="container text-center mt-4">
+    <h1 class="nautilus" style="color:rgb(231, 91, 30);">INSTALACIONES</h1>
 
-  <P class="roboto mx-auto d-block w-75 mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam neque atque repellendus odio rerum deleniti voluptatibus praesentium tenetur earum, assumenda, laudantium suscipit nihil et in dolores vero doloribus ducimus quasi.</P>
-</div>
+    <P class="roboto mx-auto d-block w-75 mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam neque
+      atque repellendus odio rerum deleniti voluptatibus praesentium tenetur earum, assumenda, laudantium suscipit nihil
+      et in dolores vero doloribus ducimus quasi.</P>
+  </div>
 
 
 
   <div class="container w-75 fondo-semi-transparente">
     <div class="container carrusel1">
-  
+
       <owl-carousel-o [options]="customOptions1" #owlCar>
         <ng-template carouselSlide>
-          <button href="#carouselExampleDark" class="active border-0 btn bg-transparent" data-bs-target="#carouselExampleDark" data-bs-slide-to="0"><h4 class="roboto">Diapositiva 1</h4>
+          <button href="#carouselExampleDark" class="active border-0 btn bg-transparent"
+            data-bs-target="#carouselExampleDark" data-bs-slide-to="0">
+            <h4 class="roboto">Diapositiva 1</h4>
             <img src="../../../assets/comida.gif" class="mx-auto d-block w-25" alt="">
-        </button>
+          </button>
         </ng-template>
         <ng-template carouselSlide>
-          <button href="#carouselExampleDark" class="active border-0 btn bg-transparent" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"><h4 class="roboto">Diapositiva 2</h4>
+          <button href="#carouselExampleDark" class="active border-0 btn bg-transparent"
+            data-bs-target="#carouselExampleDark" data-bs-slide-to="1">
+            <h4 class="roboto">Diapositiva 2</h4>
             <img src="../../../assets/familia.gif" class="mx-auto d-block w-25" alt="">
-           </button>
+          </button>
         </ng-template>
         <ng-template carouselSlide>
-          <button href="#carouselExampleDark" class="active border-0 btn bg-transparent" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"><h4 class="roboto">Diapositiva 3</h4>
+          <button href="#carouselExampleDark" class="active border-0 btn bg-transparent"
+            data-bs-target="#carouselExampleDark" data-bs-slide-to="2">
+            <h4 class="roboto">Diapositiva 3</h4>
             <img src="../../../assets/comida.gif" class="mx-auto d-block w-25" alt="">
-           </button>
+          </button>
         </ng-template>
         <ng-template carouselSlide>
-          <button href="#carouselExampleDark" class="active border-0 btn bg-transparent" data-bs-target="#carouselExampleDark" data-bs-slide-to="3"><h4 class="roboto">Diapositiva 4</h4>
-            <img src="../../../assets/comida.gif" class="mx-auto d-block w-25" alt=""> 
+          <button href="#carouselExampleDark" class="active border-0 btn bg-transparent"
+            data-bs-target="#carouselExampleDark" data-bs-slide-to="3">
+            <h4 class="roboto">Diapositiva 4</h4>
+            <img src="../../../assets/comida.gif" class="mx-auto d-block w-25" alt="">
           </button>
         </ng-template>
       </owl-carousel-o>
-<hr>
+      <hr>
 
       <div id="carouselExampleDark" class="carousel carousel-dark slide">
         <div class="carousel-inner">
@@ -148,78 +165,83 @@
 
             <div class="container hover-container">
               <div class="row">
-                  <div class="col-lg-3 col-sm-12 col-md-6 rounded-4 hover-item mt-4">
-                    <img src="{{lugaresEspeciales[0].imagen}}" class="imagen rounded-2 shadow-effect" alt="...">
-                  </div>
-                  <div class="col-lg-9 col-sm-12 col-md-6 hover-item mt-4">
-                    <h1 class="nautilus" style="color:rgb(231, 91, 30);">{{lugaresEspeciales[0].nombre}}</h1>
-                    <div>
-                      <p class="roboto">{{lugaresEspeciales[0].descripcion}}</p>
-                    </div>
+                <div class="col-lg-3 col-sm-12 col-md-6 rounded-4 hover-item mt-4">
+                  <img src="{{lugaresEspeciales[0].imagen}}" class="imagen rounded-2 shadow-effect" alt="...">
+                </div>
+                <div class="col-lg-9 col-sm-12 col-md-6 hover-item mt-4">
+                  <h1 class="nautilus" style="color:rgb(231, 91, 30);">{{lugaresEspeciales[0].nombre}}</h1>
+                  <div>
+                    <p class="roboto">{{lugaresEspeciales[0].descripcion}}</p>
                   </div>
                 </div>
-                <div class="mt-4 text-end">
-                  <button class="boton border-0 rounded-2 cursor-pointer mx-3 mb-2" (click)="abrirPopup(platosEspeciales[3])">RESERVAR</button>
-                  <button class="boton border-0 rounded-2 cursor-pointer" (click)="abrirPopupLugar(lugaresEspeciales[0])">VER DETALLES</button>
+              </div>
+              <div class="mt-4 text-end">
+                <button class="boton border-0 rounded-2 cursor-pointer mx-3 mb-2"
+                  (click)="abrirPopup(platosEspeciales[3])">RESERVAR</button>
+                <button class="boton border-0 rounded-2 cursor-pointer"
+                  (click)="abrirPopupLugar(lugaresEspeciales[0])">VER DETALLES</button>
 
-                </div>
+              </div>
             </div>
           </div>
           <div class="carousel-item" data-bs-interval="2000">
             <div class="container hover-container">
               <div class="row">
-                  <div class="col-lg-3 col-sm-12 col-md-6 rounded-4 hover-item mt-4">
-                    <img src="{{lugaresEspeciales[1].imagen}}" class="imagen rounded-2 w-75 shadow-effect" alt="...">
-                  </div>
-                  <div class="col-lg-9 col-sm-12 col-md-6 hover-item mt-4">
-                    <h1 class="nautilus" style="color:rgb(231, 91, 30);">{{lugaresEspeciales[1].nombre}}</h1>
-                    <div>
-                      <p class="roboto">{{lugaresEspeciales[1].descripcion}}</p>
-                    </div>
+                <div class="col-lg-3 col-sm-12 col-md-6 rounded-4 hover-item mt-4">
+                  <img src="{{lugaresEspeciales[1].imagen}}" class="imagen rounded-2 w-75 shadow-effect" alt="...">
+                </div>
+                <div class="col-lg-9 col-sm-12 col-md-6 hover-item mt-4">
+                  <h1 class="nautilus" style="color:rgb(231, 91, 30);">{{lugaresEspeciales[1].nombre}}</h1>
+                  <div>
+                    <p class="roboto">{{lugaresEspeciales[1].descripcion}}</p>
                   </div>
                 </div>
-                <div class="mt-4 text-end">
-                  <button class="boton border-0 rounded-2 cursor-pointer mx-3 mb-2">RESERVAR</button>
-                    <button class="boton border-0 rounded-2 cursor-pointer" (click)="abrirPopupLugar(lugaresEspeciales[1])">VER DETALLES</button>
-                </div>
+              </div>
+              <div class="mt-4 text-end">
+                <button class="boton border-0 rounded-2 cursor-pointer mx-3 mb-2">RESERVAR</button>
+                <button class="boton border-0 rounded-2 cursor-pointer"
+                  (click)="abrirPopupLugar(lugaresEspeciales[1])">VER DETALLES</button>
+              </div>
             </div>
           </div>
           <div class="carousel-item">
             <div class="container hover-container">
               <div class="row">
-                  <div class="col-lg-3 col-sm-12 col-md-6 rounded-4 hover-item mt-4">
-                    <img src="{{lugaresEspeciales[2].imagen}}" class="imagen rounded-2 w-75 shadow-effect" alt="...">
-                  </div>
-                  <div class="col-lg-9 col-sm-12 col-md-6 hover-item mt-4">
-                    <h1 class="nautilus" style="color:rgb(231, 91, 30);">{{lugaresEspeciales[2].nombre}}</h1>
-                    <div>
-                      <p class="roboto">{{lugaresEspeciales[2].descripcion}}</p>
-                    </div>
+                <div class="col-lg-3 col-sm-12 col-md-6 rounded-4 hover-item mt-4">
+                  <img src="{{lugaresEspeciales[2].imagen}}" class="imagen rounded-2 w-75 shadow-effect" alt="...">
+                </div>
+                <div class="col-lg-9 col-sm-12 col-md-6 hover-item mt-4">
+                  <h1 class="nautilus" style="color:rgb(231, 91, 30);">{{lugaresEspeciales[2].nombre}}</h1>
+                  <div>
+                    <p class="roboto">{{lugaresEspeciales[2].descripcion}}</p>
                   </div>
                 </div>
-                <div class="mt-4 text-end">
-                  <button class="boton border-0 rounded-2 cursor-pointer mx-3 mb-2">RESERVAR</button>
-                    <button class="boton border-0 rounded-2 cursor-pointer" (click)="abrirPopupLugar(lugaresEspeciales[2])">VER DETALLES</button>
-                </div>
+              </div>
+              <div class="mt-4 text-end">
+                <button class="boton border-0 rounded-2 cursor-pointer mx-3 mb-2">RESERVAR</button>
+                <button class="boton border-0 rounded-2 cursor-pointer"
+                  (click)="abrirPopupLugar(lugaresEspeciales[2])">VER DETALLES</button>
+              </div>
             </div>
           </div>
           <div class="carousel-item">
             <div class="container hover-container">
               <div class="row">
-                  <div class="col-lg-3 col-sm-12 col-md-6 rounded-4 hover-item mt-4">
-                    <img src="{{lugaresEspeciales[3].imagen}}" class="imagen rounded-2 w-75 shadow-effect" alt="...">
-                  </div>
-                  <div class="col-lg-9 col-sm-12 col-md-6 hover-item mt-4">
-                    <h1 class="nautilus" style="color:rgb(231, 91, 30);">{{lugaresEspeciales[3].nombre}}</h1>
-                    <div>
-                      <p class="roboto">{{lugaresEspeciales[3].descripcion}}</p>
-                    </div>
+                <div class="col-lg-3 col-sm-12 col-md-6 rounded-4 hover-item mt-4">
+                  <img src="{{lugaresEspeciales[3].imagen}}" class="imagen rounded-2 w-75 shadow-effect" alt="...">
+                </div>
+                <div class="col-lg-9 col-sm-12 col-md-6 hover-item mt-4">
+                  <h1 class="nautilus" style="color:rgb(231, 91, 30);">{{lugaresEspeciales[3].nombre}}</h1>
+                  <div>
+                    <p class="roboto">{{lugaresEspeciales[3].descripcion}}</p>
                   </div>
                 </div>
-                <div class="mt-4 text-end">
-                  <button class="boton border-0 rounded-2 cursor-pointer mx-3 mb-2">RESERVAR</button>
-                    <button class="boton border-0 rounded-2 cursor-pointer" (click)="abrirPopupLugar(lugaresEspeciales[3])">VER DETALLES</button>
-                </div>
+              </div>
+              <div class="mt-4 text-end">
+                <button class="boton border-0 rounded-2 cursor-pointer mx-3 mb-2">RESERVAR</button>
+                <button class="boton border-0 rounded-2 cursor-pointer"
+                  (click)="abrirPopupLugar(lugaresEspeciales[3])">VER DETALLES</button>
+              </div>
             </div>
           </div>
         </div>
@@ -236,320 +258,367 @@
 
   <div class="position-relative">
     <div class="parallax2">
-    <div class="position-absolute text-center mt-lg-1" style="top: 0%; width: 100%;">
-      <p class="fs-1 nautilus text-white" style="margin-bottom: 0;">PERSONAL</p>
-      <p class="roboto p-lg-4 text-white">Lo mejor en comida en un solo lugarñ.</p>
-     
-      <div class="container mx-auto d-block">
-        <owl-carousel-o  [options]="customOptions3" #owlCar>
-          <ng-template carouselSlide> 
-            <div class="card mx-5 d-block" style="width: 18rem;">
-              <img src="{{personalEspeciales[0].imagen}}" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">{{personalEspeciales[0].nombre}}</h5>
-                <p class="card-text">descripcion pendiente en la base de datos</p>
-                <div class="row">
-                <div class="col">
-                  <button class="boton border-0 rounded-2  cursor-pointer" (click)="abrirPopupPersonal(personalEspeciales[0])">info</button>
-              </div>
-              <div class="col heart-container">
-                <img id="heart1" src="../../../assets/corazon.png" class="heart w-25" >
-             </div>
-            </div>
-              </div>
-            </div>
-          </ng-template>
-          <ng-template carouselSlide>
-            <div class="card mx-5 d-block" style="width: 18rem;">
-              <img src="../../../assets/team2.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                  <h5 class="card-title">TEAM</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <div class="row"> <!-- Agregamos la clase gx-2 para agregar espacio entre columnas -->
-                      <div class="col">
-                          <button class="boton border-0 rounded-2 cursor-pointer" routerLink="/personal/personal2">info</button>
-                      </div>
-                      <div class="col heart-container">
-                        <img id="heart2" src="../../../assets/corazon.png" class="heart w-25">
-                     </div>
+      <div class="position-absolute text-center mt-lg-1" style="top: 0%; width: 100%;">
+        <p class="fs-1 nautilus text-white" style="margin-bottom: 0;">PERSONAL</p>
+        <p class="roboto p-lg-4 text-white">Lo mejor en comida en un solo lugarñ.</p>
+
+        <div class="container mx-auto d-block">
+          <owl-carousel-o [options]="customOptions3" #owlCar>
+            <ng-template carouselSlide>
+              <div class="card mx-5 d-block" style="width: 18rem;">
+                <img src="{{personalEspeciales[0].imagen}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{personalEspeciales[0].nombre}}</h5>
+                  <p class="card-text">descripcion pendiente en la base de datos</p>
+                  <div class="row">
+                    <div class="col">
+                      <button class="boton border-0 rounded-2  cursor-pointer"
+                        (click)="abrirPopupPersonal(personalEspeciales[0])">info</button>
+                    </div>
+                    <div class="col heart-container">
+                      <img id="heart1" src="../../../assets/corazon.png" class="heart w-25">
+                    </div>
                   </div>
+                </div>
               </div>
-          </div>
-          
-      </ng-template>
-          <ng-template carouselSlide> 
-            <div class="card mx-5 d-block" style="width: 18rem;">
-              <img src="../../../assets/team3.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
+            </ng-template>
+            <ng-template carouselSlide>
+              <div class="card mx-5 d-block" style="width: 18rem;">
+                <img src="../../../assets/team2.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
                   <h5 class="card-title">TEAM</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
                   <div class="row"> <!-- Agregamos la clase gx-2 para agregar espacio entre columnas -->
-                      <div class="col">
-                          <button class="boton border-0 rounded-2 cursor-pointer" routerLink="/personal/personal3">info</button>
-                      </div>
-                      <div class="col heart-container">
-                        <img id="heart3" src="../../../assets/corazon.png" class="heart w-25" (click)="incrementClickCount()">
-                     </div>
+                    <div class="col">
+                      <button class="boton border-0 rounded-2 cursor-pointer"
+                        (click)="abrirPopupPersonal(personalEspeciales[1])">info</button>
+                    </div>
+                    <div class="col heart-container">
+                      <img id="heart2" src="../../../assets/corazon.png" class="heart w-25">
+                    </div>
                   </div>
+                </div>
               </div>
-          </div>
-      </ng-template>
-        </owl-carousel-o>
+
+            </ng-template>
+            <ng-template carouselSlide>
+              <div class="card mx-5 d-block" style="width: 18rem;">
+                <img src="../../../assets/team3.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">TEAM</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                  <div class="row"> <!-- Agregamos la clase gx-2 para agregar espacio entre columnas -->
+                    <div class="col">
+                      <button class="boton border-0 rounded-2 cursor-pointer"
+                        (click)="abrirPopupPersonal(personalEspeciales[2])">info</button>
+                    </div>
+                    <div class="col heart-container">
+                      <img id="heart3" src="../../../assets/corazon.png" class="heart w-25"
+                        (click)="incrementClickCount()">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </owl-carousel-o>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 
   <div id="BEBIDAS" class="mb-5"></div>
 
   <div class="container w-75 fondo-semi-negro">
     <div class="container text-center mt-4">
-  <h1 class="nautilus" style="color:rgb(231, 91, 30);">BEBIDAS</h1>
+      <h1 class="nautilus" style="color:rgb(231, 91, 30);">BEBIDAS</h1>
 
-  <P class="roboto mx-auto d-block w-75 mt-3 text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam neque atque repellendus odio rerum deleniti voluptatibus praesentium tenetur earum, assumenda, laudantium suscipit nihil et in dolores vero doloribus ducimus quasi.</P>
-</div>
-
-<div class="container text-center mt-5">
-  <div class="row align-items-start">
-
-    <!-- Bebida 1 -->
-    <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center mb-4">
-      <img class="rounded me-3" src="../../../assets/bebida 1.jpg" alt="Copa Cabana" style="width: 120px; height: auto;">
-      <div class="text-start">
-       <h2 class="mb-1 nautilus" style="color:tomato">Copa Cabana</h2>
-        <p class="mb-0 text-white roboto">Cóctel tropical con frutas exóticas y ron.</p>
-      </div>
+      <P class="roboto mx-auto d-block w-75 mt-3 text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Ipsam neque atque repellendus odio rerum deleniti voluptatibus praesentium tenetur earum, assumenda, laudantium
+        suscipit nihil et in dolores vero doloribus ducimus quasi.</P>
     </div>
 
-    <!-- Bebida 2 -->
-    <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center mb-4">
-      <img class="rounded me-3" src="../../../assets/bebida 2.jpg" alt="Sunset Punch" style="width: 120px; height: auto;">
-      <div class="text-start">
-        <h2 class="mb-1 nautilus" style="color:tomato">Sunset Punch</h2>
-        <p class="mb-0 text-white roboto">Refrescante bebida con cítricos y soda.</p>
+    <div class="container text-center mt-5">
+      <div class="row align-items-start">
+
+        <!-- Bebida 1 -->
+        <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center mb-4">
+          <img class="rounded me-3" src="../../../assets/bebida 1.jpg" alt="Copa Cabana"
+            style="width: 120px; height: auto;">
+          <div class="text-start">
+            <h2 class="mb-1 nautilus" style="color:tomato">Copa Cabana</h2>
+            <p class="mb-0 text-white roboto">Cóctel tropical con frutas exóticas y ron.</p>
+          </div>
+        </div>
+
+        <!-- Bebida 2 -->
+        <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center mb-4">
+          <img class="rounded me-3" src="../../../assets/bebida 2.jpg" alt="Sunset Punch"
+            style="width: 120px; height: auto;">
+          <div class="text-start">
+            <h2 class="mb-1 nautilus" style="color:tomato">Sunset Punch</h2>
+            <p class="mb-0 text-white roboto">Refrescante bebida con cítricos y soda.</p>
+          </div>
+        </div>
+
+        <!-- Bebida 3 -->
+        <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center mb-4">
+          <img class="rounded me-3" src="../../../assets/bebida 3.jpg" alt="Limonada Verde"
+            style="width: 120px; height: auto;">
+          <div class="text-start">
+            <h2 class="mb-1 nautilus" style="color:tomato">Limonada Verde</h2>
+            <p class="mb-0 text-white roboto">Limonada con hierbabuena, natural y fresca.</p>
+          </div>
+        </div>
+
+        <!-- Bebida 4 -->
+        <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center mb-4">
+          <img class="rounded me-3" src="../../../assets/bebida 4.jpg" alt="Choco Cream"
+            style="width: 120px; height: auto;">
+          <div class="text-start">
+            <h2 class="mb-1 nautilus" style="color:tomato">Choco Cream</h2>
+            <p class="mb-0 text-white roboto">Batido cremoso de chocolate y leche.</p>
+          </div>
+        </div>
+
+        <!-- Bebida 5 -->
+        <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center mb-4">
+          <img class="rounded me-3" src="../../../assets/bebida 5.jpg" alt="Piña Fizz"
+            style="width: 120px; height: auto;">
+          <div class="text-start">
+            <h2 class="mb-1 nautilus" style="color:tomato">Piña Fizz</h2>
+            <p class="mb-0 text-white roboto">Cóctel espumoso de piña con soda.</p>
+          </div>
+        </div>
+
+        <!-- Bebida 6 -->
+        <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center mb-4">
+          <img class="rounded me-3" src="../../../assets/bebida 6.jpg" alt="Berry Cool"
+            style="width: 120px; height: auto;">
+          <div class="text-start">
+            <h2 class="mb-1 nautilus" style="color:tomato">Berry Cool</h2>
+            <p class="mb-0 text-white roboto">Bebida fría de frutos rojos y menta.</p>
+          </div>
+        </div>
+
       </div>
     </div>
-
-    <!-- Bebida 3 -->
-    <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center mb-4">
-      <img class="rounded me-3" src="../../../assets/bebida 3.jpg" alt="Limonada Verde" style="width: 120px; height: auto;">
-      <div class="text-start">
-        <h2 class="mb-1 nautilus" style="color:tomato">Limonada Verde</h2>
-        <p class="mb-0 text-white roboto">Limonada con hierbabuena, natural y fresca.</p>
-      </div>
-    </div>
-
-    <!-- Bebida 4 -->
-    <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center mb-4">
-      <img class="rounded me-3" src="../../../assets/bebida 4.jpg" alt="Choco Cream" style="width: 120px; height: auto;">
-      <div class="text-start">
-        <h2 class="mb-1 nautilus" style="color:tomato">Choco Cream</h2>
-        <p class="mb-0 text-white roboto">Batido cremoso de chocolate y leche.</p>
-      </div>
-    </div>
-
-    <!-- Bebida 5 -->
-    <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center mb-4">
-      <img class="rounded me-3" src="../../../assets/bebida 5.jpg" alt="Piña Fizz" style="width: 120px; height: auto;">
-      <div class="text-start">
-        <h2 class="mb-1 nautilus" style="color:tomato">Piña Fizz</h2>
-        <p class="mb-0 text-white roboto">Cóctel espumoso de piña con soda.</p>
-      </div>
-    </div>
-
-    <!-- Bebida 6 -->
-    <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center mb-4">
-      <img class="rounded me-3" src="../../../assets/bebida 6.jpg" alt="Berry Cool" style="width: 120px; height: auto;">
-      <div class="text-start">
-        <h2 class="mb-1 nautilus" style="color:tomato">Berry Cool</h2>
-        <p class="mb-0 text-white roboto">Bebida fría de frutos rojos y menta.</p>
-      </div>
-    </div>
-
   </div>
-</div>
-  </div>
 
 
 
-<div id="RESERVAR" class="mb-5"></div>
+  <div id="RESERVAR" class="mb-5"></div>
   <div class="formulario" style="background-image: url(../../../assets/formulario.png);">
     <div class="text-center" style="display: flex; justify-content: center;">
       <div class="mt-5">
-  <h1 class="nautilus" style="color:rgb(231, 91, 30);">RESERVACIONES</h1>
-  <h4 class="mt-5 roboto"><strong>FORMULARIO DE RESERVA</strong></h4>
-  <h6 class="roboto">POR FAVOR LLENE TODOS LOS CAMPOS REQUERIDOS. ¡GRACIAS!</h6>
-</div>
-</div>
-<form [formGroup]="formulario" class=" mx-auto d-block w-50 needs-validation">
-    <div class="row">
-    <div class="col-lg-6 col-sm-12 mt-4">
-    <div class="form-group">
-      <div class="input-group has-validation">
-        <input type="text" style="border: 1px dashed #000;" class="form-control" id="name" aria-describedby="nombreHelp" name="nombre"  placeholder="Nombre y Apellido" formControlName="nombre">
-      </div>
-      <div class="text-danger" >
-      @if(formulario.get('nombre')?.invalid && (isFormSubmitted || formulario.get('nombre')?.touched || formulario.get('nombre')?.dirty)){
-        @if(formulario.get('nombre')?.errors?.['required']){
-          Este campo es requerido}
-        @if(formulario.get('nombre')?.errors?.['pattern'])
-        {No ingrese numeros}
-      }
-</div>
-    </div>
-  </div>
-
-  <div class="col-lg-6 col-sm-12 mt-4">
-    <div class="form-group">
-      <input type="email" style="border: 1px dashed #000;" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" placeholder="Enter email" formControlName="email">
-      <div class="text-danger" >
-        @if(formulario.get('email')?.invalid && (isFormSubmitted || formulario.get('email')?.touched || formulario.get('email')?.dirty)){
-          @if(formulario.get('email')?.errors?.['required']){
-            Este campo es requerido}
-          @if(formulario.get('email')?.errors?.['pattern'])
-          {Ingrese un correo electronico}
-        }
-  </div>
-    </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-6 col-sm-12 mt-4">
-    <div class="form-group">
-      <input type="text" style="border: 1px dashed #000;" class="form-control" id="exampleNumber" aria-describedby="numeroTelefonoHelp" name="telefono" placeholder="Telf" formControlName="telefono">
-      <div class="text-danger" >
-        @if(formulario.get('telefono')?.invalid && (isFormSubmitted || formulario.get('telefono')?.touched || formulario.get('telefono')?.dirty)){
-          @if(formulario.get('telefono')?.errors?.['required']){
-            Este campo es requerido}
-          @if(formulario.get('telefono')?.errors?.['pattern'])
-          {ingrese un numero de celular valido}
-        }
-  </div>
-    </div>
-    </div>
-    <div class="col-lg-6 col-sm-12 mt-4">
-    <div class="form-group">
-      <input type="text" style="border: 1px dashed #000;" class="form-control " id="exampleLugar" aria-describedby="lugarHelp" name="lugar"  placeholder="Lugar" formControlName="lugar">
-      <div class="text-danger" >
-        @if(formulario.get('lugar')?.invalid && (isFormSubmitted || formulario.get('lugar')?.touched || formulario.get('lugar')?.dirty)){
-          @if(formulario.get('lugar')?.errors?.['required']){
-            Este campo es requerido}
-        }
+        <h1 class="nautilus" style="color:rgb(231, 91, 30);">RESERVACIONES</h1>
+        <h4 class="mt-5 roboto"><strong>FORMULARIO DE RESERVA</strong></h4>
+        <h6 class="roboto">POR FAVOR LLENE TODOS LOS CAMPOS REQUERIDOS. ¡GRACIAS!</h6>
       </div>
     </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-6 col-sm-12 mt-4">
-      <div class="form-group">
-        <input type="text" style="border: 1px dashed #000;" class="form-control" id="exampleNumeroPersonas" aria-describedby="numeroPersonasHelp" name="N_personas"  placeholder="Num Personas" formControlName="n_personas">
-        <div class="text-danger" >
-          @if(formulario.get('n_personas')?.invalid && (isFormSubmitted || formulario.get('n_personas')?.touched || formulario.get('n_personas')?.dirty)){
-            @if(formulario.get('n_personas')?.errors?.['required']){
+    <form [formGroup]="formulario" class=" mx-auto d-block w-50 needs-validation">
+      <div class="row">
+        <div class="col-lg-6 col-sm-12 mt-4">
+          <div class="form-group">
+            <div class="input-group has-validation">
+              <input type="text" style="border: 1px dashed #000;" class="form-control" id="name"
+                aria-describedby="nombreHelp" name="nombre" placeholder="Nombre y Apellido" formControlName="nombre">
+            </div>
+            <div class="text-danger">
+              @if(formulario.get('nombre')?.invalid && (isFormSubmitted || formulario.get('nombre')?.touched ||
+              formulario.get('nombre')?.dirty)){
+              @if(formulario.get('nombre')?.errors?.['required']){
               Este campo es requerido}
-          }
-    </div>
-      </div>
-    </div>
-    <div class="col-lg-6 col-sm-12 mt-4">
-      <div class="form-group">
-        <input type="date" style="border: 1px dashed #000;" class="form-control" id="exampleDate" aria-describedby="fechaHelp" name="fecha"  placeholder="Fecha" formControlName="fecha">
-        <div class="text-danger" >
-          @if(formulario.get('fecha')?.invalid && (isFormSubmitted || formulario.get('fecha')?.touched || formulario.get('fecha')?.dirty)){
-            @if(formulario.get('fecha')?.errors?.['required']){
-              Este campo es requerido}
-            }
-    </div>
-      </div>
-    </div>
-    <div class="col-lg-6 col-sm-12 mt-4">
-      <div class="form-group">
-        <input type="text" style="border: 1px dashed #000;" class="form-control" id="exampleHora" aria-describedby="horaHelp" name="hora"  placeholder="hora" formControlName="hora">
-        <div class="text-danger" >
-          @if(formulario.get('hora')?.invalid && (isFormSubmitted || formulario.get('hora')?.touched || formulario.get('hora')?.dirty)){
-            @if(formulario.get('hora')?.errors?.['required']){
-              Este campo es requerido}
-          }
-    </div>
-      </div>
-    </div>
-  </div>
-  
-    <div class="col text-center mt-5">
-      <button type="button" class="boton border-0 rounded-2 cursor-pointer" (click)="agregarReserva()">RESERVAR MI MESA</button>
-  </div>
-</form>
-  
-</div>
-
-
-
-<div class="parallax3 mt-5">
-  <div class="text-center d-flex flex-column align-items-center mx-auto" >
-    <div class="mt-2"> 
-      <h1 class="nautilus" style="color:rgb(231, 91, 30);">COMENTARIOS</h1>
-      <h6 class="roboto text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h6>
-
-      <form [formGroup]="formularioMensaje" class="needs-validation">
-<div class="container">
-  <div class="row">
-
-      <div class="col-lg-6 col-sm-12 mt-4">
-        <div class="form-group">
-          <div class="input-group has-validation">
-            <input type="text" style="border: 1px dashed #000;" class="form-control" id="name" aria-describedby="nombreHelp" name="nombre"  placeholder="Nombre y Apellido" formControlName="nombre">
+              @if(formulario.get('nombre')?.errors?.['pattern'])
+              {No ingrese numeros}
+              }
+            </div>
           </div>
-          <div class="text-danger" >
-          @if(formularioMensaje.get('nombre')?.invalid && (FormSubmitted || formularioMensaje.get('nombre')?.touched || formularioMensaje.get('nombre')?.dirty)){
-            @if(formularioMensaje.get('nombre')?.errors?.['required']){
-              Este campo es requerido}
-          }
-    </div>
         </div>
-      </div>
 
-      <div class="col-lg-6 col-sm-12 mt-4">
-        <div class="form-group">
-          <input type="email" style="border: 1px dashed #000;" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" placeholder="Enter email" formControlName="email">
-          <div class="text-danger" >
-            @if(formularioMensaje.get('email')?.invalid && (FormSubmitted || formularioMensaje.get('email')?.touched || formularioMensaje.get('email')?.dirty)){
-              @if(formularioMensaje.get('email')?.errors?.['required']){
-                Este campo es requerido}
-              @if(formularioMensaje.get('email')?.errors?.['pattern'])
+        <div class="col-lg-6 col-sm-12 mt-4">
+          <div class="form-group">
+            <input type="email" style="border: 1px dashed #000;" class="form-control" id="exampleInputEmail1"
+              aria-describedby="emailHelp" name="email" placeholder="Enter email" formControlName="email">
+            <div class="text-danger">
+              @if(formulario.get('email')?.invalid && (isFormSubmitted || formulario.get('email')?.touched ||
+              formulario.get('email')?.dirty)){
+              @if(formulario.get('email')?.errors?.['required']){
+              Este campo es requerido}
+              @if(formulario.get('email')?.errors?.['pattern'])
               {Ingrese un correo electronico}
-            }
+              }
+            </div>
+          </div>
+        </div>
       </div>
-        </div>
-        </div>
-    </div>
-  </div>
-
-      
-      <div class="form-group mt-5">
-        <input type="text" style="border: 1px dashed #ffffff;" class="form-control input1" id="comentario" aria-describedby="comentarioHelp" name="comentario" placeholder="Deje su comentario" formControlName="comentario">
-        <div class="text-danger" >
-          @if(formularioMensaje.get('comentario')?.invalid && (FormSubmitted || formularioMensaje.get('comentario')?.touched || formularioMensaje.get('comentario')?.dirty)){
-            @if(formularioMensaje.get('comentario')?.errors?.['required']){
+      <div class="row">
+        <div class="col-lg-6 col-sm-12 mt-4">
+          <div class="form-group">
+            <input type="text" style="border: 1px dashed #000;" class="form-control" id="exampleNumber"
+              aria-describedby="numeroTelefonoHelp" name="telefono" placeholder="Telf" formControlName="telefono">
+            <div class="text-danger">
+              @if(formulario.get('telefono')?.invalid && (isFormSubmitted || formulario.get('telefono')?.touched ||
+              formulario.get('telefono')?.dirty)){
+              @if(formulario.get('telefono')?.errors?.['required']){
               Este campo es requerido}
-          }
-    </div>
-      </div>
-      
-      <div class="enviar-container">
-        <div class="enviar-border">
-          <img id="enviar" class="enviar img1" (click)="agregarMensaje()"   src="../../../assets/enviar1.png" alt="">
+              @if(formulario.get('telefono')?.errors?.['pattern'])
+              {ingrese un numero de celular valido}
+              }
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-12 mt-4">
+          <div class="form-group">
+            <input type="text" style="border: 1px dashed #000;" class="form-control " id="exampleLugar"
+              aria-describedby="lugarHelp" name="lugar" placeholder="Lugar" formControlName="lugar">
+            <div class="text-danger">
+              @if(formulario.get('lugar')?.invalid && (isFormSubmitted || formulario.get('lugar')?.touched ||
+              formulario.get('lugar')?.dirty)){
+              @if(formulario.get('lugar')?.errors?.['required']){
+              Este campo es requerido}
+              }
+            </div>
+          </div>
         </div>
       </div>
-      
-      
+      <div class="row">
+        <div class="col-lg-6 col-sm-12 mt-4">
+          <div class="form-group">
+            <input type="text" style="border: 1px dashed #000;" class="form-control" id="exampleNumeroPersonas"
+              aria-describedby="numeroPersonasHelp" name="N_personas" placeholder="Num Personas"
+              formControlName="n_personas">
+            <div class="text-danger">
+              @if(formulario.get('n_personas')?.invalid && (isFormSubmitted || formulario.get('n_personas')?.touched ||
+              formulario.get('n_personas')?.dirty)){
+              @if(formulario.get('n_personas')?.errors?.['required']){
+              Este campo es requerido}
+              }
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-12 mt-4">
+          <div class="form-group">
+            <input type="date" style="border: 1px dashed #000;" class="form-control" id="exampleDate"
+              aria-describedby="fechaHelp" name="fecha" placeholder="Fecha" formControlName="fecha">
+            <div class="text-danger">
+              @if(formulario.get('fecha')?.invalid && (isFormSubmitted || formulario.get('fecha')?.touched ||
+              formulario.get('fecha')?.dirty)){
+              @if(formulario.get('fecha')?.errors?.['required']){
+              Este campo es requerido}
+              }
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-12 mt-4">
+          <div class="form-group">
+            <input type="text" style="border: 1px dashed #000;" class="form-control" id="exampleHora"
+              aria-describedby="horaHelp" name="hora" placeholder="hora" formControlName="hora">
+            <div class="text-danger">
+              @if(formulario.get('hora')?.invalid && (isFormSubmitted || formulario.get('hora')?.touched ||
+              formulario.get('hora')?.dirty)){
+              @if(formulario.get('hora')?.errors?.['required']){
+              Este campo es requerido}
+              }
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-12 col-sm-12 mt-4">
+          <div class="form-group">
+            <label for="detalles" class="form-label">Detalles / Sugerencias</label>
+            <textarea id="detalles" class="form-control" style="border: 1px dashed #000;" name="detalles"
+              placeholder="Deja aquí alguna sugerencia o detalle para tu reserva" formControlName="detalles" rows="4"></textarea>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col text-center mt-5">
+        <button type="button" class="boton border-0 rounded-2 cursor-pointer" (click)="agregarReserva()">RESERVAR MI
+          MESA</button>
+      </div>
     </form>
+
   </div>
-</div>
 
- <div class="comentarios-box mx-auto p-4">
 
-    <div class="comentarios-scroll d-flex flex-column align-items-center mx-auto" style="max-width: 600px;">
-      @for(comentario of comentario.slice().reverse(); track comentario) {
+
+  <div class="parallax3 mt-5">
+    <div class="text-center d-flex flex-column align-items-center mx-auto">
+      <div class="mt-2">
+        <h1 class="nautilus" style="color:rgb(231, 91, 30);">COMENTARIOS</h1>
+        <h6 class="roboto text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h6>
+
+        <form [formGroup]="formularioMensaje" class="needs-validation">
+          <div class="container">
+            <div class="row">
+
+              <div class="col-lg-6 col-sm-12 mt-4">
+                <div class="form-group">
+                  <div class="input-group has-validation">
+                    <input type="text" style="border: 1px dashed #000;" class="form-control" id="name"
+                      aria-describedby="nombreHelp" name="nombre" placeholder="Nombre y Apellido"
+                      formControlName="nombre">
+                  </div>
+                  <div class="text-danger">
+                    @if(formularioMensaje.get('nombre')?.invalid && (FormSubmitted ||
+                    formularioMensaje.get('nombre')?.touched || formularioMensaje.get('nombre')?.dirty)){
+                    @if(formularioMensaje.get('nombre')?.errors?.['required']){
+                    Este campo es requerido}
+                    }
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 col-sm-12 mt-4">
+                <div class="form-group">
+                  <input type="email" style="border: 1px dashed #000;" class="form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp" name="email" placeholder="Enter email" formControlName="email">
+                  <div class="text-danger">
+                    @if(formularioMensaje.get('email')?.invalid && (FormSubmitted ||
+                    formularioMensaje.get('email')?.touched || formularioMensaje.get('email')?.dirty)){
+                    @if(formularioMensaje.get('email')?.errors?.['required']){
+                    Este campo es requerido}
+                    @if(formularioMensaje.get('email')?.errors?.['pattern'])
+                    {Ingrese un correo electronico}
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="form-group mt-5">
+            <input type="text" style="border: 1px dashed #ffffff;" class="form-control input1" id="comentario"
+              aria-describedby="comentarioHelp" name="comentario" placeholder="Deje su comentario"
+              formControlName="comentario">
+            <div class="text-danger">
+              @if(formularioMensaje.get('comentario')?.invalid && (FormSubmitted ||
+              formularioMensaje.get('comentario')?.touched || formularioMensaje.get('comentario')?.dirty)){
+              @if(formularioMensaje.get('comentario')?.errors?.['required']){
+              Este campo es requerido}
+              }
+            </div>
+          </div>
+
+          <div class="enviar-container">
+            <div class="enviar-border">
+              <img id="enviar" class="enviar img1" (click)="agregarMensaje()" src="../../../assets/enviar1.png" alt="">
+            </div>
+          </div>
+
+
+        </form>
+      </div>
+    </div>
+
+    <div class="comentarios-box mx-auto p-4">
+
+      <div class="comentarios-scroll d-flex flex-column align-items-center mx-auto" style="max-width: 600px;">
+        @for(comentario of comentario.slice().reverse(); track comentario) {
         <div class="mb-3 p-3 comentario-card w-100">
           <!-- Nombre y correo -->
           <div class="d-flex flex-wrap align-items-center mb-2">
@@ -564,27 +633,17 @@
           <!-- Comentario -->
           <p class="mb-0 text-white">{{ comentario.comentario }}</p>
         </div>
-      }
+        }
+      </div>
     </div>
   </div>
-</div>
-<app-footer></app-footer>
-<app-pop-up-platos 
-      *ngIf="isPopupVisible"
-      [plato]="platoSeleccionado"
-      [isVisible]="isPopupVisible"
-      (close)="closePopup()">
-    </app-pop-up-platos>
-    <app-pop-up-lugares
-    *ngIf="mostrarPopUp"
-    [lugar]="lugarSeleccionado"
-  [isVisible]="mostrarPopUp"
-  (close)="cerrarPopup()"
-  >
-</app-pop-up-lugares>
-<app-pop-up-personal
-  *ngIf="mostrarPopUpPersonal"
-  [personal]="personalSelecionado"
-  [isVisible]="mostrarPopUpPersonal"
-  (close)="cerrarPopupPersonal()">
-</app-pop-up-personal>
+  <app-footer></app-footer>
+  <app-pop-up-platos *ngIf="isPopupVisible" [plato]="platoSeleccionado" [isVisible]="isPopupVisible"
+    (close)="closePopup()">
+  </app-pop-up-platos>
+  <app-pop-up-lugares *ngIf="mostrarPopUp" [lugar]="lugarSeleccionado" [isVisible]="mostrarPopUp"
+    (close)="cerrarPopup()">
+  </app-pop-up-lugares>
+  <app-pop-up-personal *ngIf="mostrarPopUpPersonal" [personal]="personalSelecionado" [isVisible]="mostrarPopUpPersonal"
+    (close)="cerrarPopupPersonal()">
+  </app-pop-up-personal>

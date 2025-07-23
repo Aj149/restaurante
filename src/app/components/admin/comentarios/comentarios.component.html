@@ -1,40 +1,31 @@
-<div class="container mt-3">
-<div class="justify-content-center">
-<h1 class="mb-4 roboto text-center">Comentarios</h1>
-<table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Email</th>
-        <th scope="col">comentario</th>
-        <th scope="col">ver</th>
-        <th scope="col">editar</th>
-        <th scope="col">eliminar</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for(comentario of comentario | paginate: { itemsPerPage: 9, currentPage: page }; track comentario){
-      <tr>
-            <td class="col">{{comentario.id_comentario}}</td>
-            <td class="col">{{comentario.nombre}}</td>
-            <td class="col">{{comentario.email}}</td>
-            <td class="col">{{comentario.comentario}}</td>
-            <td class="col"><button class="btn btn-outline-primary" routerLink="/detalle/{{comentario.id_comentario}}"><i class="far fa-eye"></i> Ver</button></td>
-            <td class="col">
-              <button class="btn btn-outline-warning" [routerLink]="['/admin/editarcomentario', comentario.id_comentario]">
-                <i class="far fa-edit"></i> Editar
-              </button>
-            </td>
-            
-            
-            <td class="col"><button class="btn btn-outline-danger" (click)="comentario.id_comentario  !== undefined ? borrar(comentario.id_comentario) : null"><i class="far fa-trash-alt"></i> Eliminar</button></td>
-      
-          </tr>
-        }  
-    </tbody>
-  </table>
-  <pagination-controls class="text-center" (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente">
-  </pagination-controls>
+<div class="container mt-5">
+  <h2 class="text-center mb-4 roboto">Comentarios</h2>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    @for(comentario of comentario | paginate: { itemsPerPage: 9, currentPage: page }; track comentario) {
+      <div class="col">
+        <div class="card h-100 shadow-sm border border-primary-subtle">
+          <div class="card-body">
+            <h5 class="card-title text-primary">
+              <i class="fas fa-user-circle me-2"></i>{{ comentario.nombre }}
+            </h5>
+            <h6 class="card-subtitle mb-2 text-muted">
+              <i class="fas fa-envelope me-2"></i>{{ comentario.email }}
+            </h6>
+            <p class="card-text mt-3">
+              <i class="fas fa-comment-dots me-2 text-secondary"></i>{{ comentario.comentario }}
+            </p>
+          </div>
+        </div>
+      </div>
+    }
   </div>
-  </div>
+
+  <div class="d-flex justify-content-center mt-4">
+  <pagination-controls
+    (pageChange)="page = $event"
+    previousLabel="⟨ Anterior"
+    nextLabel="Siguiente ⟩"
+    class="pagination justify-content-center pagination-lg"
+  ></pagination-controls>
+</div>
+</div>

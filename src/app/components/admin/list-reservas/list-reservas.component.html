@@ -2,6 +2,25 @@
 <div class="justify-content-center">
   <h1 class="mb-4 roboto text-center">Reservas</h1>
 
+ <div class="mb-4">
+    <div class="card bg-light">
+      <div class="card-header text-center">
+        <h5>Filtro</h5>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-1 col-md-2">
+            <label for="buscador" class="form-label">Buscar: </label>
+          </div>
+          <div class="col-lg-11 col-md-10">
+            <input id="buscador" type="text" class="form-control" [(ngModel)]="searchTerm"
+              placeholder="Buscar por nombre de estudiante, docente" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
     <table class="table table-striped">
       <thead>
         <tr>
@@ -16,7 +35,7 @@
         </tr>
       </thead>
       <tbody>
-        @for(reserva of reservasFiltradas | buscador : nombre | paginate: { itemsPerPage: 9, currentPage: page }; track reserva){
+        @for(reserva of reservasFiltradas | buscador : searchTerm | paginate: { itemsPerPage: 9, currentPage: page }; track reserva){
         <tr>
           <td>{{reserva.id_reserva}}</td>
           <td>{{reserva.nombre}}</td>
@@ -26,12 +45,12 @@
           <td>{{reserva.email}}</td>
           <td>{{reserva.fecha}}</td>
           <td>
-            <button class="btn btn-outline-primary" routerLink="/detalle/{{reserva.id_reserva}}">
+            <button class="btn btn-outline-primary" [routerLink]="['/admin/verReserva', reserva.id_reserva]">
               <i class="far fa-eye"></i> Ver
             </button>
           </td>
           <td>
-            <button class="btn btn-outline-warning" [routerLink]="['/admin/editarReserva', reserva.id_reserva]">
+            <button class="btn btn-outline-warning" [routerLink]="['/admin/editar-reserva', reserva.id_reserva]">
               <i class="far fa-edit"></i> Editar
             </button>
           </td>

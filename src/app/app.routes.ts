@@ -3,10 +3,6 @@ import { AdminComponent } from './components/admin/admin.component';
 import { LikesComponent } from './components/admin/likes/likes.component';
 import { ComentariosComponent } from './components/admin/comentarios/comentarios.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { Personal1Component } from './components/dashboard/personal/personal1/personal1.component';
-import { PersonalComponent } from './components/dashboard/personal/personal.component';
-import { Personal2Component } from './components/dashboard/personal/personal2/personal2.component';
-import { Personal3Component } from './components/dashboard/personal/personal3/personal3.component';
 import { ListReservasComponent } from './components/admin/list-reservas/list-reservas.component';
 import { EditReservasComponent } from './components/admin/edit-reservas/edit-reservas.component';
 import { PopUpPlatosComponent } from './components/dashboard/pop-up-platos/pop-up-platos.component';
@@ -22,6 +18,15 @@ import { LoginAdminComponent } from './components/core/admin/login-admin/login-a
 import { RecuperarContrasenaComponent } from './components/core/recuperar-contrasena/recuperar-contrasena.component';
 import { ResetPasswordComponent } from './components/core/reset-password/reset-password.component';
 import { PopUpPersonalComponent } from './components/dashboard/pop-up-personal/pop-up-personal.component';
+import { EditPersonasComponent } from './components/admin/edit-personas/edit-personas.component';
+import { PersonalComponent } from './components/admin/personal/personal.component';
+import { CrearPersonalComponent } from './components/admin/crear-personal/crear-personal.component';
+import { VerPersonalComponent } from './components/admin/ver-personal/ver-personal.component';
+import { VerReservasComponent } from './components/admin/ver-reservas/ver-reservas.component';
+import { CrearPlatoComponent } from './components/admin/crear-plato/crear-plato.component';
+import { LugaresComponent } from './components/admin/lugares/lugares.component';
+import { EditLugarComponent } from './components/admin/edit-lugar/edit-lugar.component';
+import { CrearLugarComponent } from './components/admin/crear-lugar/crear-lugar.component';
 
 
 
@@ -29,7 +34,7 @@ export const routes: Routes = [
   // Ruta de login (pública)
   { path: 'login', component: UserComponent },
   
-  { path: 'admin', component: LoginAdminComponent },
+  { path: 'loginAdmin', component: LoginAdminComponent },
   
   // Ruta de registro (pública)
   { path: 'register', component: UserRegisterComponent },
@@ -49,8 +54,18 @@ export const routes: Routes = [
       { path: 'comentarios', component: ComentariosComponent },
       { path: 'lista-de-reservas', component: ListReservasComponent },
       { path: 'editar-reserva/:id_reserva', component: EditReservasComponent },
+      { path: 'verReserva/:id_reserva', component: VerReservasComponent },
       { path: 'lista-de-platos', component: PlatosComponent },
-      { path: 'editar-plato/:id_plato', component: EditPlatosEsComponent }
+      { path: 'editar-plato/:id_plato', component: EditPlatosEsComponent },
+      { path: 'crearPlato', component: CrearPlatoComponent },
+      { path: 'listaPersonal', component: PersonalComponent },
+      { path: 'editar-personal/:id_personal', component: EditPersonasComponent },
+      { path: 'crearPersonal', component: CrearPersonalComponent },
+      { path: 'verPersonal/:id_personal', component: VerPersonalComponent },
+      { path: 'lugares', component: LugaresComponent },
+      { path: 'crearlugar', component: CrearLugarComponent },
+      { path: 'editar-lugar/:id_lugar', component: EditLugarComponent },
+
     ]
   },
 
@@ -60,16 +75,6 @@ export const routes: Routes = [
     component: DashboardComponent,
   },
 
-  // Personal (protegido)
-  {
-    path: 'personal',
-    component: PersonalComponent,
-    children: [
-      { path: 'personal1', component: Personal1Component },
-      { path: 'personal2', component: Personal2Component },
-      { path: 'personal3', component: Personal3Component }
-    ]
-  },
 
   // Extras (protegidos según necesidad)
   {path: 'pop-up-personal', component: PopUpPersonalComponent},

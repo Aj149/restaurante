@@ -1,6 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { reserva } from '../models/dashboard';
-import { info } from 'console';
 
 @Pipe({
   name: 'buscador',
@@ -8,14 +7,16 @@ import { info } from 'console';
 })
 export class BuscadorPipe implements PipeTransform {
 
-  transform(reserva: reserva[], searchTerm: string): reserva[] {
-    if(!searchTerm || searchTerm.trim() === ''){
-      return reserva;
+  transform(reservas: reserva[], searchTerm: string): reserva[] {
+    if (!searchTerm || searchTerm.trim() === '') {
+      return reservas;
     }
     const searchTermLower = searchTerm.toLowerCase();
 
-    return reserva.filter((reserva: reserva) => 
-    reserva.nombre.toLowerCase().includes(searchTermLower))
+    return reservas.filter((reserva: reserva) => 
+      (reserva.nombre?.toLowerCase().includes(searchTermLower) || 
+       reserva.email?.toLowerCase().includes(searchTermLower))
+    );
   }
 
 }

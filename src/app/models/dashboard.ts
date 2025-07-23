@@ -8,6 +8,7 @@ export class reserva{
     n_personas: number=0;
     fecha: string='';
     hora: string=''; 
+    detalles: string='';
 }
 
 // 2COMENTARIOS

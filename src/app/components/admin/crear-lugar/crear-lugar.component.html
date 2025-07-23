@@ -1,0 +1,89 @@
+<form [formGroup]="formulario" (ngSubmit)="agregarLugar()">
+    <div class="container mt-5 mb-5">
+        <div class="text-center mb-4">
+            <img src="../../../../assets/cubiertos formulario.png" alt="">
+            <h1 class="nautilus">FOOD FUNDAY</h1>
+            <h2 class="roboto tomate text-white">RESTAURANTE GOURMET</h2>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control input-dotted" id="nombre" formControlName="nombre" />
+
+                @if (formulario.get('nombre')?.errors?.['required'] && isFormSubmitted) {
+                <small class="text-danger">El nombre es obligatorio</small>
+                }
+                @if (formulario.get('nombre')?.errors?.['pattern'] && isFormSubmitted) {
+                <small class="text-danger">Solo se aceptan letras y espacios</small>
+                }
+            </div>
+
+
+            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                <label for="precio" class="form-label">Precio</label>
+                <input type="number" class="form-control input-dotted" id="precio" formControlName="precio" />
+
+                @if (formulario.get('precio')?.errors?.['required'] && isFormSubmitted) {
+                <small class="text-danger">El precio es obligatorio</small>
+                }
+                @if (formulario.get('precio')?.errors?.['min'] && isFormSubmitted) {
+                <small class="text-danger">El precio debe ser mayor a 0</small>
+                }
+                @if (formulario.get('precio')?.errors?.['pattern'] && isFormSubmitted) {
+                <small class="text-danger">El precio debe ser un número válido</small>
+                }
+            </div>
+
+
+            <div class="mb-3">
+                <label for="capacidad" class="form-label">Capacidad</label>
+                <input type="number" class="form-control input-dotted" id="capacidad" formControlName="capacidad" />
+
+                @if (formulario.get('capacidad')?.errors?.['required'] && isFormSubmitted) {
+                <small class="text-danger">La capacidad es obligatoria</small>
+                }
+                @if (formulario.get('capacidad')?.errors?.['min'] && isFormSubmitted) {
+                <small class="text-danger">Debe ser al menos 1</small>
+                }
+                @if (formulario.get('capacidad')?.errors?.['pattern'] && isFormSubmitted) {
+                <small class="text-danger">Debe ser un número válido</small>
+                }
+            </div>
+
+
+            <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripción</label>
+                <textarea class="form-control input-dotted" id="descripcion" formControlName="descripcion"></textarea>
+
+                @if (formulario.get('descripcion')?.errors?.['required'] && isFormSubmitted) {
+                <small class="text-danger">La descripción es obligatoria</small>
+                }
+            </div>
+
+
+
+            <div class="mb-3">
+                <label for="imagen" class="form-label">Imagen (URL)</label>
+                <input type="text" class="form-control input-dotted" id="imagen" formControlName="imagen" />
+
+                @if (formulario.get('imagen')?.errors?.['required'] && isFormSubmitted) {
+                <small class="text-danger">La URL de la imagen es obligatoria</small>
+                }
+                @if (formulario.get('imagen')?.errors?.['pattern'] && isFormSubmitted) {
+                <small class="text-danger">Debe ser una URL válida (http o https)</small>
+                }
+            </div>
+
+        </div>
+        <div class="d-flex justify-content-center gap-3 mt-3 mb-4">
+  <button class="boton border-0 rounded-2 px-4 py-2">GUARDAR</button>
+  
+  <button [routerLink]="['/admin/lugares']"
+          class="border rounded-2 px-4 py-2 bg-light text-dark">
+    Regresar
+  </button>
+</div>
+
+    </div>
+</form>

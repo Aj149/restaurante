@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Personal2Component } from './personal2.component';
+import { CrearLugarComponent } from './crear-lugar.component';
 
-describe('Personal2Component', () => {
-  let component: Personal2Component;
-  let fixture: ComponentFixture<Personal2Component>;
+describe('CrearLugarComponent', () => {
+  let component: CrearLugarComponent;
+  let fixture: ComponentFixture<CrearLugarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Personal2Component]
+      imports: [CrearLugarComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(Personal2Component);
+    fixture = TestBed.createComponent(CrearLugarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FooterComponent } from "../../../dashboard/footer/footer.component";
 import { NavbarComponent } from "../../../dashboard/navbar/navbar.component";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AdminService } from '../../../../services/admin.service';
@@ -10,7 +10,7 @@ import { AdminService } from '../../../../services/admin.service';
 @Component({
   selector: 'app-login-admin',
   standalone: true,
-  imports: [FooterComponent, NavbarComponent,RouterLink, NgClass, ReactiveFormsModule, JwtModule],
+  imports: [FooterComponent, NavbarComponent, RouterLink, NgClass, ReactiveFormsModule, JwtModule, RouterOutlet],
   templateUrl: './login-admin.component.html',
   styleUrl: './login-admin.component.css'
 })
@@ -63,7 +63,7 @@ export class LoginAdminComponent {
       this.adminService.login({ cedula, password }).subscribe({
         next: (response) => {
           console.log('Login exitoso:', response);
-          this.router.navigate(['/admin/likes']);
+          this.router.navigate(['/admin']);
         },
         error: (err) => {
           console.error('Error al iniciar sesión:', err);

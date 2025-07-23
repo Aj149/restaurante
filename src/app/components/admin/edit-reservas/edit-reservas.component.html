@@ -1,6 +1,11 @@
-    <div class="container">
+    <div class="container mt-5">
+        <div class="text-center mb-4">
+    <img src="../../../../assets/cubiertos formulario.png" alt="">
+    <h1 class="nautilus">FOOD FUNDAY</h1>
+    <h2 class="roboto tomate text-white">RESTAURANTE GOURMET</h2>
+  </div>
         <div class="row mt-5">
-            <div class="col-md-4 mx-auto">
+            <div class="mb-3">
                 <form (ngSubmit)="Update()">
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
@@ -13,32 +18,43 @@
                         [(ngModel)]="reservas.telefono" required>
                     </div>
                     <div class="form-group">
-                        <label for="nombre">Numero de personas</label>
-                        <input type="text" class="form-control" id="N_personas" name="N_personas"
+                        <label for="N_personas">Numero de personas</label>
+                        <input type="number" class="form-control" id="N_personas" name="N_personas"
                         [(ngModel)]="reservas.n_personas" required>
                     </div>
                     <div class="form-group">
-                        <label for="nombre">Hora</label>
+                        <label for="hora">Hora</label>
                         <input type="text" class="form-control" id="hora" name="hora"
                         [(ngModel)]="reservas.hora" required>
                     </div>
                     <div class="form-group">
-                        <label for="nombre">Email</label>
+                        <label for="correo">Email</label>
                         <input type="email" class="form-control" id="correo" name="correo"
                         [(ngModel)]="reservas.email" required>
                     </div>
                     <div class="form-group">
-                        <label for="nombre">Lugar</label>
+                        <label for="lugar">Lugar</label>
                         <input type="text" class="form-control" id="lugar" name="lugar"
                         [(ngModel)]="reservas.lugar" required>
                     </div>
                     <div class="form-group">
-                        <label for="nombre">Fecha</label>
+                        <label for="fecha">Fecha</label>
                         <input type="date" class="form-control" id="fecha" name="fecha"
                         [(ngModel)]="reservas.fecha" required>
                     </div>
-                    <button type="submit" class="color-boton border-0 mt-4 rounded-pill mb-1 w-100 p-2 h4">Editar</button>
-                  <button class="btn btn-danger border-0 mt-4 rounded-pill mb-1 text-white w-100 p-2" (click)="volver()">volver</button>
+                    
+                    <div class="form-group">
+                        <label for="detalles">Detalles</label>
+                        <input type="text" class="form-control" id="detalles" name="detalles"
+                        [(ngModel)]="reservas.detalles" required>
+                    </div>
+
+                   <div class="d-flex justify-content-center mt-3">
+    <button type="submit" class="btn btn-success me-2" (click)="Update()">Guardar Cambios</button>
+    <button type="button" class="btn btn-secondary" (click)="volver()">Cancelar</button>
+
+
+  </div>
                 </form>
             </div>
         </div>

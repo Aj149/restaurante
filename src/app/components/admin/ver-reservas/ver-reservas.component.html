@@ -1,0 +1,28 @@
+<div class="container mt-5">
+  <div class="card shadow-sm p-4 mx-auto" style="max-width: 600px; border-radius: 12px;">
+    <div class="text-center mb-4">
+      <img src="../../../../assets/cubiertos formulario.png" alt="Logo Food Funday" style="max-width: 100px;">
+      <h1 class="display-5 fw-bold nautilus mt-3 mb-1">FOOD FUNDAY</h1>
+      <h4 class="roboto tomate text-white">RESTAURANTE GOURMET</h4>
+    </div>
+
+    <h3 class="text-center mb-4" style="color: #d6336c;">Detalle de Reserva</h3>
+
+    <ul class="list-group list-group-flush mb-4">
+      <li class="list-group-item"><strong>Nombre:</strong> {{ reserva.nombre }}</li>
+      <li class="list-group-item"><strong>Teléfono:</strong> {{ reserva.telefono }}</li>
+      <li class="list-group-item"><strong>Correo:</strong> {{ reserva.email }}</li>
+      <li class="list-group-item"><strong>Fecha:</strong> {{ reserva.fecha }}</li>
+      <li class="list-group-item"><strong>Hora de la reserva:</strong> {{ reserva.hora }}</li>
+      <li class="list-group-item"><strong>Lugar:</strong> {{ reserva.lugar }}</li>
+      <li class="list-group-item"><strong>Número de personas:</strong> {{ reserva.n_personas }}</li>
+      <li class="list-group-item"><strong>Detalles</strong> {{ reserva.detalles }}</li>
+    </ul>
+
+    <div class="d-flex justify-content-center">
+      <button class="boton border-0 rounded-2 cursor-pointer mx-3 mb-2" (click)="volver()">
+        Volver a la lista
+      </button>
+    </div>
+  </div>
+</div>

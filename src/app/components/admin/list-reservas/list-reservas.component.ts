@@ -7,11 +7,12 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, timeout } from 'rxjs';
 import Swal from 'sweetalert2';
 import { reserva } from '../../../models/dashboard';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-list-reservas',
   standalone: true,
-  imports: [RouterLink, BuscadorPipe, NgxPaginationModule ],
+  imports: [RouterLink, BuscadorPipe, NgxPaginationModule, FormsModule ],
   templateUrl: './list-reservas.component.html',
   styleUrl: './list-reservas.component.css'
 })
@@ -19,7 +20,7 @@ export class ListReservasComponent implements OnInit  {
 
   nombre = '';
   public page!: number;
-  
+  searchTerm: string = '';
   searchTerm$ = new BehaviorSubject<string>('');
   
  

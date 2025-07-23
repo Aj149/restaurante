@@ -17,13 +17,18 @@ export class LugaresService {
         return this.httpClient.get<Lugares[]>(this.lugarUrl);
       }
     
-      public id_Plato(id_plato: number): Observable<Lugares> {
+      public id_lugar(id_plato: number): Observable<Lugares> {
         return this.httpClient.get<Lugares>(`${this.lugarUrl}/${id_plato}`);
       }
     
       public agregarLugares(nuevosPlatos: Lugares): Observable<any> {
         return this.httpClient.post<any>(`${this.lugarUrl}`, nuevosPlatos);
       }
+
+      public eliminarLugar(id_lugar: number): Observable<any> {
+  return this.httpClient.delete<any>(`${this.lugarUrl}/${id_lugar}`);
+}
+
     
       public update(id_lugar: number, lugares: Lugares): Observable<any> {
         return this.httpClient.patch<any>(`${this.lugarUrl}/${id_lugar}`, lugares);

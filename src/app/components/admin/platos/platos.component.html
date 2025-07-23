@@ -3,29 +3,32 @@
 
   <div class="row justify-content-center">
     @for (platos of plato; track platos) {
-      <div class="col-sm-6 col-md-4 col-lg-3 mb-4 d-flex">
-        <div class="card shadow-sm border-0 w-100 d-flex flex-column">
-          <img
-            [src]="platos?.imagen"
-            class="card-img-top"
-            alt="{{ platos.nombre }}"
-            style="object-fit: cover; height: 150px;"
-          />
-          <div class="card-body d-flex flex-column p-2">
-            <h6 class="card-title mb-1 text-truncate">{{ platos.nombre }}</h6>
-            <p class="card-text small mb-1 text-muted">{{ platos.descripcion }}</p>
-            <p class="card-text mb-2"><strong>$</strong>{{ platos.precio }}</p>
+    <div class="col-sm-6 col-md-4 col-lg-3 mb-4 d-flex">
+      <div class="card shadow-sm border-0 w-100 d-flex flex-column">
+        <img [src]="platos?.imagen" class="card-img-top" alt="{{ platos.nombre }}"
+          style="object-fit: cover; height: 150px;" />
+        <div class="card-body d-flex flex-column p-2">
+          <h6 class="card-title mb-1 text-truncate">{{ platos.nombre }}</h6>
+          <p class="card-text small mb-1 text-muted">{{ platos.descripcion }}</p>
+          <p class="card-text mb-2"><strong>$</strong>{{ platos.precio }}</p>
 
-            <div class="mt-auto">
-              <a
-                class="btn btn-sm btn-outline-primary w-100"
-                [routerLink]="['/admin/editar-plato', platos.id_plato]"
-                >Editar</a
-              >
-            </div>
-          </div>
+          <div class="d-flex gap-2 mt-auto">
+  <a class="btn btn-sm btn-outline-primary flex-fill"
+     [routerLink]="['/admin/editar-plato', platos.id_plato]">
+    Editar
+  </a>
+  <button class="btn btn-sm btn-outline-danger flex-fill"
+          (click)="eliminar(platos.id_plato!)">
+    Eliminar
+  </button>
+</div>
+
         </div>
       </div>
+    </div>
     }
+  </div>
+  <div class="text-center ">
+    <button type="button" class="boton border-0 rounded-2 cursor-pointer mx-3 mb-2" [routerLink]="['/admin/crearPlato']">Agregar plato</button>
   </div>
 </div>

@@ -1,0 +1,46 @@
+<div class="container py-4">
+  <h1 class="mb-4 roboto text-center">Personal</h1>
+
+  <div class="row justify-content-center">
+    @for (Personal of personal; track Personal) {
+    <div class="col-sm-6 col-md-4 col-lg-3 mb-4 d-flex">
+      <div class="card shadow-sm border-0 w-100 d-flex flex-column">
+        <img [src]="Personal?.imagen" class="card-img-top" alt="{{ Personal.nombre }}"
+          style="object-fit: cover; height: 150px;" />
+        <div class="card-body d-flex flex-column p-2">
+          <h6 class="card-title mb-1 text-truncate">{{ Personal.nombre }}</h6>
+          <p class="card-text small mb-1 text-muted">{{ Personal.descripcion }}</p>
+          <p class="card-text mb-2"><strong>$</strong>{{ Personal.cedula }}</p>
+
+          <div class="d-flex gap-2 mt-auto">
+            <!-- Botón Editar -->
+            <a class="btn btn-sm btn-outline-primary flex-fill"
+              [routerLink]="['/admin/editar-personal', Personal.id_persona]">
+              Editar
+            </a>
+
+            <!-- Botón Ver -->
+            <a class="btn btn-sm btn-outline-info flex-fill"
+              [routerLink]="['/admin/verPersonal', Personal.id_persona]">
+              Ver
+            </a>
+
+            <!-- Botón Eliminar -->
+            <button
+  class="btn btn-sm btn-outline-danger flex-fill"
+  (click)="eliminarPersonal(Personal.id_persona!)">
+  Eliminar
+</button>
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  <div class="text-center ">
+    <button type="button" class="boton border-0 rounded-2 cursor-pointer mx-3 mb-2" [routerLink]="['/admin/crearPersonal']">Agregar personal</button>
+  </div>
+</div>

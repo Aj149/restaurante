@@ -1,0 +1,64 @@
+<div class="container mt-4 mb-4">
+    <div class="text-center">
+        <img src="../../../../assets/cubiertos formulario.png" alt="">
+        <h1 class="nautilus">FOOD FUNDAY</h1>
+        <h2 class="roboto tomate text-white">RESTAURANTE GOURMET</h2>
+    </div>
+
+    <div class="text-center mt-1 mb-1">
+      <h4 class="roboto">Editar Plato</h4>
+    </div>
+
+    <form (ngSubmit)="guardarCambios()">
+
+        <div class="row">
+            <div class="col-6 form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" class="form-control" [(ngModel)]="lugar.nombre" name="nombre" required>
+            </div>
+
+            <div class="col-6 form-group">
+                <label for="precio">Precio</label>
+                <input type="number" id="precio" class="form-control" [(ngModel)]="lugar.precio" name="precio" required>
+            </div>
+
+        </div>
+
+        <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción</label>
+            <textarea id="descripcion" class="form-control" [(ngModel)]="lugar.descripcion" name="descripcion" rows="3"
+                maxlength="320" #descripcion="ngModel" required></textarea>
+            <small class="text-muted">
+                {{ descripcion.value?.length || 0 }} / 320 caracteres
+            </small>
+            @if (descripcion.value?.length === 320) {
+
+            <div class="text-danger">
+                ¡Has alcanzado el límite de caracteres!
+            </div>
+            }
+        </div>
+
+        <div class="mb-3" class="form-group">
+            <label for="imagen">Imagen (URL o base64)</label>
+            <input type="text" id="imagen" class="form-control" [(ngModel)]="lugar.imagen" name="imagen">
+        </div>
+        @if (lugar.imagen) {
+        <div class="mb-3 text-center mt-3">
+            <img [src]="lugar.imagen" class="img-thumbnail" alt="Vista previa" style="max-height: 200px;">
+        </div>
+        }
+
+        <div class="d-flex justify-content-center mt-4 mb-4">
+            <div class="w-50 d-flex justify-content-between gap-3">
+                <button class="btn btn-sm btn-outline-primary flex-fill">
+                    Guardar Cambios
+                </button>
+
+                <button class="btn btn-sm btn-outline-danger flex-fill" (click)="volver()">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

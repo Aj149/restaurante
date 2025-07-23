@@ -1,0 +1,206 @@
+<form  [formGroup]="formulario" (ngSubmit)="agregarPersonal()">
+    <div class="container mt-5">
+        <div class="text-center mb-4">
+            <img src="../../../../assets/cubiertos formulario.png" alt="">
+            <h1 class="nautilus">FOOD FUNDAY</h1>
+            <h2 class="roboto tomate text-white">RESTAURANTE GOURMET</h2>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control input-dotted" id="nombre" formControlName="nombre"
+                    name="nombre" />
+
+                @if (formulario.get('nombre')?.errors?.['required'] && isFormSubmitted) {
+                <small class="text-danger">El nombre es obligatorio</small>
+                }
+
+                @if (formulario.get('nombre')?.errors?.['pattern'] && isFormSubmitted) {
+                <small class="text-danger">Solo se aceptan letras</small>
+                }
+            </div>
+
+
+
+            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                <label for="email" class="form-label">Correo electrónico</label>
+                <input type="email" class="form-control input-dotted" id="email" formControlName="email" name="email" />
+
+                @if (formulario.get('email')?.errors?.['required'] && isFormSubmitted) {
+                <small class="text-danger">El correo es obligatorio</small>
+                }
+
+                @if (formulario.get('email')?.errors?.['email'] && isFormSubmitted) {
+                <small class="text-danger">Debe ser un correo válido</small>
+                }
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                <label for="telefono" class="form-label">Teléfono</label>
+                <input type="text" class="form-control input-dotted" id="telefono" formControlName="telefono"
+                    name="telefono" />
+
+                @if (formulario.get('telefono')?.errors?.['required'] && isFormSubmitted) {
+                <small class="text-danger">El teléfono es obligatorio</small>
+                }
+
+                @if (formulario.get('telefono')?.errors?.['pattern'] && isFormSubmitted) {
+                <small class="text-danger">Solo se permiten números</small>
+                }
+            </div>
+
+
+            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                <label for="direccion" class="form-label">Dirección</label>
+                <input type="text" class="form-control input-dotted" id="direccion" formControlName="direccion"
+                    name="direccion" />
+
+                @if (formulario.get('direccion')?.errors?.['required'] && isFormSubmitted) {
+                <small class="text-danger">La dirección es obligatoria</small>
+                }
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                <label for="cedula" class="form-label">Cédula</label>
+                <input type="text" class="form-control input-dotted" id="cedula" formControlName="cedula"
+                    name="cedula" />
+
+                @if (formulario.get('cedula')?.errors?.['required'] && isFormSubmitted) {
+                <small class="text-danger">La cédula es obligatoria</small>
+                }
+
+                @if (formulario.get('cedula')?.errors?.['pattern'] && isFormSubmitted) {
+                <small class="text-danger">La cédula debe tener exactamente 10 dígitos numéricos</small>
+                }
+            </div>
+
+
+            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                <label for="nacionalidad" class="form-label">Nacionalidad</label>
+                <input type="text" class="form-control input-dotted" id="nacionalidad" formControlName="nacionalidad"
+                    name="nacionalidad" />
+
+                @if (formulario.get('nacionalidad')?.errors?.['required'] && isFormSubmitted) {
+                <small class="text-danger">La nacionalidad es obligatoria</small>
+                }
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                <label for="imagen" class="form-label">Imagen (URL)</label>
+                <input type="text" class="form-control input-dotted" id="imagen" formControlName="imagen"
+                    name="imagen" />
+
+                @if (formulario.get('imagen')?.errors?.['required'] && isFormSubmitted) {
+                <small class="text-danger">La URL de la imagen es obligatoria</small>
+                }
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                <label for="puesto" class="form-label">Puesto</label>
+                <input type="text" class="form-control input-dotted" id="puesto" formControlName="puesto"
+                    name="puesto" />
+
+                @if (formulario.get('puesto')?.errors?.['required'] && isFormSubmitted) {
+                <small class="text-danger">El puesto es obligatorio</small>
+                }
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                <label for="fecha_contratacion" class="form-label">Fecha de Contratación</label>
+                <input type="date" class="form-control input-dotted" id="fecha_contratacion"
+                    formControlName="fecha_contratacion" name="fecha_contratacion" />
+                @if (formulario.get('fecha_contratacion')?.errors?.['required'] && isFormSubmitted) {
+                <small class="text-danger">La fecha de contratación es obligatoria</small>
+                }
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
+                <input type="date" class="form-control input-dotted" id="fecha_nacimiento"
+                    formControlName="fecha_nacimiento" name="fecha_nacimiento" />
+                @if (formulario.get('fecha_nacimiento')?.errors?.['required'] && isFormSubmitted) {
+                <small class="text-danger">La fecha de nacimiento es obligatoria</small>
+                }
+            </div>
+
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                <label for="salario" class="form-label">Salario</label>
+                <input type="number" class="form-control input-dotted" id="salario" formControlName="salario"
+                    name="salario" />
+                @if (formulario.get('salario')?.errors?.['required'] && isFormSubmitted) {
+                <small class="text-danger">El salario es obligatorio</small>
+                }
+                @if (formulario.get('salario')?.errors?.['pattern'] && isFormSubmitted) {
+                <small class="text-danger">Ingrese un salario válido (número, opcional decimales)</small>
+                }
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                <label for="genero" class="form-label">Género</label>
+                <select class="form-select input-dotted" id="genero" formControlName="genero" name="genero">
+                    <option value="">Seleccione</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Otro">Otro</option>
+                </select>
+                @if (formulario.get('genero')?.errors?.['required'] && isFormSubmitted) {
+                <small class="text-danger">Seleccione un género</small>
+                }
+            </div>
+
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                <label for="jornadaLaboral" class="form-label">Jornada Laboral</label>
+                <select class="form-select input-dotted" id="jornadaLaboral" formControlName="jornadaLaboral"
+                    name="jornadaLaboral">
+                    <option value="">Seleccione</option>
+                    <option value="Tiempo completo">Tiempo completo</option>
+                    <option value="Medio tiempo">Medio tiempo</option>
+                    <option value="Por horas">Por horas</option>
+                </select>
+                @if (formulario.get('jornadaLaboral')?.errors?.['required'] && isFormSubmitted) {
+                <small class="text-danger">Seleccione una jornada laboral</small>
+                }
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+                <label for="descripcion" class="form-label">Descripción</label>
+                <textarea class="form-control input-dotted" id="descripcion" rows="3" formControlName="descripcion"
+                    name="descripcion"></textarea>
+                @if (formulario.get('descripcion')?.errors?.['required'] && isFormSubmitted) {
+                <small class="text-danger">La descripción es obligatoria</small>
+                }
+            </div>
+
+        </div>
+
+        <div class="text-center">
+            <button class="boton border-0 rounded-2 cursor-pointer mx-3 mb-2">GUARDAR</button>
+        </div>
+    </div>
+</form>

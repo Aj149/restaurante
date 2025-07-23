@@ -27,6 +27,11 @@ export class PlatosService {
     public agregarPlatos(nuevaPlatos: Platos): Observable<any> {
       return this.httpClient.post<any>(`${this.platosUrl}`, nuevaPlatos);
     }
+
+    public eliminarPlato(id_plato: number): Observable<any> {
+  return this.httpClient.delete<any>(`${this.platosUrl}/${id_plato}`);
+}
+
   
     public update(id_platos: number, platos: Platos): Observable<any> {
       return this.httpClient.patch<any>(`${this.platosUrl}/${id_platos}`, platos);

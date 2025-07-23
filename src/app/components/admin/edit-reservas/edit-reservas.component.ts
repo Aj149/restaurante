@@ -17,13 +17,14 @@ import { reserva } from '../../../models/dashboard';
 export class EditReservasComponent {
 
   reservas: reserva ={
-    nombre:'',
-    email:'',
+    nombre: '',
+    email: '',
     telefono: 0,
-    lugar:'',
+    lugar: '',
     n_personas: 0,
     fecha: '',
     hora: '',
+    detalles: ''
   }
 
   constructor(
@@ -55,7 +56,7 @@ export class EditReservasComponent {
   Update(): void {
     Swal.fire({
       title: "¿Estás seguro?",
-      text: "¿Deseas editar este estudiante?",
+      text: "¿Deseas editar esta reserva?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -86,6 +87,6 @@ export class EditReservasComponent {
 
 
   volver(): void {
-    this.router.navigate(['/admin/listaDeReservas']);
+    this.router.navigate(['/admin/lista-de-reservas']);
   }
 }

@@ -1,0 +1,94 @@
+<form [formGroup]="formulario" (ngSubmit)="agregarPlato()">
+    <div class="container mt-5 mb-5 mb-5 mb-5">
+        <div class="card shadow-sm p-4 mx-auto" style="max-width: 700px;">
+
+            <div class="text-center mb-5">
+                <img src="../../../../assets/cubiertos formulario.png" alt="Logo Food Funday" style="max-width: 120px;">
+                <h1 class="display-4 nautilus">FOOD FUNDAY</h1>
+                <h3 class="roboto tomate text-white">RESTAURANTE GOURMET</h3>
+            </div>
+
+            <h2 class="mb-4 text-center">Agregar Plato</h2>
+
+            <div class="mb-3 text-center">
+                @if (plato.imagen) {
+
+                <img [src]="plato.imagen" class="img-thumbnail" alt="Vista previa" style="max-height: 200px;">
+                }
+            </div>
+
+            <div class="mb-3 row">
+                <div class="col-6">
+
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control input-dotted" id="nombre" formControlName="nombre"
+                        name="nombre" />
+
+                    @if (formulario.get('nombre')?.errors?.['required'] && isFormSubmitted) {
+                    <small class="text-danger">El nombre es obligatorio</small>
+                    }
+
+                    @if (formulario.get('nombre')?.errors?.['pattern'] && isFormSubmitted) {
+                    <small class="text-danger">Solo se aceptan letras</small>
+                    }
+                </div>
+
+                <div class="col-6">
+                    <label for="precio" class="form-label">Precio</label>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input type="number" class="form-control input-dotted" id="precio" formControlName="precio"
+                            name="precio" />
+                    </div>
+                    @if (formulario.get('precio')?.errors?.['required'] && isFormSubmitted) {
+                    <small class="text-danger">El precio es obligatorio</small>
+                    }
+                </div>
+
+            </div>
+
+            <div>
+                <label for="imagen">Imagen (URL o base64)</label>
+                <input type="text" id="imagen" class="form-control" formControlName="imagen" name="imagen" />
+            </div>
+
+
+
+            <div>
+                <label for="descripcion" class="form-label">Descripción</label>
+                <textarea id="descripcion" rows="3" class="form-control input-dotted" formControlName="descripcion"
+                    [attr.maxlength]="300" name="descripcion"></textarea>
+
+                <!-- Alerta si está vacío -->
+                @if (formulario.get('descripcion')?.errors?.['required'] && isFormSubmitted) {
+                <small class="text-danger">La descripción es obligatoria</small>
+                }
+
+                <!-- Alerta si supera los 300 caracteres -->
+                @if (formulario.get('descripcion')?.errors?.['maxlength'] && isFormSubmitted) {
+                <small class="text-danger">Máximo 300 caracteres permitidos</small>
+                }
+
+                <!-- Contador de caracteres (opcional) -->
+                <div class="text-end text-muted small mt-1">
+                    {{ formulario.get('descripcion')?.value?.length || 0 }}/300 caracteres
+                </div>
+            </div>
+
+
+
+            <div class="d-flex justify-content-center mt-4">
+                <div class="w-50 d-flex justify-content-between gap-3">
+                    <button class="btn btn-sm btn-outline-primary flex-fill">
+                        Guardar Cambios
+                    </button>
+
+                    <button class="btn btn-sm btn-outline-danger flex-fill" (click)="volver()">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
