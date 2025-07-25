@@ -20,9 +20,7 @@ export class PopUpLugaresComponent {
     total: number = 0;
 
 
-    ngOnInit() {
-      console.log('lugar recibido:', this.lugar);
-    }
+    
 
     closePopup() {
         this.close.emit();

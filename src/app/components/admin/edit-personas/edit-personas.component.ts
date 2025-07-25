@@ -70,14 +70,12 @@ editarPersonal(): void {
   }).then((result) => {
     if (result.isConfirmed) {
      const id_persona = this.activatedRoute.snapshot.params['id_personal'];
-     console.log("ID recibido desde ruta:", id_persona);
     // Convertir el salario a número
     if (this.personal.salario) {
       this.personal.salario = Number(this.personal.salario);
     }
     this.personalService.editPersonal(id_persona, this.personal).subscribe(
       (data: any) => {
-        console.log("Respuesta recibida:", data);
         Swal.fire({
           icon: 'success',
           title: '¡Éxito!',

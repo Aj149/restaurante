@@ -66,7 +66,6 @@ export class EditPlatosEsComponent {
         }
         this.platosService.update(id_plato, this.plato).subscribe(
           (data: any) => {
-            console.log("Respuesta recibida:", data);
             this.toastr.success(data.message, 'Plato editado correctamente', {
               timeOut: 7000, positionClass: 'toast-top-center'
             });

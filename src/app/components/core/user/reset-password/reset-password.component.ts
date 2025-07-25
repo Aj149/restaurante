@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FooterComponent } from "../../dashboard/footer/footer.component";
-import { NavbarComponent } from "../../dashboard/navbar/navbar.component";
+import { FooterComponent } from "../../../dashboard/footer/footer.component";
+import { NavbarComponent } from "../../../dashboard/navbar/navbar.component";
 import Swal from 'sweetalert2';
 import { NgClass } from '@angular/common';
 

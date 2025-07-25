@@ -34,10 +34,21 @@
           </li>
           <li class="nav-item ms-lg-5">
             <button class="nav-link active roboto" aria-current="page"
+              routerLink="/dashboard" (click)="scrollTo('BEBIDAS')">BEBIDAS</button>
+          </li>
+          <li class="nav-item ms-lg-5">
+            <button class="nav-link active roboto" aria-current="page"
               routerLink="/dashboard" (click)="scrollTo('RESERVAR')">RESERVACIONES</button>
           </li>
           <li class="nav-item ms-lg-5">
-            <img class="redes" src="../../../assets/administrador.png" routerLink="/loginAdmin" alt="">
+            <button class="nav-link active roboto" aria-current="page"
+              routerLink="/dashboard" (click)="scrollTo('COMENTARIOS')">COMENTARIOS</button>
+          </li>
+          <li class="nav-item ms-lg-5">
+            <button>
+
+              <img class="redes" src="../../../../assets/usuario.gif" routerLink="/login" alt="">
+            </button>
           </li>
         </ul>
       </div>

@@ -87,7 +87,6 @@ ngOnInit(): void {
     if (result.isConfirmed) {
       this.formularioService.delete(id_reserva).subscribe({
         next: (response: any) => {
-          console.log('Usuario eliminado correctamente', response);
           Swal.fire(
             'Eliminado!',
             'El registro ha sido eliminado correctamente.',

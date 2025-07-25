@@ -46,7 +46,6 @@ export class UserRegisterComponent {
     }
     if (this.registerForm.invalid) return;
   
-    console.log('Datos enviados:', this.registerForm.value);
     this.isLoading = true;
     this.errorMessage = '';
   

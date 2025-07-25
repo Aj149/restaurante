@@ -64,7 +64,6 @@ platoSeleccionado!: Platos;
       (data) => {
         this.personal = data;
         this.personalEspeciales = this.personal.slice(0, 4);
-        console.log('estas son las personas',this.personalEspeciales); // <-- esto deberías ver lleno de objetos
       },
       (error) => {
         console.error('Error al cargar el personal', error);
@@ -181,7 +180,8 @@ abrirPopup(plato: Platos) {
       lugar: new FormControl('',[Validators.required]),
       n_personas: new FormControl ('',[Validators.required, Validators.pattern('^[0-9]*$')]),
       fecha: new FormControl ('',[Validators.required]),
-      hora:new FormControl ('',[Validators.required])
+      hora:new FormControl ('',[Validators.required]),
+      detalles: new FormControl ('',[Validators.required])
     })
   }
 
@@ -210,7 +210,6 @@ abrirPopup(plato: Platos) {
         Validators.max(this.maxPersonas),
       ]);
       numeroPersonasControl.updateValueAndValidity();
-      console.log('Validators:', numeroPersonasControl.validator);
     }
   }
 

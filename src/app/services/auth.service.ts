@@ -67,7 +67,6 @@ export class AuthService {
 
   // Métodos comunes de autenticación
   private handleAuthResponse(response: any): void {
-    console.log('handleAuthResponse ejecutado con:', response);
     if (response?.access_token) {
       this.setToken(response.access_token);
       this.setUserData(response.user || this.getTokenPayload());
@@ -110,8 +109,6 @@ export class AuthService {
     saveUserFromToken(token: string): void {
       try {
         const decoded = jwtDecode<MyJwtPayload>(token);
-        
-        console.log('Token decodificado:', decoded);  // Revisa si aquí están los campos completos
     
         const user = {
           id: decoded.sub,
@@ -185,7 +182,6 @@ export class AuthService {
     localStorage.removeItem(this.USER_KEY);
     this.isAuthenticatedSubject.next(false);
     this.router.navigate(['/login']);
-    // window.location.href = '/login'; // Opcional: recarga completa
   }
 // recuperar contraseña
 sendRecoveryEmail(email: string) {

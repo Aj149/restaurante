@@ -15,8 +15,8 @@ import { authGuard } from './services/auth.guard';
 import { UserComponent } from './components/core/user/user.component';
 import { UserRegisterComponent } from './components/core/user/user-register/user-register.component';
 import { LoginAdminComponent } from './components/core/admin/login-admin/login-admin.component';
-import { RecuperarContrasenaComponent } from './components/core/recuperar-contrasena/recuperar-contrasena.component';
-import { ResetPasswordComponent } from './components/core/reset-password/reset-password.component';
+import { RecuperarContrasenaComponent } from './components/core/user/recuperar-contrasena/recuperar-contrasena.component';
+import { ResetPasswordComponent } from './components/core/user/reset-password/reset-password.component';
 import { PopUpPersonalComponent } from './components/dashboard/pop-up-personal/pop-up-personal.component';
 import { EditPersonasComponent } from './components/admin/edit-personas/edit-personas.component';
 import { PersonalComponent } from './components/admin/personal/personal.component';
@@ -27,6 +27,11 @@ import { CrearPlatoComponent } from './components/admin/crear-plato/crear-plato.
 import { LugaresComponent } from './components/admin/lugares/lugares.component';
 import { EditLugarComponent } from './components/admin/edit-lugar/edit-lugar.component';
 import { CrearLugarComponent } from './components/admin/crear-lugar/crear-lugar.component';
+import { BebidasComponent } from './components/admin/bebidas/bebidas.component';
+import { EditBebidaComponent } from './components/admin/edit-bebida/edit-bebida.component';
+import { RecuperarComponent } from './components/core/admin/recuperar/recuperar.component';
+import { adminAuthGuard } from './services/admin.guard';
+import { ResetComponent } from './components/core/admin/reset/reset.component';
 
 
 
@@ -40,14 +45,21 @@ export const routes: Routes = [
   { path: 'register', component: UserRegisterComponent },
   
   { path: 'recuperarContraseña', component: RecuperarContrasenaComponent },
+  
+  { path: 'recuperarAdmin', component: RecuperarComponent },
 
   { path: 'reset-password', component: ResetPasswordComponent },
+  
+  { path: 'admin/reset-password', component: ResetComponent },
+
+
+
 
   
   // Admin (protegido)
   {
     path: 'admin',
-    component: AdminComponent,
+    component: AdminComponent, canActivate: [adminAuthGuard],
     
     children: [
       { path: 'likes', component: LikesComponent },
@@ -65,6 +77,8 @@ export const routes: Routes = [
       { path: 'lugares', component: LugaresComponent },
       { path: 'crearlugar', component: CrearLugarComponent },
       { path: 'editar-lugar/:id_lugar', component: EditLugarComponent },
+      { path: 'editar-bebida/:id_bebida', component: EditBebidaComponent },
+      { path: 'bebidas', component: BebidasComponent },
 
     ]
   },
@@ -72,7 +86,7 @@ export const routes: Routes = [
   // Dashboard (protegido)
   {
     path: 'dashboard',
-    component: DashboardComponent,
+    component: DashboardComponent
   },
 
 

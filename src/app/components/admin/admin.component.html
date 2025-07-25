@@ -24,7 +24,7 @@
           <ul class="dropdown-menu">
             <li><a class="dropdown-item roboto fs-5" routerLink="/admin/lista-de-platos">Platos</a></li>
             <li><a class="dropdown-item roboto fs-5" routerLink="/admin/lugares">Lugares</a></li>
-            <li><a class="dropdown-item roboto fs-5" routerLink="/admin/lista-de-bebidas">Bebidas</a></li>
+            <li><a class="dropdown-item roboto fs-5" routerLink="/admin/bebidas">Bebidas</a></li>
             <li><a class="dropdown-item roboto fs-5" routerLink="/admin/listaPersonal">Personal</a></li>
           </ul>
         </li>
@@ -33,8 +33,9 @@
       <!-- Cerrar sesión alineado a la derecha -->
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link text-danger fw-semibold roboto fs-5" routerLink="/login">Cerrar sesión</a>
+          <button class="nav-link text-danger fw-semibold roboto fs-5" (click)="logout()">Cerrar sesión</button>
         </li>
+        
       </ul>
     </div>
   </div>

@@ -54,6 +54,14 @@ export class Personal {
   descripcion: string = '';
 }
 
+export class Bebidas {
+  id_bebida?: number = 0;
+  nombre: string = '';
+  descripcion: string = '';
+  imagen: string = '';
+  precio: number = 0;
+}
+
 
 
 

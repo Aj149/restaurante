@@ -60,7 +60,6 @@ export class CarritoComponent implements OnInit {
     if (pedidoTemp) {
       try {
         const pedido: Pedido = JSON.parse(pedidoTemp);
-        console.log('Pedido temporal recuperado:', pedido);  // Verifica los datos del plato
         this.platosService.agregar(pedido);
         localStorage.removeItem('pedidoTemporal');
       } catch (error) {

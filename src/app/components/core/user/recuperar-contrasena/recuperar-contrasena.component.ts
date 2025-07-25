@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../../../services/auth.service';
+import { AuthService } from '../../../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
-import { FooterComponent } from "../../dashboard/footer/footer.component";
-import { NavbarComponent } from "../../dashboard/navbar/navbar.component";
+import { FooterComponent } from "../../../dashboard/footer/footer.component";
+import { NavbarComponent } from "../../../dashboard/navbar/navbar.component";
 import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
 import { NgClass } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-recuperar-contrasena',
   standalone: true,
-  imports: [ReactiveFormsModule, FooterComponent, NavbarComponent, NgClass],
+  imports: [ReactiveFormsModule, FooterComponent, NavbarComponent, NgClass, RouterLink],
   templateUrl: './recuperar-contrasena.component.html',
   styleUrl: './recuperar-contrasena.component.css'
 })

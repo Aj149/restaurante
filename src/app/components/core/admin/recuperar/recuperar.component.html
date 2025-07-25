@@ -1,0 +1,35 @@
+<app-navbar></app-navbar>
+
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="col-md-6 col-lg-5 shadow-lg p-5 rounded-4 beige">
+
+    <h2 class="text-center mb-4 roboto">🔐 Recuperar contraseña</h2>
+
+    <form (ngSubmit)="onSubmit()" [formGroup]="forgotForm" novalidate>
+      <div class="mb-3">
+        <label for="correo" class="form-label fw-semibold">Correo</label>
+        <input type="email" id="correo" class="form-control" formControlName="correo" 
+        [ngClass]="{'is-invalid': forgotForm.get('correo')?.invalid && forgotForm.get('correo')?.touched,   'is-valid': forgotForm.get('correo')?.valid && forgotForm.get('correo')?.touched }"/>
+        <div class="invalid-feedback">
+          Por favor, ingresa una correo válida.
+        </div>
+        <div class="form-text text-muted">
+          Te enviaremos un enlace para cambiar tu contraseña.
+        </div>
+      </div>
+
+        <div class="d-flex flex-column flex-sm-row gap-2 mt-auto">
+  <button type="submit" class="submit-button btn boton roboto text-truncate" [disabled]="forgotForm.invalid">
+    📩 Enviar enlace
+  </button>
+  <button type="button" class="btn boton roboto" [routerLink]="['/loginAdmin']">
+    REGRESAR
+  </button>
+</div>
+
+    </form>
+
+  </div>
+</div>
+
+<app-footer></app-footer>

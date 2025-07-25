@@ -18,9 +18,14 @@
         </div>
       </div>
 
-      <button type="submit" class="submit-button btn boton roboto w-100" [disabled]="forgotForm.invalid">
-        📩 Enviar enlace
-      </button>
+      <div class="d-flex flex-column flex-sm-row gap-2 mt-auto">
+  <button type="submit" class="submit-button btn boton roboto text-truncate" [disabled]="forgotForm.invalid">
+    📩 Enviar enlace
+  </button>
+  <button type="button" class="btn boton roboto" [routerLink]="['/login']">
+    REGRESAR
+  </button>
+</div>
     </form>
 
   </div>

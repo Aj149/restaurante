@@ -25,7 +25,7 @@ private http = inject(HttpClient);
   }
 
   // Método para login
-  login(credentials: { cedula: string; password: string }): Observable<any> {
+  login(credentials: { cedula: number; password: string }): Observable<any> {
     this.isLoading.next(true);
     return this.http.post<{ access_token: string }>(
       `${environment.authUrl}/admin/login`, 
@@ -60,7 +60,6 @@ private http = inject(HttpClient);
 
   // Métodos comunes de autenticación
   private handleAuthResponse(response: any): void {
-    console.log('handleAuthResponse ejecutado con:', response);
     if (response?.access_token) {
       this.setToken(response.access_token);
       this.setUserData(response.user || this.getTokenPayload());
@@ -130,11 +129,21 @@ private http = inject(HttpClient);
     return payload.exp < (Date.now() / 1000);
   }
 
-  public logout(): void {
-    localStorage.removeItem(this.TOKEN_KEY);
-    localStorage.removeItem(this.USER_KEY);
-    this.isAuthenticatedSubject.next(false);
-    this.router.navigate(['/login']);
-    // window.location.href = '/login'; // Opcional: recarga completa
+  // admin.service.ts
+// admin.service.ts
+public logout(): void {
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('token'); // <-- Esta clave debe coincidir
+    localStorage.removeItem('userData'); // Si también guardas datos del usuario
+  }
+
+  this.isAuthenticatedSubject.next(false);
+  this.router.navigate(['/loginAdmin']);
+}
+
+
+
+  recuperarCorreo(correo:string) {
+    return this.http.post(`${environment.adminUrl}/admin/forgot-password`, {correo});
   }
 }

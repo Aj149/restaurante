@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-crear-lugar',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule,RouterLink],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './crear-lugar.component.html',
   styleUrl: './crear-lugar.component.css'
 })
@@ -97,5 +97,10 @@ export class CrearLugarComponent {
       }
     );
   }
+
+  volver() {
+    this.router.navigate(['/admin/lista-de-platos']);
+  }
+
 
 }

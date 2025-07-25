@@ -6,6 +6,7 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AdminService } from '../../../../services/admin.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login-admin',
@@ -62,15 +63,19 @@ export class LoginAdminComponent {
     
       this.adminService.login({ cedula, password }).subscribe({
         next: (response) => {
-          console.log('Login exitoso:', response);
           this.router.navigate(['/admin']);
         },
         error: (err) => {
           console.error('Error al iniciar sesión:', err);
           this.isLoading = false;
-          alert('Credenciales inválidas o error de red. Intente nuevamente.');
+    
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Credenciales inválidas o error de red. Intente nuevamente.',
+            confirmButtonColor: '#d33',
+          });
         }
-        
       });
     }
 }
