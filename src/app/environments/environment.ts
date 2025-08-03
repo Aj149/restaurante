@@ -10,6 +10,7 @@ export const environment = {
     adminUrl: 'http://localhost:8000',
     personalURL: 'http://localhost:8000/personal',
     bebidasURL: 'http://localhost:8000/bebidas',
+    horarioUrl: 'http://localhost:8000/horarios',
 
   }
   

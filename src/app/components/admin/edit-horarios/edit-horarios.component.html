@@ -1,0 +1,39 @@
+@if (horario) {
+
+  <form (ngSubmit)="onGuardar()" class="p-4 border rounded shadow-sm bg-light" style="max-width: 400px; margin: auto;">
+    
+    <div class="mb-3">
+      <label for="dia" class="form-label fw-semibold">Día:</label>
+      <select id="dia" [(ngModel)]="horario.dia" name="dia" required class="form-select">
+        @for (dia of diasSemana; track dia) {
+          <option [value]="dia">{{ dia }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="horaInicio" class="form-label fw-semibold">Hora de Inicio:</label>
+      <input id="horaInicio" type="time" [(ngModel)]="horario.horaInicio" name="horaInicio" required class="form-control" />
+    </div>
+
+    <div class="mb-3">
+      <label for="horaFin" class="form-label fw-semibold">Hora de Fin:</label>
+      <input id="horaFin" type="time" [(ngModel)]="horario.horaFin" name="horaFin" required class="form-control" />
+    </div>
+
+    <div class="mb-4">
+      <label for="estado" class="form-label fw-semibold">Estado:</label>
+      <select id="estado" [(ngModel)]="horario.estado" name="estado" required class="form-select">
+        <option value="Disponible">Disponible</option>
+        <option value="Ocupado">Ocupado</option>
+      </select>
+    </div>
+
+    <div class="d-flex justify-content-between">
+      <button type="submit" class="btn btn-sm btn-outline-primary">Guardar</button>
+      <button type="button" class="btn btn-sm btn-outline-danger" (click)="onCancelar()">Cancelar</button>
+    </div>
+
+  </form>
+
+}

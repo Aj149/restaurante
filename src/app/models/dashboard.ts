@@ -34,6 +34,18 @@ export class Lugares{
     imagen: string='';
     precio: number=0;
     capacidad: number=0;
+    dia : string='';
+    hora: string='';
+    estado: string='';
+}
+
+export class Horario {
+  id: number = 0;
+  id_lugar?: number=0;
+  dia: string = '';
+  horaInicio: string = '';
+  horaFin: string = '';
+  estado: string = '';
 }
 
 export class Personal {

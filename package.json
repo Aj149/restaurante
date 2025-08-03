@@ -21,6 +21,7 @@
     "@angular/router": "^17.1.0",
     "@angular/ssr": "^17.1.1",
     "@auth0/angular-jwt": "^5.2.0",
+    "angularx-qrcode": "^17.0.1",
     "animate.css": "^4.1.1",
     "block": "file:",
     "express": "^4.21.2",

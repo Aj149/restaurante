@@ -1,20 +1,20 @@
 <div style="margin-top: 10%">
     <app-navbar></app-navbar>
-    <hr class="tomate">
+    <hr style="border: 2px solid;">
     <div class="text-center">
         <h1 class="nautilus">Mi</h1>
         <h1 class="roboto">CARRITO</h1>
     </div>
-    <div class="beige col-lg-4 col-md-6 col-sm-12">
-        <h2 class="text-center roboto text-white">Detalle del pedido</h2>
+    <div class="beige">
+        <h2 class="text-center roboto text-white">Detalles del pedido</h2>
     </div>
 
 
-    <div class="container mt-5">
+    <div class="mt-5">
         <div class="row justify-content-center">
             <!-- Columna de información del usuario -->
             <div class="col-lg-5 col-md-6 col-sm-12 pb-5">
-                <div class="container color rounded-2 p-3">
+                <div class="color rounded-2 p-3 col-9">
                     <div class="row roboto mt-3 text-center">
                         <div class="col">
                             <h2>Hola {{ usuario?.nombre }}</h2>
@@ -26,7 +26,7 @@
                             <div class="d-flex align-items-center">
                                 <img class="telf me-4" src="../../../../assets/telefonoCarrito.png" alt="" />
                                 <div>
-                                    <span class="roboto fs-5">Teléfono&nbsp;</span><b>{{ usuario?.telefono }}</b>
+                                    <span class="roboto fs-5"> <b> Teléfono: </b> &nbsp;</span>{{ usuario?.telefono }}
                                 </div>
                             </div>
 
@@ -37,7 +37,7 @@
                             <div class="d-flex align-items-start">
                                 <img class="direc me-3" src="../../../../assets/direcCarrito.png" alt="" />
                                 <div class="ms-3">
-                                    <span class="roboto fs-5">Direccion</span><b> {{ usuario?.direccion }}</b>
+                                    <span class="roboto fs-5"> <b>Direccion: </b></span> {{ usuario?.direccion }}
 
                                 </div>
                             </div>
@@ -52,7 +52,7 @@
                 <div class="d-flex align-items-center mb-4">
                     <img class="plato me-5" [src]="item.imagen" [alt]="" />
                     <div>
-                        <span class="roboto fs-5">{{ item.nombre }} ------- ${{ item.precio }}</span>
+                        <span class="roboto fs-5">{{ item.nombre }}--- ${{ item.precio }}</span>
                         <div class="d-flex align-items-center me-4">
                             <!-- Botones para incrementar y decrementar -->
                             <button class="tomate px-3 rounded-start border-0" (click)="decrement(item)"
@@ -69,75 +69,47 @@
                 <div>
 
                     <!-- Enlace con fragmento -->
-                    <h6>Deseas agregar más platos?</h6><a href="/dashboard#ESPECIALIDADES">Mira el catalogo completo</a>
+                    <h4>Deseas agregar más platos?</h4><a href="/dashboard#ESPECIALIDADES" class="link-personalizado">
+                        <b>Mira el catálogo completo </b>
+</a>
+
 
                 </div>
             </div>
         </div>
 
-        <div class="row justify-content-center">
-            <!-- Resumen de compra -->
-            <div class="col-lg-4 col-md-6 col-sm-12 pb-5">
-                <h2 class="fs-5 mb-3">Resumen Final</h2>
-                <div class="d-flex justify-content-between mb-2 bg-light p-2">
-                    <span class="fw-normal">Total Parcial</span>
-                    <strong class="fw-bold">${{subtotal.toFixed(2)}}</strong>
-                </div>
-                <div class="d-flex justify-content-between mb-2 p-2">
-                    <span class="fw-normal">Envío</span>
-                    <strong class="fw-bold">${{costoEnvio.toFixed(2)}}</strong>
-                </div>
-                <div class="d-flex justify-content-between pt-3 border-top bg-light p-2">
-                    <span class="fw-normal">Total</span>
-                    <strong class="fw-bold">${{totalFinal.toFixed(2)}}</strong>
-                </div>
-            </div>
+       
+        <div class="row justify-content-center mb-5">
+  <div class="col-lg-4 col-md-6 col-sm-12 pb-5 mt-5 resumen-box">
+    <h2 class="fs-4 text-center mb-4 text-dark">🧾 Resumen Final</h2>
 
-            <!-- Formulario de pago -->
-            <div class="col-lg-5 col-md-6 col-sm-12">
-                <div class="card shadow-lg">
-                    <div class="card-header text-white beige text-center">
-                        <h4>Pago con Tarjeta de Crédito</h4>
-                    </div>
-                    <div class="card-body">
-                        <form [formGroup]="paymentForm" (ngSubmit)="realizarPedido()">
-                            <div class="mb-3">
-                                <label for="cardName" class="form-label">Nombre del titular</label>
-                                <input type="text" class="form-control" id="cardName" formControlName="cardName" 
-                                       placeholder="Nombre como aparece en la tarjeta" required>
-                              </div>
-                      
-                              <div class="mb-3">
-                                <label for="cardNumber" class="form-label">Número de tarjeta</label>
-                                <input type="text" class="form-control" id="cardNumber" formControlName="cardNumber"
-                                       placeholder="1234 5678 9012 3456" maxlength="19" (input)="formatearTarjeta()">
-                              </div>
-                      
-                              <div class="row">
-                                <div class="col-md-6 mb-3">
-                                  <label for="expiryDate" class="form-label">Fecha de expiración</label>
-                                  <input type="text" class="form-control" id="expiryDate" formControlName="expiryDate" 
-                                         placeholder="MM/AA" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                  <label for="cvv" class="form-label">CVV</label>
-                                  <input type="text" class="form-control" id="cvv" formControlName="cvv" placeholder="123" maxlength="4" required>
-                                </div>
-                              </div>
-                      
-                              <div class="mb-3">
-                                <label class="form-label">Monto a pagar</label>
-                                <input type="text" class="form-control" [value]="'$' + total.toFixed(2)" readonly>
-                              </div>
+    <div class="d-flex justify-content-between resumen-linea">
+      <span class="fw-medium">Total Parcial</span>
+      <strong class="fw-bold text-success">${{subtotal.toFixed(2)}}</strong>
+    </div>
 
-                            <button type="submit" class="btn boton w-100">Realizar Pedido</button>
-                            <button type="button" class="btn btn-secondary w-100 mt-2" (click)="logout()">Cerrar
-                                sesión</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="d-flex justify-content-between resumen-linea">
+      <span class="fw-medium">IVA</span>
+      <strong class="fw-bold text-info">${{costoEnvio.toFixed(2)}}</strong>
+    </div>
+
+    <div class="d-flex justify-content-between resumen-total">
+      <span class="fw-medium">Total a Pagar</span>
+      <strong class="fw-bold text-danger">${{totalFinal.toFixed(2)}}</strong>
+    </div>
+
+    <!-- <button class="btn btn-primary mt-3" (click)="generarQR()">Generar QR</button>
+    <p class="mt-2">Presente el QR al encargado para retirar su pedido o asistir a su reserva</p> -->
+
+    <!-- <div *ngIf="mostrarQR" id="codigoQR" class="text-center mt-3">
+      <qrcode [qrdata]="qrData" [width]="200" [errorCorrectionLevel]="'M'"></qrcode>
+      <button class="btn btn-outline-success mt-2" (click)="descargarQR()">📥 Descargar QR</button>
+    </div> -->
+  </div>
+</div>
+
+
+
     </div>
 </div>
 

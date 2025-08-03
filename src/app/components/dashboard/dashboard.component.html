@@ -469,35 +469,73 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-6 col-sm-12 mt-4">
-          <div class="form-group">
-            <input type="text" style="border: 1px dashed #000;" class="form-control " id="exampleLugar"
-              aria-describedby="lugarHelp" name="lugar" placeholder="Lugar" formControlName="lugar">
-            <div class="text-danger">
-              @if(formulario.get('lugar')?.invalid && (isFormSubmitted || formulario.get('lugar')?.touched ||
-              formulario.get('lugar')?.dirty)){
-              @if(formulario.get('lugar')?.errors?.['required']){
-              Este campo es requerido}
-              }
-            </div>
-          </div>
-        </div>
+     
+
+        <!-- Campo de número de personas -->
+       <div class="col-lg-6 col-sm-12 mt-4">
+  <div class="form-group">
+    <input
+      type="number"
+      class="form-control"
+      formControlName="n_personas"
+      [max]="capacidades"
+      placeholder="Número de personas"
+    />
+
+    <!-- Texto de capacidad con clase condicional -->
+    <small
+      [ngClass]="{
+        'text-danger': formulario.get('n_personas')?.value > capacidades
+      }"
+    >
+      Capacidad máxima: {{ capacidades }}
+    </small>
+
+    <!-- Validaciones -->
+    <div class="text-danger">
+      @if(
+        formulario.get('n_personas')?.invalid &&
+        (isFormSubmitted ||
+          formulario.get('n_personas')?.touched ||
+          formulario.get('n_personas')?.dirty)
+      ){
+        @if(formulario.get('n_personas')?.errors?.['required']){
+          Este campo es requerido
+        }
+      }
+    </div>
+  </div>
+</div>
+
       </div>
+      <!-- Selector de lugar -->
       <div class="row">
         <div class="col-lg-6 col-sm-12 mt-4">
           <div class="form-group">
-            <input type="text" style="border: 1px dashed #000;" class="form-control" id="exampleNumeroPersonas"
-              aria-describedby="numeroPersonasHelp" name="N_personas" placeholder="Num Personas"
-              formControlName="n_personas">
+            <select class="form-control" formControlName="lugar" (change)="onLugarChange($event)">
+              <option value="">Seleccione un lugar</option>
+              <option *ngFor="let lugar of lugares" [value]="lugar.id_lugar">
+                {{ lugar.nombre }}
+              </option>
+            </select>
             <div class="text-danger">
-              @if(formulario.get('n_personas')?.invalid && (isFormSubmitted || formulario.get('n_personas')?.touched ||
-              formulario.get('n_personas')?.dirty)){
-              @if(formulario.get('n_personas')?.errors?.['required']){
-              Este campo es requerido}
+              @if(formulario.get('lugar')?.invalid && (isFormSubmitted || formulario.get('lugar')?.touched || formulario.get('lugar')?.dirty)){
+                @if(formulario.get('lugar')?.errors?.['required']){
+                  Este campo es requerido
+                }
               }
             </div>
           </div>
         </div>
+        
+
+
+
+
+
+
+
+
         <div class="col-lg-6 col-sm-12 mt-4">
           <div class="form-group">
             <input type="date" style="border: 1px dashed #000;" class="form-control" id="exampleDate"

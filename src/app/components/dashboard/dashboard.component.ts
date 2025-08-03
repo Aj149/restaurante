@@ -95,6 +95,21 @@ platoSeleccionado!: Platos;
     );
   }
 
+    onLugarChange(event: any) {
+  const lugarId = +event.target.value;
+  const lugarSeleccionado = this.lugares.find(l => l.id_lugar === lugarId);
+
+  if (lugarSeleccionado) {
+    this.capacidades = lugarSeleccionado.capacidad;
+
+    const personasCtrl = this.formulario.get('n_personas');
+    if (personasCtrl && personasCtrl.value > this.capacidades) {
+      personasCtrl.setValue(this.capacidades);
+    }
+  } else {
+    this.capacidades = 0;
+  }
+}
   
 
 
@@ -142,7 +157,7 @@ abrirPopup(plato: Platos) {
   lugares: Lugares[] = [];
   lugaresEspeciales: Lugares[] = [];
   lugarSeleccionado!: Lugares;
-  capacidades: { [key: string]: number } = {};
+  capacidades: number = 0;
   maxPersonas: number = 0;
 
 

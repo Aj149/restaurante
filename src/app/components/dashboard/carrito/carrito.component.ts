@@ -27,12 +27,44 @@ export class CarritoComponent implements OnInit {
  
   pedido: any[] = []; 
   subtotal: number = 0;
-  costoEnvio: number = 5.00;
+  costoEnvio: number = 1.50;
   total: number = 0;
   paymentForm: FormGroup;
 
 
   isLoading: boolean = true;
+
+  // mostrarQR = false;
+  // infoReserva = '';
+  // qrData = '';
+
+  //  generarQR() {
+  //   const datos = {
+  //     totalParcial: this.subtotal.toFixed(2),
+  //     iva: this.costoEnvio.toFixed(2),
+  //     totalFinal: this.totalFinal.toFixed(2),
+  //     platos: this.platosSeleccionados, // ejemplo
+  //     lugar: this.lugarSeleccionado, // ejemplo
+  //     mesas: this.mesas,
+  //     sillas: this.sillas,
+  //   };
+
+  //   this.qrData = JSON.stringify(datos, null, 2);
+  //   this.mostrarQR = true;
+  // }
+
+  // descargarQR() {
+  //   const qrElement: any = document.getElementById('codigoQR');
+  //   const img = qrElement.querySelector('img');
+
+  //   if (img) {
+  //     const url = img.src;
+  //     const a = document.createElement('a');
+  //     a.href = url;
+  //     a.download = 'codigo_qr.png';
+  //     a.click();
+  //   }
+  // }
 
   constructor(
     private fb: FormBuilder,
@@ -210,5 +242,6 @@ export class CarritoComponent implements OnInit {
       this.calcularTotal(); // 🔁 recalcula el total
     }
   }
+
   
 }

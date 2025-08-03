@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
-import { Lugares } from '../../../models/dashboard';
+import { Horario, Lugares } from '../../../models/dashboard';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LugaresService } from '../../../services/lugares.service';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
-import { FormsModule } from '@angular/forms';
+import { FormGroup, FormsModule } from '@angular/forms';
+import { EditHorariosComponent } from "../edit-horarios/edit-horarios.component";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-edit-lugar',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, EditHorariosComponent, CommonModule],
   templateUrl: './edit-lugar.component.html',
   styleUrl: './edit-lugar.component.css'
 })
@@ -21,8 +23,20 @@ export class EditLugarComponent {
     nombre: '',
     imagen: '',
     precio: 0,
-    capacidad: 0
+    capacidad: 0,
+    dia: '',
+    hora: '',
+    estado: ''
   };
+
+  diasSemana: string[] = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+diaSeleccionado: string = '';
+horariosDelDia: Horario[] = [];
+horarioEditado: Horario | null = null;
+modoEdicion: boolean = false;
+horarios: Horario[] = [];
+
+
 
   constructor(
     private router: Router,
@@ -31,21 +45,82 @@ export class EditLugarComponent {
     private lugaresService: LugaresService,
   ) {}
 
-  ngOnInit(): void {
-    const id_lugar = this.activatedRoute.snapshot.params['id_lugar'];
-    this.lugaresService.id_lugar(id_lugar).subscribe(
-      data => {
-        this.lugar = data;
-      },
-      err => {
-        this.toastr.error(err.error.message, 'Fail', {
-          timeOut: 3000,
-          positionClass: 'toast-top-center',
-        });
-        this.router.navigate(['/']);
-      }
-    );
+   horarioParaEditar: Horario | null = null;
+
+  abrirEdicion(horario: Horario) {
+  console.log('Horario para editar:', horario);
+  this.horarioParaEditar = { ...horario };
+}
+
+
+ onHorarioGuardado(horarioActualizado: Horario) {
+  console.log('ID del horario:', horarioActualizado.id);  // Verifica que tiene valor
+
+  this.lugaresService.updateHorario(horarioActualizado.id, horarioActualizado)
+    .subscribe(() => {
+      this.horarioParaEditar = null;
+      this.cargarHorarios();
+      this.toastr.success('Horario actualizado correctamente', 'Éxito');
+    }, error => {
+      this.toastr.error('Error al actualizar horario', 'Error');
+      console.error(error);
+    });
+}
+
+
+
+
+// edit-lugar.component.ts
+
+  cargarHorarios() {
+  if (!this.lugar?.id_lugar) {
+    this.horariosDelDia = [];
+    return;
   }
+  this.lugaresService.getHorariosPorLugar(this.lugar.id_lugar).subscribe({
+    next: (horarios) => this.horariosDelDia = horarios,
+    error: () => this.horariosDelDia = []
+  });
+}
+
+
+
+  onDiaChange() {
+  if (this.diaSeleccionado && this.lugar?.id_lugar) {
+    this.lugaresService.getHorariosPorLugarYDia(this.lugar.id_lugar, this.diaSeleccionado)
+      .subscribe({
+        next: horarios => {
+          console.log('Horarios filtrados por lugar y día:', horarios);
+          this.horariosDelDia = horarios;
+        },
+        error: err => {
+          console.error(err);
+          this.horariosDelDia = [];
+        }
+      });
+    this.horarioParaEditar = null;
+  }
+}
+
+
+  ngOnInit(): void {
+  const id_lugar = this.activatedRoute.snapshot.params['id_lugar'];
+  this.lugaresService.id_lugar(id_lugar).subscribe(
+    data => {
+      this.lugar = data;
+      this.cargarHorarios();  // cargar horarios solo de ese lugar
+    },
+    err => {
+      this.toastr.error(err.error.message, 'Fail', {
+        timeOut: 3000,
+        positionClass: 'toast-top-center',
+      });
+      this.router.navigate(['/']);
+    }
+  );
+}
+
+
 
   guardarCambios(): void {
     Swal.fire({

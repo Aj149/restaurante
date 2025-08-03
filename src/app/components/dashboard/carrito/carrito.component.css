@@ -13,4 +13,34 @@
    background-color: #e0e0e0;
    
   }
-  
+.link-personalizado {
+  color: tomato;
+  text-decoration: none;
+}
+
+  .resumen-box {
+    background-color: #fffdf8; /* fondo suave estilo restaurante */
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .resumen-box:hover {
+    transform: scale(1.01);
+  }
+
+  .resumen-linea {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin-bottom: 12px;
+  }
+
+  .resumen-total {
+    background-color: #fff3cd;
+    border-radius: 10px;
+    padding: 12px 15px;
+    border-top: 2px solid #ffc107;
+    font-size: 1.1rem;
+   }
