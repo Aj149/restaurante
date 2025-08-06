@@ -24,7 +24,7 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th scope="col">Id</th>
+          
           <th scope="col">Nombre</th>
           <th scope="col">Telefono</th>
           <th scope="col">Personas</th>
@@ -37,11 +37,11 @@
       <tbody>
         @for(reserva of reservasFiltradas | buscador : searchTerm | paginate: { itemsPerPage: 9, currentPage: page }; track reserva){
         <tr>
-          <td>{{reserva.id_reserva}}</td>
+          
           <td>{{reserva.nombre}}</td>
           <td>{{reserva.telefono}}</td>
           <td>{{reserva.n_personas}}</td>
-          <td>{{reserva.hora}}</td>
+          <td>{{reserva.horario_id}}</td>
           <td>{{reserva.email}}</td>
           <td>{{reserva.fecha}}</td>
           <td>

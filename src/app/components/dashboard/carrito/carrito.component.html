@@ -98,18 +98,20 @@
       <strong class="fw-bold text-danger">${{totalFinal.toFixed(2)}}</strong>
     </div>
 
-    <!-- <button class="btn btn-primary mt-3" (click)="generarQR()">Generar QR</button>
-    <p class="mt-2">Presente el QR al encargado para retirar su pedido o asistir a su reserva</p> -->
+    <button class="btn btn-primary mt-3" (click)="generarQR()">Generar QR</button>
+    <p class="mt-2">Presente el QR al encargado para retirar su pedido o asistir a su reserva</p>
 
-    <!-- <div *ngIf="mostrarQR" id="codigoQR" class="text-center mt-3">
+    <div *ngIf="mostrarQR" id="codigoQR" class="text-center mt-3">
       <qrcode [qrdata]="qrData" [width]="200" [errorCorrectionLevel]="'M'"></qrcode>
       <button class="btn btn-outline-success mt-2" (click)="descargarQR()">📥 Descargar QR</button>
-    </div> -->
+    </div>
   </div>
 </div>
+<div class="d-flex justify-content-center mb-5">
+  <button class="btn btn-sm btn-outline-danger fs-5" (click)="logout()">Cerrar sesión</button>
+</div>
 
-
-
+        
     </div>
 </div>
 

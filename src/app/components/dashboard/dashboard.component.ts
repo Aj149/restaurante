@@ -1,5 +1,5 @@
 import { Component, Input, OnInit} from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CarouselModule,OwlOptions } from 'ngx-owl-carousel-o';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
@@ -9,7 +9,7 @@ import { FormularioService } from '../../services/formulario.service';
 import { CommonModule } from '@angular/common';
 import { ComentariosService } from '../../services/comentarios.service';
 import Swal from 'sweetalert2';
-import { Comentarios, Lugares, Personal, Platos, reserva } from '../../models/dashboard';
+import { Bebidas, Comentarios, Horario, Lugares, Personal, Platos, reserva } from '../../models/dashboard';
 import { HttpClient } from '@angular/common/http';
 import { PopUpPlatosComponent } from './pop-up-platos/pop-up-platos.component';
 import { PlatosService } from '../../services/platos.service';
@@ -18,6 +18,8 @@ import { PopUpLugaresComponent } from "./pop-up-lugares/pop-up-lugares.component
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PopUpPersonalComponent } from "./pop-up-personal/pop-up-personal.component";
 import { PersonalService } from '../../services/personal.service';
+import { AuthService } from '../../services/auth.service';
+import { BebidasService } from '../../services/bebidas.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -57,6 +59,9 @@ platoSeleccionado!: Platos;
     if (this.personal) {
       this.traerPersonal();
     }
+    if (this.bebidas) {
+      this.traerBebidas();
+    }
   }
 
   traerPersonal(): void {
@@ -95,6 +100,18 @@ platoSeleccionado!: Platos;
     );
   }
 
+  traerBebidas(): void {
+    this.bebidasService.obtenerBebidas().subscribe(
+      (data) => {
+        this.bebidas = data;
+        this.bebidasEspeciales = this.bebidas.slice(0, 6);
+      },
+      (error) => {
+        console.error('Error al cargar bebidas:', error);
+      }
+    );
+  }
+
     onLugarChange(event: any) {
   const lugarId = +event.target.value;
   const lugarSeleccionado = this.lugares.find(l => l.id_lugar === lugarId);
@@ -106,13 +123,40 @@ platoSeleccionado!: Platos;
     if (personasCtrl && personasCtrl.value > this.capacidades) {
       personasCtrl.setValue(this.capacidades);
     }
+
+    // 🔹 Cargar todos los horarios de este lugar
+    this.lugaresService.getHorariosPorLugar(lugarId).subscribe((data: Horario[]) => {
+      this.todosLosHorarios = data; // Guardamos todos
+      this.horarios = [];
+    });
   } else {
     this.capacidades = 0;
+    this.todosLosHorarios = [];
+    this.horarios = [];
   }
 }
+
+
+onFechaChange(event: any) {
+  const fechaSeleccionada = event.target.value; // "YYYY-MM-DD"
+  if (!fechaSeleccionada) {
+    this.horarios = [];
+    return;
+  }
+
+  const dateObj = new Date(fechaSeleccionada);
+  const diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+  const diaSemana = diasSemana[dateObj.getDay()];
+
+  // Filtrar con tipado
+  this.horarios = this.todosLosHorarios.filter((h: Horario) => h.dia === diaSemana);
+}
+
+
   
 
 
+  
 
 // 4abre y cierra el popup de los platos especiales
 abrirPopup(plato: Platos) {
@@ -159,7 +203,12 @@ abrirPopup(plato: Platos) {
   lugarSeleccionado!: Lugares;
   capacidades: number = 0;
   maxPersonas: number = 0;
+  todosLosHorarios: Horario[] = [];
+  horarios: Horario[] = [];
 
+  // 4para las bebidas
+  bebidas: Bebidas[] = [];
+  bebidasEspeciales: Bebidas[] = [];
 
   constructor(
     // 1para los lugares
@@ -170,7 +219,10 @@ abrirPopup(plato: Platos) {
     private platosService: PlatosService,
     private PersonalService: PersonalService,
     private lugaresService: LugaresService,
-    private comentariosService: ComentariosService
+    private comentariosService: ComentariosService,
+    private router: Router,
+    private authService: AuthService,
+    private bebidasService: BebidasService
 
   ) {
     // 1para los lugares
@@ -201,20 +253,7 @@ abrirPopup(plato: Platos) {
   }
 
 
-// 1para los lugares
-  // ngOnInit() {
-  //   this.http.get<any>('http://localhost:8000/reserva/lugares').subscribe(data => {
-  //     console.log('Data:', data);
-  //     this.lugares = data.lugares;
-  //     this.capacidades = data.capacidades;
-  //   });
 
-  //   this.formulario.get('lugar')?.valueChanges.subscribe(selectedLugar => {
-  //     this.maxPersonas = this.capacidades[selectedLugar] || 0;
-  //     console.log('Max Personas:', this.maxPersonas);
-  //     this.updateNumeroPersonasValidators();
-  //   });
-  // }
 
   updateNumeroPersonasValidators() {
     const numeroPersonasControl = this.formulario.get('numeroPersonas');
@@ -237,33 +276,73 @@ abrirPopup(plato: Platos) {
       console.log('Formulario Inválido', this.formulario.errors);
     }
   }
-
-  agregarReserva() {
-    this.isFormSubmitted = true;
-    if (this.formulario.valid) {
-      const formValues = this.formulario.value;
-      const nuevaReserva: reserva = {
-        nombre: formValues.nombre,
-        email: formValues.email,
-        telefono: +formValues.telefono,
-        lugar: formValues.lugar,
-        n_personas: +formValues.n_personas,
-        fecha: formValues.fecha,
-        hora: formValues.hora,
-        detalles: formValues.detalles
-      };
-      console.log(nuevaReserva); // Verifica los datos aquí
-      this.formularioService.agregarReserva(nuevaReserva).subscribe(
-        response => {
-          console.log('Reserva creada con éxito', response);
-        },
-        error => {
-          console.error('Error al crear la reserva', error);
+agregarReserva() {
+  this.isFormSubmitted = true;
+  if (this.formulario.valid) {
+    const formValues = this.formulario.value;
+    const nuevaReserva: reserva = {
+      nombre: formValues.nombre,
+      email: formValues.email,
+      telefono: formValues.telefono,
+      lugar_id: +formValues.lugar,
+      n_personas: +formValues.n_personas,
+      fecha: formValues.fecha,
+      horario_id: +formValues.hora,
+      detalles: formValues.detalles
+    };
+    console.log(nuevaReserva); // Verifica los datos aquí
+    this.formularioService.agregarReserva(nuevaReserva).subscribe(
+      response => {
+        // Reserva creada con éxito
+        Swal.fire({
+          icon: 'success',
+          title: '¡Reserva creada!',
+          text: 'La reserva se ha realizado correctamente.',
+          confirmButtonText: 'Aceptar',
+          timer: 3000,
+          timerProgressBar: true
+        });
+        this.formulario.reset();
+        console.log('Reserva creada con éxito', response);
+      },
+      error => {
+        // Manejo de errores
+        console.error('Error al crear la reserva', error);
+        
+        if (error.status === 409) {
+          // Error de conflicto: horario ya reservado
+          Swal.fire({
+            icon: 'error',
+            title: 'Horario no disponible',
+            text: error.error.message || 'El horario ya está reservado para esa fecha.',
+            confirmButtonText: 'Aceptar',
+          });
+        } else {
+          // Otros errores
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Ocurrió un error al crear la reserva. Inténtalo de nuevo.',
+            confirmButtonText: 'Aceptar',
+          });
         }
-      );
-    }
+      }
+    );
   }
+}
 
+
+
+formatearHorario(horaInicio: string, horaFin: string, dia: string): string {
+  const formato = (hora: string) => {
+    const [h, m] = hora.split(':').map(Number);
+    const ampm = h >= 12 ? 'pm' : 'am';
+    const hora12 = h % 12 || 12;
+    return `${hora12}${ampm}`;
+  };
+
+  return `${formato(horaInicio)} a ${formato(horaFin)} (${dia})`;
+}
 
 
 
@@ -271,39 +350,87 @@ abrirPopup(plato: Platos) {
 
 
   // para agregar mensajes
-  agregarMensaje(): void {
-    this.FormSubmitted = true;
-    if (this.formularioMensaje.valid) {
-        const formValues = this.formularioMensaje.value;
-        const nuevoMensaje: Comentarios = {
-            nombre: formValues.nombre,
-            email: formValues.email,
-            comentario: formValues.comentario
-        };
-        console.log(nuevoMensaje);
-        this.mensajeService.agregarMensaje(nuevoMensaje).subscribe(
-            response => {
-                Swal.fire({
-                    title: 'Enviado!',
-                    text: 'El mensaje ha sido enviado correctamente.',
-                    icon: 'success',
-                    background: "#27272a",
-                    color: "#fafafa",
-                    confirmButtonColor: "rgb(218, 91, 30)"
-                });  
-            },
-            error => {
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Hubo un problema al enviar el mensaje.',
-                    icon: 'error',
-                    background: "#27272a",
-                    color: "#fafafa",
-                    confirmButtonColor: "#d33"
-                });
-            }
-        );
+ agregarMensaje(): void {
+  this.FormSubmitted = true;
+  this.formularioMensaje.markAllAsTouched();
+
+  // 1) Comprobar si está logueado (ajusta según tu proyecto)
+  // Opción A: usando un AuthService
+  const isLoggedIn = this.authService?.isLoggedIn ? this.authService.isLoggedIn() : null;
+
+  // Opción B (fallback): comprobación directa en localStorage
+  const token = localStorage.getItem('token');
+  const logged = (isLoggedIn !== null) ? isLoggedIn : !!token;
+
+  if (!logged) {
+    // Guardar borrador opcionalmente
+    const draft = this.formularioMensaje.value;
+    localStorage.setItem('draftComentario', JSON.stringify(draft));
+
+    // Mostrar alerta y ofrecer ir a login
+    Swal.fire({
+      icon: 'warning',
+      title: 'Debes iniciar sesión',
+      text: 'Necesitas iniciar sesión para publicar un comentario. ¿Deseas ir a la página de login?',
+      showCancelButton: true,
+      confirmButtonText: 'Ir a login',
+      cancelButtonText: 'Cancelar'
+    }).then(result => {
+      if (result.isConfirmed) {
+        // Redirigir a login
+        this.router.navigate(['/login']);
+      }
+    });
+
+    return; // detener ejecución: no enviar si no está logueado
+  }
+
+  // 2) Si está logueado, validar formulario y enviar
+  if (this.formularioMensaje.invalid) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Formulario incompleto',
+      text: 'Por favor completa todos los campos requeridos.'
+    });
+    return;
+  }
+
+  const formValues = this.formularioMensaje.value;
+  const nuevoMensaje: Comentarios = {
+    nombre: formValues.nombre,
+    email: formValues.email,
+    comentario: formValues.comentario
+  };
+
+  console.log('Enviando comentario:', nuevoMensaje);
+
+  this.mensajeService.agregarMensaje(nuevoMensaje).subscribe({
+    next: (response) => {
+      Swal.fire({
+        title: 'Enviado!',
+        text: 'El mensaje ha sido enviado correctamente.',
+        icon: 'success',
+        background: "#27272a",
+        color: "#fafafa",
+        confirmButtonColor: "rgb(218, 91, 30)"
+      });
+      this.formularioMensaje.reset();
+      this.FormSubmitted = false;
+      localStorage.removeItem('draftComentario'); // limpiar borrador
+    },
+    error: (err) => {
+      console.error('Error al enviar mensaje:', err);
+      const msg = err?.error?.message || 'Hubo un problema al enviar el mensaje.';
+      Swal.fire({
+        title: 'Error!',
+        text: msg,
+        icon: 'error',
+        background: "#27272a",
+        color: "#fafafa",
+        confirmButtonColor: "#d33"
+      });
     }
+  });
 }
 
 // 2para ver los mensajes
@@ -407,48 +534,5 @@ comentario : Comentarios [] =[];
       }
     },
   }
-
-
-
-
-// servicio para cargar el corazon a otro componente
-
-incrementClickCount() {
-  this.likeService.incrementClickCount();
-}
-
-// efecto del corazon y del enviar
-ngAfterViewInit(): void {
-  const enviar = document.querySelectorAll('.enviar');
-  enviar.forEach(enviar => {
-    enviar.addEventListener('click', () => this.handleClick1(enviar.id));
-  });
-
-  const hearts = document.querySelectorAll('.heart');
-  hearts.forEach(heart => {
-    heart.addEventListener('click', () => this.handleClick(heart.id));
-  });
-}
-
-
-handleClick(heartId: string): void {
-  const heart = document.getElementById(heartId);
-  if (heart) {
-    heart.classList.add('clicked');
-    setTimeout(() => {
-      heart.classList.remove('clicked');
-    }, 600);
-  }
-}
-
-handleClick1(enviarId: string): void {
-  const enviar = document.getElementById(enviarId);
-  if (enviar) {
-    enviar.classList.add('clicked');
-    setTimeout(() => {
-      enviar.classList.remove('clicked');
-    }, 600);
-  }
-}
 
 }

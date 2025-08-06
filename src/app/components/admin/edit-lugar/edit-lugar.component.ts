@@ -120,6 +120,32 @@ horarios: Horario[] = [];
   );
 }
 
+eliminarHorario(horario: any) {
+  Swal.fire({
+    title: '¿Estás seguro?',
+    text: `Se eliminará el horario de ${horario.dia}`,
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Sí, eliminar',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.lugaresService.eliminarHorario(horario.id).subscribe(() => {
+        Swal.fire(
+          'Eliminado',
+          'El horario ha sido eliminado correctamente.',
+          'success'
+        );
+        this.cargarHorarios();
+      });
+    }
+  });
+}
+
+
+
 
 
   guardarCambios(): void {

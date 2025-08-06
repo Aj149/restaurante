@@ -4,10 +4,10 @@ export class reserva{
     nombre: string='';
     email: string='';
     telefono: number=0;
-    lugar: string='';
+    lugar_id: number=0;
     n_personas: number=0;
     fecha: string='';
-    hora: string=''; 
+    horario_id: number=0; 
     detalles: string='';
 }
 

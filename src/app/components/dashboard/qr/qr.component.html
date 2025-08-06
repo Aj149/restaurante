@@ -1,1 +1,46 @@
-<!-- <ngx-qrcode [qrc-value]="qrData"></ngx-qrcode> -->
+<div *ngIf="error" class="ticket-error">{{ error }}</div>
+
+<div *ngIf="datos" class="ticket-card">
+  <header class="ticket-header">
+    <img src="/assets/logo.png" alt="Logo" class="logo"/>
+    <div class="titulo">
+      <h1>¡Gracias por tu compra!</h1>
+      <p class="subtitulo">Pedido para <strong>{{ datos.nombreCliente }}</strong></p>
+    </div>
+  </header>
+
+  <section class="ticket-body">
+    <h2 class="seccion">Resumen del pedido</h2>
+
+    <div class="row">
+      <div>Subtotal:</div>
+      <div class="valor">$ {{ datos.totalParcial }}</div>
+    </div>
+    <div class="row">
+      <div>IVA:</div>
+      <div class="valor">$ {{ datos.iva }}</div>
+    </div>
+    <div class="row total">
+      <div>Total a pagar:</div>
+      <div class="valor">$ {{ datos.totalFinal }}</div>
+    </div>
+
+    <h3 class="seccion">Platos</h3>
+    <ul class="platos">
+      <li *ngFor="let p of datos.platos">
+        {{ p.cantidad }} x {{ p.nombre }} — ${{ p.precio }}
+      </li>
+      <li *ngIf="!datos.platos || datos.platos.length === 0">No hay platos</li>
+    </ul>
+
+    <h3 class="seccion">Retirar en</h3>
+    <p class="ubicacion">{{ datos.ubicacionRetiro }}</p>
+  </section>
+
+  <footer class="ticket-footer">
+  <p>📅 Fecha: {{ getFecha() }}</p>
+  <p class="agradecimiento">¡Gracias por elegirnos! 🍽️</p>
+  <button (click)="imprimir()" class="btn-imprimir">Imprimir / Guardar</button>
+</footer>
+
+</div>

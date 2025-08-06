@@ -32,6 +32,7 @@ import { EditBebidaComponent } from './components/admin/edit-bebida/edit-bebida.
 import { RecuperarComponent } from './components/core/admin/recuperar/recuperar.component';
 import { adminAuthGuard } from './services/admin.guard';
 import { ResetComponent } from './components/core/admin/reset/reset.component';
+import { QrComponent } from './components/dashboard/qr/qr.component';
 
 
 
@@ -51,6 +52,8 @@ export const routes: Routes = [
   { path: 'reset-password', component: ResetPasswordComponent },
   
   { path: 'admin/reset-password', component: ResetComponent },
+
+  { path: 'ticket', component: QrComponent },
 
 
 

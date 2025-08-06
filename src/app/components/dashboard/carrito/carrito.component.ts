@@ -6,15 +6,16 @@ import { AuthService } from '../../../services/auth.service';
 import { PlatosService } from '../../../services/platos.service';
 import { Router } from '@angular/router';
 import { Pedido } from '../../../models/popup';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Usuarios } from '../../../models/registroUsuario';
-import { Platos } from '../../../models/dashboard';
 import Swal from 'sweetalert2';
+import { Platos } from '../../../models/dashboard';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @Component({
   selector: 'app-carrito',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, FooterComponent, ReactiveFormsModule],
+  imports: [CommonModule, NavbarComponent, FooterComponent, ReactiveFormsModule, QRCodeModule],
   templateUrl: './carrito.component.html',
   styleUrl: './carrito.component.css'
 })
@@ -34,37 +35,83 @@ export class CarritoComponent implements OnInit {
 
   isLoading: boolean = true;
 
-  // mostrarQR = false;
-  // infoReserva = '';
-  // qrData = '';
+  // 5para generar el QR de la reserva
 
-  //  generarQR() {
-  //   const datos = {
-  //     totalParcial: this.subtotal.toFixed(2),
-  //     iva: this.costoEnvio.toFixed(2),
-  //     totalFinal: this.totalFinal.toFixed(2),
-  //     platos: this.platosSeleccionados, // ejemplo
-  //     lugar: this.lugarSeleccionado, // ejemplo
-  //     mesas: this.mesas,
-  //     sillas: this.sillas,
-  //   };
+  mostrarQR = false;
+  infoReserva = '';
+  qrData: string = '';
+  platosSeleccionados: Platos[] = [];
+  platos: Platos[] = [];
 
-  //   this.qrData = JSON.stringify(datos, null, 2);
-  //   this.mostrarQR = true;
-  // }
+   generarQR() {
 
-  // descargarQR() {
-  //   const qrElement: any = document.getElementById('codigoQR');
-  //   const img = qrElement.querySelector('img');
+  // arma el objeto que quieres mostrar
+const datos = {
+  nombreCliente: 'Juan Pérez',
+  ubicacionRetiro: 'Sucursal Centro - Av. Principal 123',
+  totalParcial: this.subtotal.toFixed(2),
+  iva: this.costoEnvio.toFixed(2),
+  totalFinal: this.totalFinal.toFixed(2),
+  platos: this.platos // array de {nombre, cantidad, precio}
+};
 
-  //   if (img) {
-  //     const url = img.src;
-  //     const a = document.createElement('a');
-  //     a.href = url;
-  //     a.download = 'codigo_qr.png';
-  //     a.click();
-  //   }
-  // }
+const json = JSON.stringify(datos);
+const base64 = btoa(encodeURIComponent(json));
+this.qrData = `${window.location.origin}/ticket?d=${base64}`;
+
+
+// Crear la URL completa (ajusta dominio / ruta según tu despliegue)
+this.qrData = `${window.location.origin}/ticket?d=${base64}`;
+
+
+  this.mostrarQR = true;
+}
+
+// ngOnInit() {
+//   this.route.queryParamMap.subscribe(params => {
+//     const encoded = params.get('d');
+//     if (encoded) {
+//       try {
+//         const decoded = decodeURIComponent(atob(encoded));
+//         this.datos = JSON.parse(decoded);
+//       } catch (e) {
+//         console.error('Error decodificando', e);
+//       }
+//     }
+//   });
+// }
+
+
+  descargarQR() {
+  const qrElement = document.getElementById('codigoQR');
+  if (!qrElement) return;
+
+  // Primero intenta encontrar una imagen
+  let img: HTMLImageElement | null = qrElement.querySelector('img');
+
+  // Si no hay imagen, intenta encontrar un canvas y convertirlo a imagen
+  if (!img) {
+    const canvas: HTMLCanvasElement | null = qrElement.querySelector('canvas');
+    if (canvas) {
+      const url = canvas.toDataURL('image/png');
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'codigo_qr.png';
+      a.click();
+      return;
+    }
+  }
+
+  // Si encontró imagen, descarga
+  if (img) {
+    const url = img.src;
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'codigo_qr.png';
+    a.click();
+  }
+}
+
 
   constructor(
     private fb: FormBuilder,

@@ -17,10 +17,10 @@ export class VerReservasComponent {
     nombre: '',
     email: '',
     telefono: 0,
-    lugar: '',
+    lugar_id: 0,
     n_personas: 0,
     fecha: '',
-    hora: '',
+    horario_id: 0,
     detalles: ''
   }
 

@@ -178,11 +178,14 @@ export class AuthService {
   }
 
   public logout(): void {
-    localStorage.removeItem(this.TOKEN_KEY);
-    localStorage.removeItem(this.USER_KEY);
-    this.isAuthenticatedSubject.next(false);
-    this.router.navigate(['/login']);
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('token'); // <-- Esta clave debe coincidir
+    localStorage.removeItem('userData'); // Si también guardas datos del usuario
   }
+
+  this.isAuthenticatedSubject.next(false);
+  this.router.navigate(['/login']);
+}
 // recuperar contraseña
 sendRecoveryEmail(email: string) {
   return this.http.post(`${environment.authUrl}/usuarios/forgot-password`, { email });

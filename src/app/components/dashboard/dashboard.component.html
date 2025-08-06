@@ -166,7 +166,7 @@
             <div class="container hover-container">
               <div class="row">
                 <div class="col-lg-3 col-sm-12 col-md-6 rounded-4 hover-item mt-4">
-                  <img src="{{lugaresEspeciales[0].imagen}}" class="imagen rounded-2 shadow-effect" alt="...">
+                  <img src="{{lugaresEspeciales[0].imagen}}" class="imagen rounded-2 shadow-effect w-75" alt="...">
                 </div>
                 <div class="col-lg-9 col-sm-12 col-md-6 hover-item mt-4">
                   <h1 class="nautilus" style="color:rgb(231, 91, 30);">{{lugaresEspeciales[0].nombre}}</h1>
@@ -176,8 +176,8 @@
                 </div>
               </div>
               <div class="mt-4 text-end">
-                <button class="boton border-0 rounded-2 cursor-pointer mx-3 mb-2"
-                  (click)="abrirPopup(platosEspeciales[3])">RESERVAR</button>
+                <!-- <button class="boton border-0 rounded-2 cursor-pointer mx-3 mb-2"
+                  (click)="abrirPopup(platosEspeciales[3])">RESERVAR</button> -->
                 <button class="boton border-0 rounded-2 cursor-pointer"
                   (click)="abrirPopupLugar(lugaresEspeciales[0])">VER DETALLES</button>
 
@@ -198,7 +198,7 @@
                 </div>
               </div>
               <div class="mt-4 text-end">
-                <button class="boton border-0 rounded-2 cursor-pointer mx-3 mb-2">RESERVAR</button>
+                <!-- <button class="boton border-0 rounded-2 cursor-pointer mx-3 mb-2">RESERVAR</button> -->
                 <button class="boton border-0 rounded-2 cursor-pointer"
                   (click)="abrirPopupLugar(lugaresEspeciales[1])">VER DETALLES</button>
               </div>
@@ -218,7 +218,7 @@
                 </div>
               </div>
               <div class="mt-4 text-end">
-                <button class="boton border-0 rounded-2 cursor-pointer mx-3 mb-2">RESERVAR</button>
+                <!-- <button class="boton border-0 rounded-2 cursor-pointer mx-3 mb-2">RESERVAR</button> -->
                 <button class="boton border-0 rounded-2 cursor-pointer"
                   (click)="abrirPopupLugar(lugaresEspeciales[2])">VER DETALLES</button>
               </div>
@@ -238,7 +238,7 @@
                 </div>
               </div>
               <div class="mt-4 text-end">
-                <button class="boton border-0 rounded-2 cursor-pointer mx-3 mb-2">RESERVAR</button>
+                <!-- <button class="boton border-0 rounded-2 cursor-pointer mx-3 mb-2">RESERVAR</button> -->
                 <button class="boton border-0 rounded-2 cursor-pointer"
                   (click)="abrirPopupLugar(lugaresEspeciales[3])">VER DETALLES</button>
               </div>
@@ -269,14 +269,11 @@
                 <img src="{{personalEspeciales[0].imagen}}" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">{{personalEspeciales[0].nombre}}</h5>
-                  <p class="card-text">descripcion pendiente en la base de datos</p>
+                  <p class="card-text">{{personalEspeciales[0].descripcion}}</p>
                   <div class="row">
                     <div class="col">
                       <button class="boton border-0 rounded-2  cursor-pointer"
                         (click)="abrirPopupPersonal(personalEspeciales[0])">info</button>
-                    </div>
-                    <div class="col heart-container">
-                      <img id="heart1" src="../../../assets/corazon.png" class="heart w-25">
                     </div>
                   </div>
                 </div>
@@ -284,18 +281,14 @@
             </ng-template>
             <ng-template carouselSlide>
               <div class="card mx-5 d-block" style="width: 18rem;">
-                <img src="../../../assets/team2.jpg" class="card-img-top" alt="...">
+                <img src="{{personalEspeciales[1].imagen}}" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">TEAM</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
+                  <h5 class="card-title">{{personalEspeciales[1].nombre}}</h5>
+                  <p class="card-text">{{personalEspeciales[1].descripcion}}</p>
                   <div class="row"> <!-- Agregamos la clase gx-2 para agregar espacio entre columnas -->
                     <div class="col">
                       <button class="boton border-0 rounded-2 cursor-pointer"
                         (click)="abrirPopupPersonal(personalEspeciales[1])">info</button>
-                    </div>
-                    <div class="col heart-container">
-                      <img id="heart2" src="../../../assets/corazon.png" class="heart w-25">
                     </div>
                   </div>
                 </div>
@@ -304,19 +297,14 @@
             </ng-template>
             <ng-template carouselSlide>
               <div class="card mx-5 d-block" style="width: 18rem;">
-                <img src="../../../assets/team3.jpg" class="card-img-top" alt="...">
+                <img src="{{personalEspeciales[2].imagen}}" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">TEAM</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
+                  <h5 class="card-title">{{personalEspeciales[2].nombre}}</h5>
+                  <p class="card-text">{{personalEspeciales[2].descripcion}}</p>
                   <div class="row"> <!-- Agregamos la clase gx-2 para agregar espacio entre columnas -->
                     <div class="col">
                       <button class="boton border-0 rounded-2 cursor-pointer"
                         (click)="abrirPopupPersonal(personalEspeciales[2])">info</button>
-                    </div>
-                    <div class="col heart-container">
-                      <img id="heart3" src="../../../assets/corazon.png" class="heart w-25"
-                        (click)="incrementClickCount()">
                     </div>
                   </div>
                 </div>
@@ -344,61 +332,67 @@
 
         <!-- Bebida 1 -->
         <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center mb-4">
-          <img class="rounded me-3" src="../../../assets/bebida 1.jpg" alt="Copa Cabana"
+          <img class="rounded me-3" src="{{bebidasEspeciales[0].imagen}}" alt="Copa Cabana"
             style="width: 120px; height: auto;">
           <div class="text-start">
-            <h2 class="mb-1 nautilus" style="color:tomato">Copa Cabana</h2>
-            <p class="mb-0 text-white roboto">Cóctel tropical con frutas exóticas y ron.</p>
+            <h2 class="mb-1 nautilus" style="color:tomato">{{bebidasEspeciales[0].nombre}}</h2>
+            <p class="mb-0 text-white roboto">{{bebidasEspeciales[0].descripcion}}</p>
+            <p class="mb-0 text-white roboto"><strong>$</strong>{{bebidasEspeciales[0].precio}}</p>
           </div>
         </div>
 
         <!-- Bebida 2 -->
         <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center mb-4">
-          <img class="rounded me-3" src="../../../assets/bebida 2.jpg" alt="Sunset Punch"
+          <img class="rounded me-3" src="{{bebidasEspeciales[1].imagen}}" alt="Sunset Punch"
             style="width: 120px; height: auto;">
           <div class="text-start">
-            <h2 class="mb-1 nautilus" style="color:tomato">Sunset Punch</h2>
-            <p class="mb-0 text-white roboto">Refrescante bebida con cítricos y soda.</p>
+            <h2 class="mb-1 nautilus" style="color:tomato">{{bebidasEspeciales[1].nombre}}</h2>
+            <p class="mb-0 text-white roboto">{{bebidasEspeciales[1].descripcion}}</p>
+            <p class="mb-0 text-white roboto"><strong>$</strong>{{bebidasEspeciales[1].precio}}</p>
           </div>
         </div>
 
         <!-- Bebida 3 -->
         <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center mb-4">
-          <img class="rounded me-3" src="../../../assets/bebida 3.jpg" alt="Limonada Verde"
+          <img class="rounded me-3" src="{{bebidasEspeciales[2].imagen}}" alt="Limonada Verde"
             style="width: 120px; height: auto;">
           <div class="text-start">
-            <h2 class="mb-1 nautilus" style="color:tomato">Limonada Verde</h2>
-            <p class="mb-0 text-white roboto">Limonada con hierbabuena, natural y fresca.</p>
+            <h2 class="mb-1 nautilus" style="color:tomato">{{bebidasEspeciales[2].nombre}}</h2>
+            <p class="mb-0 text-white roboto">{{bebidasEspeciales[2].descripcion}}</p>
+            <p class="mb-0 text-white roboto"><strong>$</strong>{{bebidasEspeciales[2].precio}}</p>
           </div>
         </div>
 
         <!-- Bebida 4 -->
         <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center mb-4">
-          <img class="rounded me-3" src="../../../assets/bebida 4.jpg" alt="Choco Cream"
+          <img class="rounded me-3" src="{{bebidasEspeciales[3].imagen}}" alt="Choco Cream"
             style="width: 120px; height: auto;">
           <div class="text-start">
-            <h2 class="mb-1 nautilus" style="color:tomato">Choco Cream</h2>
-            <p class="mb-0 text-white roboto">Batido cremoso de chocolate y leche.</p>
+            <h2 class="mb-1 nautilus" style="color:tomato">{{bebidasEspeciales[3].nombre}}</h2>
+            <p class="mb-0 text-white roboto">{{bebidasEspeciales[3].descripcion}}</p>
+            <p class="mb-0 text-white roboto"><strong>$</strong>{{bebidasEspeciales[3].precio}}</p>
           </div>
         </div>
 
         <!-- Bebida 5 -->
         <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center mb-4">
-          <img class="rounded me-3" src="../../../assets/bebida 5.jpg" alt="Piña Fizz"
+          <img class="rounded me-3" src="{{bebidasEspeciales[4].imagen}}" alt="Piña Fizz"
             style="width: 120px; height: auto;">
           <div class="text-start">
-            <h2 class="mb-1 nautilus" style="color:tomato">Piña Fizz</h2>
-            <p class="mb-0 text-white roboto">Cóctel espumoso de piña con soda.</p>
+            <h2 class="mb-1 nautilus" style="color:tomato">{{bebidasEspeciales[4].nombre}}</h2>
+            <p class="mb-0 text-white roboto">{{bebidasEspeciales[4].descripcion}}</p>
+            <p class="mb-0 text-white roboto"><strong>$</strong>{{bebidasEspeciales[4].precio}}</p>
           </div>
         </div>
 
         <!-- Bebida 6 -->
         <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-items-center mb-4">
-          <img class="rounded me-3" src="../../../assets/bebida 6.jpg" alt="Berry Cool"
+          <img class="rounded me-3" src="{{bebidasEspeciales[5].imagen}}" alt="Berry Cool"
             style="width: 120px; height: auto;">
           <div class="text-start">
-            <h2 class="mb-1 nautilus" style="color:tomato">Berry Cool</h2>
-            <p class="mb-0 text-white roboto">Bebida fría de frutos rojos y menta.</p>
+            <h2 class="mb-1 nautilus" style="color:tomato">{{bebidasEspeciales[5].nombre}}</h2>
+            <p class="mb-0 text-white roboto">{{bebidasEspeciales[5].descripcion}}</p>
+            <p class="mb-0 text-white roboto"><strong>$</strong>{{bebidasEspeciales[5].precio}}</p>
           </div>
         </div>
 
@@ -439,6 +433,90 @@
 
         <div class="col-lg-6 col-sm-12 mt-4">
           <div class="form-group">
+            <select class="form-control" formControlName="lugar" (change)="onLugarChange($event)">
+              <option value="">Seleccione un lugar</option>
+              <option *ngFor="let lugar of lugares" [value]="lugar.id_lugar">
+                {{ lugar.nombre }}
+              </option>
+            </select>
+            <div class="text-danger">
+              @if(formulario.get('lugar')?.invalid && (isFormSubmitted || formulario.get('lugar')?.touched ||
+              formulario.get('lugar')?.dirty)){
+              @if(formulario.get('lugar')?.errors?.['required']){
+              Este campo es requerido
+              }
+              }
+            </div>
+          </div>
+        </div>
+
+        
+      </div>
+      <div class="row">
+
+        <!-- Campo de número de personas -->
+        <div class="col-lg-6 col-sm-12 mt-4">
+          <div class="form-group">
+            <input type="number" class="form-control" formControlName="n_personas" [max]="capacidades"
+              placeholder="Número de personas" />
+
+            <!-- Texto de capacidad con clase condicional -->
+            <small [ngClass]="{
+        'text-danger': formulario.get('n_personas')?.value > capacidades
+      }">
+              Capacidad máxima: {{ capacidades }}
+            </small>
+
+            <!-- Validaciones -->
+            <div class="text-danger">
+              @if(
+              formulario.get('n_personas')?.invalid &&
+              (isFormSubmitted ||
+              formulario.get('n_personas')?.touched ||
+              formulario.get('n_personas')?.dirty)
+              ){
+              @if(formulario.get('n_personas')?.errors?.['required']){
+              Este campo es requerido
+              }
+              }
+            </div>
+          </div>
+        </div>
+
+       <div class="col-lg-6 col-sm-12 mt-4">
+          <div class="form-group">
+            <input type="date" class="form-control" formControlName="fecha" (change)="onFechaChange($event)">
+            <div class="text-danger">
+              @if(formulario.get('fecha')?.invalid && (isFormSubmitted || formulario.get('fecha')?.touched ||
+              formulario.get('fecha')?.dirty)){
+              @if(formulario.get('fecha')?.errors?.['required']){
+              Este campo es requerido}
+              }
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-12 mt-4">
+          <div class="form-group">
+             <select class="form-control" formControlName="hora">
+      <option value="">Seleccione el horario disponible para esa fecha</option>
+      <option *ngFor="let h of horarios" [value]="h.id">
+  {{ formatearHorario(h.horaInicio, h.horaFin, h.dia) }}
+</option>
+
+    </select>
+            <div class="text-danger">
+              @if(formulario.get('hora')?.invalid && (isFormSubmitted || formulario.get('hora')?.touched ||
+              formulario.get('hora')?.dirty)){
+              @if(formulario.get('hora')?.errors?.['required']){
+              Este campo es requerido}
+              }
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-lg-6 col-sm-12 mt-4">
+          <div class="form-group">
             <input type="email" style="border: 1px dashed #000;" class="form-control" id="exampleInputEmail1"
               aria-describedby="emailHelp" name="email" placeholder="Enter email" formControlName="email">
             <div class="text-danger">
@@ -452,9 +530,8 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-6 col-sm-12 mt-4">
+
+         <div class="col-lg-6 col-sm-12 mt-4">
           <div class="form-group">
             <input type="text" style="border: 1px dashed #000;" class="form-control" id="exampleNumber"
               aria-describedby="numeroTelefonoHelp" name="telefono" placeholder="Telf" formControlName="telefono">
@@ -469,64 +546,13 @@
             </div>
           </div>
         </div>
-     
 
-        <!-- Campo de número de personas -->
-       <div class="col-lg-6 col-sm-12 mt-4">
-  <div class="form-group">
-    <input
-      type="number"
-      class="form-control"
-      formControlName="n_personas"
-      [max]="capacidades"
-      placeholder="Número de personas"
-    />
 
-    <!-- Texto de capacidad con clase condicional -->
-    <small
-      [ngClass]="{
-        'text-danger': formulario.get('n_personas')?.value > capacidades
-      }"
-    >
-      Capacidad máxima: {{ capacidades }}
-    </small>
-
-    <!-- Validaciones -->
-    <div class="text-danger">
-      @if(
-        formulario.get('n_personas')?.invalid &&
-        (isFormSubmitted ||
-          formulario.get('n_personas')?.touched ||
-          formulario.get('n_personas')?.dirty)
-      ){
-        @if(formulario.get('n_personas')?.errors?.['required']){
-          Este campo es requerido
-        }
-      }
-    </div>
-  </div>
-</div>
+        
 
       </div>
       <!-- Selector de lugar -->
       <div class="row">
-        <div class="col-lg-6 col-sm-12 mt-4">
-          <div class="form-group">
-            <select class="form-control" formControlName="lugar" (change)="onLugarChange($event)">
-              <option value="">Seleccione un lugar</option>
-              <option *ngFor="let lugar of lugares" [value]="lugar.id_lugar">
-                {{ lugar.nombre }}
-              </option>
-            </select>
-            <div class="text-danger">
-              @if(formulario.get('lugar')?.invalid && (isFormSubmitted || formulario.get('lugar')?.touched || formulario.get('lugar')?.dirty)){
-                @if(formulario.get('lugar')?.errors?.['required']){
-                  Este campo es requerido
-                }
-              }
-            </div>
-          </div>
-        </div>
         
 
 
@@ -536,38 +562,15 @@
 
 
 
-        <div class="col-lg-6 col-sm-12 mt-4">
-          <div class="form-group">
-            <input type="date" style="border: 1px dashed #000;" class="form-control" id="exampleDate"
-              aria-describedby="fechaHelp" name="fecha" placeholder="Fecha" formControlName="fecha">
-            <div class="text-danger">
-              @if(formulario.get('fecha')?.invalid && (isFormSubmitted || formulario.get('fecha')?.touched ||
-              formulario.get('fecha')?.dirty)){
-              @if(formulario.get('fecha')?.errors?.['required']){
-              Este campo es requerido}
-              }
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 col-sm-12 mt-4">
-          <div class="form-group">
-            <input type="text" style="border: 1px dashed #000;" class="form-control" id="exampleHora"
-              aria-describedby="horaHelp" name="hora" placeholder="hora" formControlName="hora">
-            <div class="text-danger">
-              @if(formulario.get('hora')?.invalid && (isFormSubmitted || formulario.get('hora')?.touched ||
-              formulario.get('hora')?.dirty)){
-              @if(formulario.get('hora')?.errors?.['required']){
-              Este campo es requerido}
-              }
-            </div>
-          </div>
-        </div>
+
+        
 
         <div class="col-lg-12 col-sm-12 mt-4">
           <div class="form-group">
             <label for="detalles" class="form-label">Detalles / Sugerencias</label>
             <textarea id="detalles" class="form-control" style="border: 1px dashed #000;" name="detalles"
-              placeholder="Deja aquí alguna sugerencia o detalle para tu reserva" formControlName="detalles" rows="4"></textarea>
+              placeholder="Deja aquí alguna sugerencia o detalle para tu reserva" formControlName="detalles"
+              rows="4"></textarea>
           </div>
         </div>
 

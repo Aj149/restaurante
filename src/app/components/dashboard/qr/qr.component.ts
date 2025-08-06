@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -10,36 +11,37 @@ import { Component } from '@angular/core';
 })
 export class QrComponent {
 
-  mostrarQR = false;
-  infoReserva = '';
-  qrData = '';
+   datos: any = null;
+  error = '';
+  today: Date = new Date();
 
-   generarQR() {
-    const datos = {
-      totalParcial: this.subtotal.toFixed(2),
-      iva: this.costoEnvio.toFixed(2),
-      totalFinal: this.totalFinal.toFixed(2),
-      platos: this.platosSeleccionados, // ejemplo
-      lugar: this.lugarSeleccionado, // ejemplo
-      mesas: this.mesas,
-      sillas: this.sillas,
-    };
+  constructor(private route: ActivatedRoute) {}
 
-    this.qrData = JSON.stringify(datos, null, 2);
-    this.mostrarQR = true;
+  ngOnInit() {
+    this.route.queryParamMap.subscribe(params => {
+      const d = params.get('d');
+      if (!d) {
+        this.error = 'No hay datos del ticket';
+        return;
+      }
+      try {
+        const json = decodeURIComponent(atob(d));
+        this.datos = JSON.parse(json);
+      } catch (e) {
+        this.error = 'Datos inválidos';
+        console.error(e);
+      }
+    });
   }
 
-  descargarQR() {
-    const qrElement: any = document.getElementById('codigoQR');
-    const img = qrElement.querySelector('img');
-
-    if (img) {
-      const url = img.src;
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'codigo_qr.png';
-      a.click();
-    }
+  imprimir() {
+    window.print();
   }
 
+  // opcional: una función que devuelve la fecha formateada
+  getFecha(): string {
+    // si datos.fecha existe y es válida, la usamos; si no, usamos today
+    const fecha = this.datos?.fecha ? new Date(this.datos.fecha) : this.today;
+    return fecha.toLocaleString(); // te devuelve algo legible según la localización del navegador
+  }
 }
