@@ -71,47 +71,42 @@
                     <!-- Enlace con fragmento -->
                     <h4>Deseas agregar más platos?</h4><a href="/dashboard#ESPECIALIDADES" class="link-personalizado">
                         <b>Mira el catálogo completo </b>
-</a>
+                    </a>
 
 
                 </div>
             </div>
         </div>
 
-       
+
         <div class="row justify-content-center mb-5">
-  <div class="col-lg-4 col-md-6 col-sm-12 pb-5 mt-5 resumen-box">
-    <h2 class="fs-4 text-center mb-4 text-dark">🧾 Resumen Final</h2>
+            <div class="col-lg-4 col-md-6 col-sm-12 pb-5 mt-5 resumen-box">
+                <h2 class="fs-4 text-center mb-4 text-dark">🧾 Resumen Final</h2>
 
-    <div class="d-flex justify-content-between resumen-linea">
-      <span class="fw-medium">Total Parcial</span>
-      <strong class="fw-bold text-success">${{subtotal.toFixed(2)}}</strong>
-    </div>
+                <div class="d-flex justify-content-between resumen-linea">
+                    <span class="fw-medium">Total Parcial</span>
+                    <strong class="fw-bold text-success">${{subtotal.toFixed(2)}}</strong>
+                </div>
 
-    <div class="d-flex justify-content-between resumen-linea">
-      <span class="fw-medium">IVA</span>
-      <strong class="fw-bold text-info">${{costoEnvio.toFixed(2)}}</strong>
-    </div>
+                <div class="d-flex justify-content-between resumen-linea">
+                    <span class="fw-medium">IVA</span>
+                    <strong class="fw-bold text-info">${{iva.toFixed(2)}}</strong>
+                </div>
 
-    <div class="d-flex justify-content-between resumen-total">
-      <span class="fw-medium">Total a Pagar</span>
-      <strong class="fw-bold text-danger">${{totalFinal.toFixed(2)}}</strong>
-    </div>
+                <div class="d-flex justify-content-between resumen-total">
+                    <span class="fw-medium">Total a Pagar</span>
+                    <strong class="fw-bold text-danger">${{totalFinal.toFixed(2)}}</strong>
+                </div>
 
-    <button class="btn btn-primary mt-3" (click)="generarQR()">Generar QR</button>
-    <p class="mt-2">Presente el QR al encargado para retirar su pedido o asistir a su reserva</p>
+                <button class="btn btn-primary mt-3" (click)="generarFactura()">Generar Factura</button>
 
-    <div *ngIf="mostrarQR" id="codigoQR" class="text-center mt-3">
-      <qrcode [qrdata]="qrData" [width]="200" [errorCorrectionLevel]="'M'"></qrcode>
-      <button class="btn btn-outline-success mt-2" (click)="descargarQR()">📥 Descargar QR</button>
-    </div>
-  </div>
-</div>
-<div class="d-flex justify-content-center mb-5">
-  <button class="btn btn-sm btn-outline-danger fs-5" (click)="logout()">Cerrar sesión</button>
-</div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center mb-5">
+            <button class="btn btn-sm btn-outline-danger fs-5" (click)="logout()">Cerrar sesión</button>
+        </div>
 
-        
+
     </div>
 </div>
 

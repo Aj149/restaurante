@@ -16,12 +16,13 @@ import { FormsModule } from '@angular/forms';
 })
 export class EditPlatosEsComponent {
   plato: Platos = {
-      id_plato: 0,
-      nombre: '',
-      descripcion: '',
-      imagen: '',
-      precio: 0
-    }
+    id_plato: 0,
+    nombre: '',
+    descripcion: '',
+    imagen: '',
+    precio: 0,
+    cantidad: 0
+  }
 
   constructor(
     private router: Router,

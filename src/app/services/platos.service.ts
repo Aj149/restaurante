@@ -3,7 +3,7 @@ import { environment } from '../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Platos } from '../models/dashboard';
-import { Pedido } from '../models/popup';
+import { Factura, Pedido } from '../models/pedidos';
 
 
 
@@ -13,6 +13,7 @@ import { Pedido } from '../models/popup';
 export class PlatosService {
 
   platosUrl = environment.platosURL
+  facturaUrl = environment.facturaUrl
     
     constructor(private httpClient: HttpClient) { }
   
@@ -138,6 +139,11 @@ getPedidoTemporal(): Observable<Pedido | null> {
       }
 
     
+      // 2codigo para las facturas
+
+        crearFactura(factura: Factura) {
+    return this.httpClient.post(this.facturaUrl, factura);
+  }
       
      
   }

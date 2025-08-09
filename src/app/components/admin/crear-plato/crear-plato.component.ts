@@ -63,6 +63,7 @@ export class CrearPlatoComponent {
         descripcion: formValues.descripcion,
         precio: parseFloat(formValues.precio),
         imagen: formValues.imagen,
+        cantidad: 0
       };
       this.platoService.agregarPlatos(nuevoPlato).subscribe(
       (response) => {

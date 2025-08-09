@@ -5,7 +5,7 @@ import { FooterComponent } from "../footer/footer.component";
 import { AuthService } from '../../../services/auth.service';
 import { PlatosService } from '../../../services/platos.service';
 import { Router } from '@angular/router';
-import { Pedido } from '../../../models/popup';
+import { DetalleFactura, Factura, Pedido } from '../../../models/pedidos';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Usuarios } from '../../../models/registroUsuario';
 import Swal from 'sweetalert2';
@@ -26,112 +26,106 @@ export class CarritoComponent implements OnInit {
   totalFinal: number = 0;
 
  
-  pedido: any[] = []; 
+  pedido: Pedido[] = []; 
   subtotal: number = 0;
-  costoEnvio: number = 1.50;
+
   total: number = 0;
-  paymentForm: FormGroup;
+
 
 
   isLoading: boolean = true;
 
-  // 5para generar el QR de la reserva
+  // 5para generar el pdf de la compra de los platos
 
-  mostrarQR = false;
-  infoReserva = '';
-  qrData: string = '';
+  
   platosSeleccionados: Platos[] = [];
-  platos: Platos[] = [];
-
-   generarQR() {
-
-  // arma el objeto que quieres mostrar
-const datos = {
-  nombreCliente: 'Juan Pérez',
-  ubicacionRetiro: 'Sucursal Centro - Av. Principal 123',
-  totalParcial: this.subtotal.toFixed(2),
-  iva: this.costoEnvio.toFixed(2),
-  totalFinal: this.totalFinal.toFixed(2),
-  platos: this.platos // array de {nombre, cantidad, precio}
+usuarios: Usuarios = {
+  nombre: '',
+  apellido: '',
+  email: '',
+  password: '',
+  telefono: '',
+  direccion: '',
+  platos: [] // si quieres dejar aquí, pero no es recomendable
 };
 
-const json = JSON.stringify(datos);
-const base64 = btoa(encodeURIComponent(json));
-this.qrData = `${window.location.origin}/ticket?d=${base64}`;
+iva: number = 1.50;
+  generarFactura() {
+    this.calcularTotal();
+
+    this.pedido.forEach((p, i) => {
+    console.log(`pedido[${i}] id:`, p.id, typeof p.id);
+    console.log(`pedido[${i}] precio:`, p.precio, typeof p.precio);
+  });
+
+  console.log('pedido completo:', this.pedido);
+
+    // Crear detalles desde pedido
+    const detalles = this.pedido.map(p => new DetalleFactura({
+      platoId: Number(p.id_pedido),
+    cantidad: Number(p.cantidad),
+    precio_unitario: Number(p.precio)
+    }));
+
+    // Crear la factura completa
+    const factura = new Factura({
+      fecha: new Date(),
+      usuarioId: this.usuario?.id || 0,
+      total: this.subtotal,
+      iva: this.iva,
+      detalles: detalles
+    });
+
+    // **Log para ver qué datos se enviarán al backend**
+    console.log('Factura a enviar:', factura);
+
+    // Aquí llamas al servicio para enviar 'factura' al backend
+    this.platosService.crearFactura(factura).subscribe({
+      next: (res) => {
+        console.log('Factura guardada', res);
+        const datosBase64 = btoa(encodeURIComponent(JSON.stringify(res)));
+      this.router.navigate(['/ticket'], { queryParams: { d: datosBase64 } });
+        // navegar a ticket, etc.
+      },
+      error: (err) => {
+        console.error('Error guardando factura', err);
+        // **Log para ver detalle del error**
+        console.log('Error completo:', err);
+      }
+    });
+  }
 
 
-// Crear la URL completa (ajusta dominio / ruta según tu despliegue)
-this.qrData = `${window.location.origin}/ticket?d=${base64}`;
 
 
-  this.mostrarQR = true;
-}
-
-// ngOnInit() {
-//   this.route.queryParamMap.subscribe(params => {
-//     const encoded = params.get('d');
-//     if (encoded) {
-//       try {
-//         const decoded = decodeURIComponent(atob(encoded));
-//         this.datos = JSON.parse(decoded);
-//       } catch (e) {
-//         console.error('Error decodificando', e);
-//       }
-//     }
-//   });
-// }
-
-
-  descargarQR() {
-  const qrElement = document.getElementById('codigoQR');
-  if (!qrElement) return;
-
-  // Primero intenta encontrar una imagen
-  let img: HTMLImageElement | null = qrElement.querySelector('img');
-
-  // Si no hay imagen, intenta encontrar un canvas y convertirlo a imagen
-  if (!img) {
-    const canvas: HTMLCanvasElement | null = qrElement.querySelector('canvas');
-    if (canvas) {
-      const url = canvas.toDataURL('image/png');
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'codigo_qr.png';
-      a.click();
-      return;
+  cargarDatosUsuario() {
+    const userData = this.authService.getUserData();
+    if (userData) {
+      this.usuarios = userData;
+    } else {
+      console.warn('No se encontró datos del usuario en localStorage');
     }
   }
 
-  // Si encontró imagen, descarga
-  if (img) {
-    const url = img.src;
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'codigo_qr.png';
-    a.click();
-  }
+calcularTotal() {
+  this.total = this.pedido.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
+  this.subtotal = this.total;  
+  this.totalFinal = this.subtotal + this.iva;
 }
-
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private platosService: PlatosService,
-    private router: Router
-  ) {
-    this.paymentForm = this.fb.group({
-      cardName: ['', Validators.required],
-      cardNumber: ['',[Validators.required,Validators.pattern(/^(\d{4} ?){4}$/)]],
-      expiryDate: ['', [Validators.required, Validators.pattern(/^(0[1-9]|1[0-2])\/\d{2}$/)]],
-      cvv: ['', [Validators.required, Validators.pattern(/^\d{3,4}$/)]] 
-    });
-  }
+    private router: Router,
+  ) {}
 
   ngOnInit() {
     this.checkForTemporaryOrder();
     this.loadCartItems();
     this.getUserInfo();
     this.calcularTotal(); 
+    this.cargarDatosUsuario();
   }
 
   private checkForTemporaryOrder() {
@@ -145,22 +139,6 @@ this.qrData = `${window.location.origin}/ticket?d=${base64}`;
         console.error('Error al procesar pedido temporal:', error);
       }
     }
-  }
-  
-  formatearTarjeta() {
-    const control = this.paymentForm.get('cardNumber');
-    if (!control) return;
-  
-    let value = control.value || '';
-    value = value.replace(/\D/g, ''); // Solo dígitos
-  
-    // Agrupa cada 4 dígitos con un espacio, máximo 16 dígitos (19 con espacios)
-    if (value.length > 16) {
-      value = value.slice(0, 16);
-    }
-  
-    const formatted = value.match(/.{1,4}/g)?.join(' ') ?? '';
-    control.setValue(formatted, { emitEvent: false });
   }
   
   
@@ -180,11 +158,6 @@ this.qrData = `${window.location.origin}/ticket?d=${base64}`;
     });
   }
 
-  calcularTotal() {
-    this.total = this.pedido.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
-    this.subtotal = this.total;  // Suponiendo que no haya descuentos
-    this.totalFinal = this.subtotal + this.costoEnvio;
-  }
 
   getUserInfo() {
     const user = this.authService.getUserData();
@@ -207,51 +180,6 @@ this.qrData = `${window.location.origin}/ticket?d=${base64}`;
   updateQuantity(index: number, change: number) {
     this.platosService.updateQuantity(index, change);
   }
-
-  realizarPedido() {
-    if (this.paymentForm.valid) {
-      // Simula pago exitoso
-      Swal.fire({
-        icon: 'success',
-        title: '¡Pago exitoso!',
-        text: 'Tu compra se ha realizado correctamente.',
-        confirmButtonColor: '#3085d6'
-      }).then(() => {
-        // Limpiar los campos del formulario
-        this.paymentForm.reset();
-  
-        // Si tienes variables para los platos seleccionados o precios, puedes restablecerlos aquí
-        // Ejemplo:
-        this.totalFinal = 0; // Resetear el total final
-        this.subtotal = 0; // Resetear el subtotal
-        this.costoEnvio = 0; // Resetear el costo de envío
-        this.count = 0; // Resetear el contador de platos
-
-        this.pedido = []; // Vaciar los platos seleccionados
-        this.total = 0; // Resetear el total
-  
-        // Si hay imágenes, ocultarlas
-        // Ejemplo de ocultar imágenes, si están en el DOM:
-        const imagenes = document.querySelectorAll('.imagen-plato');
-        imagenes.forEach(imagen => {
-          imagen.classList.add('d-none'); // Esconde las imágenes, por ejemplo con Bootstrap
-        });
-  
-        // Redirigir al usuario a una página limpia si es necesario, por ejemplo al inicio
-        // this.router.navigate(['/home']);
-      });
-  
-      console.log(this.paymentForm.value);
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error en el formulario',
-        text: 'Por favor, completa todos los campos correctamente.',
-        confirmButtonColor: '#d33'
-      });
-    }
-  }
-  
   
   
   

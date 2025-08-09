@@ -19,13 +19,15 @@ export class Comentarios{
     comentario: string='';
 }
 
-export class Platos{
-    id_plato?: number=0;
-    nombre: string='';
-    descripcion: string='';
-    imagen: string='';
-    precio: number=0;
+export class Platos {
+  id_plato?: number = 0;
+  nombre: string = '';
+  descripcion: string = '';
+  imagen: string = '';
+  precio: number = 0;
+  cantidad: number = 0;
 }
+
 
 export class Lugares{
     id_lugar?: number=0;

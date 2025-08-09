@@ -3,7 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { Platos } from '../../../models/dashboard';
 import { PlatosService } from '../../../services/platos.service';
 import { AuthService } from '../../../services/auth.service';
-import { Pedido } from '../../../models/popup';
+import { Pedido } from '../../../models/pedidos';
 
 @Component({
   selector: 'app-pop-up-platos',
@@ -48,12 +48,15 @@ export class PopUpPlatosComponent {
         precio: this.plato.precio,
         imagen: this.plato.imagen,
         cantidad: 0,
-        total: 0
+        total: 0,
+        fecha: new Date(),
+        estado: '',
+        id: 0
       };
   
       // Guardar el pedido temporalmente en localStorage
       localStorage.setItem('pedidoTemporal', JSON.stringify(pedido));
-      console.log('Pedido guardado:', pedido);
+
   
       this.authService.isAuthenticated().subscribe({
         next: (isAuthenticated) => {
