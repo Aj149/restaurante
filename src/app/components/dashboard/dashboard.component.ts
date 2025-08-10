@@ -1,10 +1,10 @@
-import { Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { CarouselModule,OwlOptions } from 'ngx-owl-carousel-o';
+import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { LikesService } from '../../services/likes.service';
-import {  FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormularioService } from '../../services/formulario.service';
 import { CommonModule } from '@angular/common';
 import { ComentariosService } from '../../services/comentarios.service';
@@ -36,15 +36,15 @@ export class DashboardComponent {
   formulario: FormGroup;
   isFormSubmitted: boolean = false;
   FormSubmitted: boolean = false;
-  
+
   // 4popup platos especiales
 
   isPopupVisible = false;
   platos: Platos[] = [];
-platosEspeciales: Platos[] = [];
-platoSeleccionado!: Platos;
+  platosEspeciales: Platos[] = [];
+  platoSeleccionado!: Platos;
 
-// 4traer platos, lugares, comentarios y personal
+  // 4traer platos, lugares, comentarios y personal
 
   ngOnInit(): void {
     if (this.platos) {
@@ -112,90 +112,152 @@ platoSeleccionado!: Platos;
     );
   }
 
-    onLugarChange(event: any) {
-  const lugarId = +event.target.value;
-  const lugarSeleccionado = this.lugares.find(l => l.id_lugar === lugarId);
+  onLugarChange(event: any) {
+    const lugarId = +event.target.value;
+    const lugarSeleccionado = this.lugares.find(l => l.id_lugar === lugarId);
 
-  if (lugarSeleccionado) {
-    this.capacidades = lugarSeleccionado.capacidad;
+    if (lugarSeleccionado) {
+      this.capacidades = lugarSeleccionado.capacidad;
 
-    const personasCtrl = this.formulario.get('n_personas');
-    if (personasCtrl && personasCtrl.value > this.capacidades) {
-      personasCtrl.setValue(this.capacidades);
-    }
+      const personasCtrl = this.formulario.get('n_personas');
+      if (personasCtrl && personasCtrl.value > this.capacidades) {
+        personasCtrl.setValue(this.capacidades);
+      }
 
-    // 🔹 Cargar todos los horarios de este lugar
-    this.lugaresService.getHorariosPorLugar(lugarId).subscribe((data: Horario[]) => {
-      this.todosLosHorarios = data; // Guardamos todos
+      // 🔹 Cargar todos los horarios de este lugar
+      this.lugaresService.getHorariosPorLugar(lugarId).subscribe((data: Horario[]) => {
+        this.todosLosHorarios = data; // Guardamos todos
+        this.horarios = [];
+      });
+    } else {
+      this.capacidades = 0;
+      this.todosLosHorarios = [];
       this.horarios = [];
-    });
-  } else {
-    this.capacidades = 0;
-    this.todosLosHorarios = [];
-    this.horarios = [];
+    }
   }
-}
 
 
-onFechaChange(event: any) {
+  onFechaChange(event: any) {
   const fechaSeleccionada = event.target.value; // "YYYY-MM-DD"
   if (!fechaSeleccionada) {
     this.horarios = [];
+    this.horariosFiltrados = [];
     return;
   }
 
-  const dateObj = new Date(fechaSeleccionada);
+  // Evitar problema de timezone: parse manual
+  const [anio, mes, dia] = fechaSeleccionada.split('-').map(Number);
+  const dateObj = new Date(anio, mes - 1, dia); // mes - 1 porque en JS los meses van de 0 a 11
+
   const diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
   const diaSemana = diasSemana[dateObj.getDay()];
 
-  // Filtrar con tipado
+  // Filtrar por día
   this.horarios = this.todosLosHorarios.filter((h: Horario) => h.dia === diaSemana);
+
+  // Filtrar por hora si la fecha es hoy
+  this.filtrarHorariosPorFecha(fechaSeleccionada);
 }
 
 
-  
 
+  // para que el cliente no pueda seleccionar un horario pasado
+  filtrarHorariosPorFecha(fechaSeleccionada: string) {
+  const ahora = new Date();
 
-  
+  const parts = fechaSeleccionada.split('-');
+  const fechaSel = new Date(+parts[0], +parts[1] - 1, +parts[2]);
+  fechaSel.setHours(0, 0, 0, 0);
 
-// 4abre y cierra el popup de los platos especiales
-abrirPopup(plato: Platos) {
-  this.platoSeleccionado = plato;
-  this.isPopupVisible = true;
+  // Horarios disponibles
+  const horariosDisponibles = this.horarios.filter(h => h.estado === 'Disponible');
+
+  // Hora base para ordenar (8am)
+  const baseHora = 8 * 60; // 480 minutos
+
+  // Función para convertir hora a minutos cíclicos según baseHora
+  const minutosCiclicos = (hora: string) => {
+    const [h, m] = hora.split(':').map(Number);
+    let total = h * 60 + m - baseHora;
+    if (total < 0) total += 1440; // suma un día si es negativo
+    return total;
+  };
+
+  // Filtrar y ordenar según fecha
+  if (fechaSel.toDateString() === ahora.toDateString()) {
+    let limite = new Date(ahora.getTime() + 1 * 60 * 60 * 1000);
+    const finDia = new Date(fechaSel);
+    finDia.setHours(23, 59, 59, 999);
+    if (limite > finDia) {
+      limite = finDia;
+    }
+
+    const filtrados = horariosDisponibles.filter(h => {
+      const [horaInicio, minutoInicio] = h.horaInicio.split(':').map(Number);
+      const fechaHorario = new Date(fechaSel);
+      fechaHorario.setHours(horaInicio, minutoInicio, 0, 0);
+      return fechaHorario >= limite;
+    });
+
+    this.horariosFiltrados = filtrados.sort((a, b) => minutosCiclicos(a.horaInicio) - minutosCiclicos(b.horaInicio));
+  } else {
+    this.horariosFiltrados = horariosDisponibles.sort((a, b) => minutosCiclicos(a.horaInicio) - minutosCiclicos(b.horaInicio));
+  }
 }
+
+
+
+
+
+
+  horarioActual(event: any) {
+    const fechaSeleccionada = event.target.value;
+    this.filtrarHorariosPorFecha(fechaSeleccionada);
+  }
+
+
+
+
+
+
+  // 4abre y cierra el popup de los platos especiales
+  abrirPopup(plato: Platos) {
+    this.platoSeleccionado = plato;
+    this.isPopupVisible = true;
+  }
 
   closePopup() {
     this.isPopupVisible = false;
   }
 
   // 5para los lugares del carrusel
-  
+
   abrirPopupLugar(lugar: Lugares) {
     this.lugarSeleccionado = lugar;
     this.mostrarPopUp = true;
   }
-  
-  
-    cerrarPopup() {
-      this.mostrarPopUp = false;
-    }
 
-    // 2abre y cierra el pop up del personal
-    abrirPopupPersonal(personal: Personal) {
-  this.personalSelecionado = personal;
-  this.mostrarPopUpPersonal = true;
-}
+
+  cerrarPopup() {
+    this.mostrarPopUp = false;
+  }
+
+  // 2abre y cierra el pop up del personal
+  abrirPopupPersonal(personal: Personal) {
+    this.personalSelecionado = personal;
+    this.mostrarPopUpPersonal = true;
+  }
 
   cerrarPopupPersonal() {
     this.mostrarPopUpPersonal = false;
   }
 
-    // 2pop up personal
-    mostrarPopUpPersonal = false;
-    personal: Personal[] = [];
+  // 2pop up personal
+  mostrarPopUpPersonal = false;
+  personal: Personal[] = [];
   personalEspeciales: Personal[] = [];
-    personalSelecionado!: Personal;
-  
+  personalSelecionado!: Personal;
+
   // 1para los lugares
   mostrarPopUp = false;
   lugares: Lugares[] = [];
@@ -203,8 +265,10 @@ abrirPopup(plato: Platos) {
   lugarSeleccionado!: Lugares;
   capacidades: number = 0;
   maxPersonas: number = 0;
+  // 2para los horarios
   todosLosHorarios: Horario[] = [];
   horarios: Horario[] = [];
+  horariosFiltrados: any[] = [];
 
   // 4para las bebidas
   bebidas: Bebidas[] = [];
@@ -212,8 +276,7 @@ abrirPopup(plato: Platos) {
 
   constructor(
     // 1para los lugares
-    private fb: FormBuilder, private http: HttpClient,
-    private likeService: LikesService,
+    private fb: FormBuilder,
     private formularioService: FormularioService,
     private mensajeService: ComentariosService,
     private platosService: PlatosService,
@@ -233,25 +296,59 @@ abrirPopup(plato: Platos) {
 
 
     this.formularioMensaje = new FormGroup({
-      nombre: new FormControl("",[Validators.required]),
-      email: new FormControl('',[Validators.required,Validators.email] ),
-      comentario: new FormControl ("", [Validators.required])
+      nombre: new FormControl("", [Validators.required, Validators.maxLength(30)]),
+      email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(40), Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
+      comentario: new FormControl('', [Validators.required, Validators.maxLength(150)]),
 
     })
     this.formulario = new FormGroup
-    ({
-      
-      nombre: new FormControl("",[Validators.required, Validators.pattern('^[a-zA-Z\s]*$')]),
-      email: new FormControl('',[Validators.required,Validators.email] ),
-      telefono: new FormControl("", [Validators.required, Validators.pattern(/^[0-9]{1,10}$/)]),
-      lugar: new FormControl('',[Validators.required]),
-      n_personas: new FormControl ('',[Validators.required, Validators.pattern('^[0-9]*$')]),
-      fecha: new FormControl ('',[Validators.required]),
-      hora:new FormControl ('',[Validators.required]),
-      detalles: new FormControl ('',[Validators.required])
-    })
+      ({
+
+        nombre: new FormControl("", [Validators.required, Validators.pattern(/^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$/), Validators.maxLength(30)]),
+        email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(40), Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
+        telefono: new FormControl("", [Validators.required, Validators.maxLength(11), Validators.pattern(/^[0-9]{1,10}$/)]),
+        lugar: new FormControl('', [Validators.required]),
+        n_personas: new FormControl('', [Validators.required, Validators.min(1), Validators.pattern('^[0-9]*$')]),
+        fecha: new FormControl('', [Validators.required, this.fechaNoPasadaValidator]),
+        hora: new FormControl('', [Validators.required]),
+        detalles: new FormControl('', [Validators.maxLength(200)]),
+      })
   }
 
+  // para que no puedan poner una fecha anterior a la actual
+  hoy: string = new Date().toLocaleDateString('en-CA'); // formato YYYY-MM-DD en local time
+
+
+  fechaNoPasadaValidator(control: AbstractControl) {
+    if (!control.value) return null;
+
+    const fechaSeleccionada = new Date(control.value);
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0); // quitar hora
+
+    return fechaSeleccionada < hoy ? { fechaPasada: true } : null;
+  }
+
+  fechaHoy(event: any) {
+    console.log('Fecha seleccionada:', event.target.value);
+  }
+
+  // numero maximo de caracteres para los detalles de la reserva
+maxCaracteres = 200;
+get caracteresRestantes() {
+  const valor = this.formulario.get('detalles')?.value || '';
+  return this.maxCaracteres - valor.length;
+}
+onInputDetalles() {
+  const control = this.formulario.get('detalles');
+  if (control) {
+    const valor = control.value;
+    if (valor.length > this.maxCaracteres) {
+      control.setValue(valor.substring(0, this.maxCaracteres));
+    }
+  }
+}
+  
 
 
 
@@ -276,73 +373,73 @@ abrirPopup(plato: Platos) {
       console.log('Formulario Inválido', this.formulario.errors);
     }
   }
-agregarReserva() {
-  this.isFormSubmitted = true;
-  if (this.formulario.valid) {
-    const formValues = this.formulario.value;
-    const nuevaReserva: reserva = {
-      nombre: formValues.nombre,
-      email: formValues.email,
-      telefono: formValues.telefono,
-      lugar_id: +formValues.lugar,
-      n_personas: +formValues.n_personas,
-      fecha: formValues.fecha,
-      horario_id: +formValues.hora,
-      detalles: formValues.detalles
-    };
-    console.log(nuevaReserva); // Verifica los datos aquí
-    this.formularioService.agregarReserva(nuevaReserva).subscribe(
-      response => {
-        // Reserva creada con éxito
-        Swal.fire({
-          icon: 'success',
-          title: '¡Reserva creada!',
-          text: 'La reserva se ha realizado correctamente.',
-          confirmButtonText: 'Aceptar',
-          timer: 3000,
-          timerProgressBar: true
-        });
-        this.formulario.reset();
-        console.log('Reserva creada con éxito', response);
-      },
-      error => {
-        // Manejo de errores
-        console.error('Error al crear la reserva', error);
-        
-        if (error.status === 409) {
-          // Error de conflicto: horario ya reservado
+  agregarReserva() {
+    this.isFormSubmitted = true;
+    if (this.formulario.valid) {
+      const formValues = this.formulario.value;
+      const nuevaReserva: reserva = {
+        nombre: formValues.nombre,
+        email: formValues.email,
+        telefono: formValues.telefono,
+        lugar_id: +formValues.lugar,
+        n_personas: +formValues.n_personas,
+        fecha: formValues.fecha,
+        horario_id: +formValues.hora,
+        detalles: formValues.detalles
+      };
+      console.log(nuevaReserva); // Verifica los datos aquí
+      this.formularioService.agregarReserva(nuevaReserva).subscribe(
+        response => {
+          // Reserva creada con éxito
           Swal.fire({
-            icon: 'error',
-            title: 'Horario no disponible',
-            text: error.error.message || 'El horario ya está reservado para esa fecha.',
+            icon: 'success',
+            title: '¡Reserva creada!',
+            text: 'La reserva se ha realizado correctamente.',
             confirmButtonText: 'Aceptar',
+            timer: 3000,
+            timerProgressBar: true
           });
-        } else {
-          // Otros errores
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Ocurrió un error al crear la reserva. Inténtalo de nuevo.',
-            confirmButtonText: 'Aceptar',
-          });
+          this.formulario.reset();
+          console.log('Reserva creada con éxito', response);
+        },
+        error => {
+          // Manejo de errores
+          console.error('Error al crear la reserva', error);
+
+          if (error.status === 409) {
+            // Error de conflicto: horario ya reservado
+            Swal.fire({
+              icon: 'error',
+              title: 'Horario no disponible',
+              text: error.error.message || 'El horario ya está reservado para esa fecha.',
+              confirmButtonText: 'Aceptar',
+            });
+          } else {
+            // Otros errores
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Ocurrió un error al crear la reserva. Inténtalo de nuevo.',
+              confirmButtonText: 'Aceptar',
+            });
+          }
         }
-      }
-    );
+      );
+    }
   }
-}
 
 
 
-formatearHorario(horaInicio: string, horaFin: string, dia: string): string {
-  const formato = (hora: string) => {
-    const [h, m] = hora.split(':').map(Number);
-    const ampm = h >= 12 ? 'pm' : 'am';
-    const hora12 = h % 12 || 12;
-    return `${hora12}${ampm}`;
-  };
+  formatearHorario(horaInicio: string, horaFin: string, dia: string): string {
+    const formato = (hora: string) => {
+      const [h, m] = hora.split(':').map(Number);
+      const ampm = h >= 12 ? 'pm' : 'am';
+      const hora12 = h % 12 || 12;
+      return `${hora12}${ampm}`;
+    };
 
-  return `${formato(horaInicio)} a ${formato(horaFin)} (${dia})`;
-}
+    return `${formato(horaInicio)} a ${formato(horaFin)} (${dia})`;
+  }
 
 
 
@@ -350,98 +447,98 @@ formatearHorario(horaInicio: string, horaFin: string, dia: string): string {
 
 
   // para agregar mensajes
- agregarMensaje(): void {
-  this.FormSubmitted = true;
-  this.formularioMensaje.markAllAsTouched();
+  agregarMensaje(): void {
+    this.FormSubmitted = true;
+    this.formularioMensaje.markAllAsTouched();
 
-  // 1) Comprobar si está logueado (ajusta según tu proyecto)
-  // Opción A: usando un AuthService
-  const isLoggedIn = this.authService?.isLoggedIn ? this.authService.isLoggedIn() : null;
+    // 1) Comprobar si está logueado (ajusta según tu proyecto)
+    // Opción A: usando un AuthService
+    const isLoggedIn = this.authService?.isLoggedIn ? this.authService.isLoggedIn() : null;
 
-  // Opción B (fallback): comprobación directa en localStorage
-  const token = localStorage.getItem('token');
-  const logged = (isLoggedIn !== null) ? isLoggedIn : !!token;
+    // Opción B (fallback): comprobación directa en localStorage
+    const token = localStorage.getItem('token');
+    const logged = (isLoggedIn !== null) ? isLoggedIn : !!token;
 
-  if (!logged) {
-    // Guardar borrador opcionalmente
-    const draft = this.formularioMensaje.value;
-    localStorage.setItem('draftComentario', JSON.stringify(draft));
+    if (!logged) {
+      // Guardar borrador opcionalmente
+      const draft = this.formularioMensaje.value;
+      localStorage.setItem('draftComentario', JSON.stringify(draft));
 
-    // Mostrar alerta y ofrecer ir a login
-    Swal.fire({
-      icon: 'warning',
-      title: 'Debes iniciar sesión',
-      text: 'Necesitas iniciar sesión para publicar un comentario. ¿Deseas ir a la página de login?',
-      showCancelButton: true,
-      confirmButtonText: 'Ir a login',
-      cancelButtonText: 'Cancelar'
-    }).then(result => {
-      if (result.isConfirmed) {
-        // Redirigir a login
-        this.router.navigate(['/login']);
+      // Mostrar alerta y ofrecer ir a login
+      Swal.fire({
+        icon: 'warning',
+        title: 'Debes iniciar sesión',
+        text: 'Necesitas iniciar sesión para publicar un comentario. ¿Deseas ir a la página de login?',
+        showCancelButton: true,
+        confirmButtonText: 'Ir a login',
+        cancelButtonText: 'Cancelar'
+      }).then(result => {
+        if (result.isConfirmed) {
+          // Redirigir a login
+          this.router.navigate(['/login']);
+        }
+      });
+
+      return; // detener ejecución: no enviar si no está logueado
+    }
+
+    // 2) Si está logueado, validar formulario y enviar
+    if (this.formularioMensaje.invalid) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Formulario incompleto',
+        text: 'Por favor completa todos los campos requeridos.'
+      });
+      return;
+    }
+
+    const formValues = this.formularioMensaje.value;
+    const nuevoMensaje: Comentarios = {
+      nombre: formValues.nombre,
+      email: formValues.email,
+      comentario: formValues.comentario
+    };
+
+    console.log('Enviando comentario:', nuevoMensaje);
+
+    this.mensajeService.agregarMensaje(nuevoMensaje).subscribe({
+      next: (response) => {
+        Swal.fire({
+          title: 'Enviado!',
+          text: 'El mensaje ha sido enviado correctamente.',
+          icon: 'success',
+          background: "#27272a",
+          color: "#fafafa",
+          confirmButtonColor: "rgb(218, 91, 30)"
+        });
+        this.formularioMensaje.reset();
+        this.FormSubmitted = false;
+        localStorage.removeItem('draftComentario'); // limpiar borrador
+      },
+      error: (err) => {
+        console.error('Error al enviar mensaje:', err);
+        const msg = err?.error?.message || 'Hubo un problema al enviar el mensaje.';
+        Swal.fire({
+          title: 'Error!',
+          text: msg,
+          icon: 'error',
+          background: "#27272a",
+          color: "#fafafa",
+          confirmButtonColor: "#d33"
+        });
       }
     });
-
-    return; // detener ejecución: no enviar si no está logueado
   }
 
-  // 2) Si está logueado, validar formulario y enviar
-  if (this.formularioMensaje.invalid) {
-    Swal.fire({
-      icon: 'error',
-      title: 'Formulario incompleto',
-      text: 'Por favor completa todos los campos requeridos.'
-    });
-    return;
-  }
+  // 2para ver los mensajes
+  comentario: Comentarios[] = [];
 
-  const formValues = this.formularioMensaje.value;
-  const nuevoMensaje: Comentarios = {
-    nombre: formValues.nombre,
-    email: formValues.email,
-    comentario: formValues.comentario
-  };
-
-  console.log('Enviando comentario:', nuevoMensaje);
-
-  this.mensajeService.agregarMensaje(nuevoMensaje).subscribe({
-    next: (response) => {
-      Swal.fire({
-        title: 'Enviado!',
-        text: 'El mensaje ha sido enviado correctamente.',
-        icon: 'success',
-        background: "#27272a",
-        color: "#fafafa",
-        confirmButtonColor: "rgb(218, 91, 30)"
-      });
-      this.formularioMensaje.reset();
-      this.FormSubmitted = false;
-      localStorage.removeItem('draftComentario'); // limpiar borrador
-    },
-    error: (err) => {
-      console.error('Error al enviar mensaje:', err);
-      const msg = err?.error?.message || 'Hubo un problema al enviar el mensaje.';
-      Swal.fire({
-        title: 'Error!',
-        text: msg,
-        icon: 'error',
-        background: "#27272a",
-        color: "#fafafa",
-        confirmButtonColor: "#d33"
-      });
-    }
-  });
-}
-
-// 2para ver los mensajes
-comentario : Comentarios [] =[];
-  
   nombre = '';
   public page!: number;
 
   get comentariosOrdenados() {
-  return this.comentario.slice().reverse();
-}
+    return this.comentario.slice().reverse();
+  }
 
 
 
@@ -457,9 +554,9 @@ comentario : Comentarios [] =[];
   }
 
 
-  
 
-  
+
+
   // carrusel de la comida
   customOptions: OwlOptions = {
     loop: true,

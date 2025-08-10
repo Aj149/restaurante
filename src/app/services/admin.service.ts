@@ -129,8 +129,7 @@ private http = inject(HttpClient);
     return payload.exp < (Date.now() / 1000);
   }
 
-  // admin.service.ts
-// admin.service.ts
+
 public logout(): void {
   if (typeof window !== 'undefined') {
     localStorage.removeItem('token'); // <-- Esta clave debe coincidir

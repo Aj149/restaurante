@@ -70,6 +70,8 @@ horarios: Horario[] = [];
 
 
 
+
+
 // edit-lugar.component.ts
 
   cargarHorarios() {

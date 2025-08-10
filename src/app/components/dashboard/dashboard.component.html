@@ -21,18 +21,13 @@
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
           <div>
             <h1 class="nautilus" style="color: rgb(231, 91, 30);"> Sobre Nosotros </h1>
-            <h3>IT STARTED, QUITE SIMPLY, LIKE THIS...</h3>
-            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusm incididunt ut labore et dolore
-              magna aliqua. Ut enim ad minim venia, nostrud exercitation ullamco. </p>
-
-            <p> Aenean commodo ligula eget dolor aenean massa. Cum sociis nat penatibu set magnis dis parturient montes,
-              nascetur ridiculus mus. quam felisorat, ultricies nec, Aenean commodo ligula eget dolor penatibu set
-              magnis is parturient montes, nascetur ridiculus mus. quam felisorat, ultricies nec, pellentesque eu,
-              pretium quis, sem. quat massa quis enim. Donec vitae sapien ut libero venenatis fauci Nullam quis ante.
-              Etiam sit amet rci eget eros. </p>
-
-            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusm incididunt ut labore et dolore
-              magna aliqua. Ut enim ad minim venia, nostrud exercitation ullamco. </p>
+            <h3>Pasión que se Siente en Cada Plato</h3>
+            <p> En FOOD FUNDAY nos apasiona ofrecerte una experiencia gastronómica única, combinando los mejores ingredientes
+               frescos con recetas tradicionales y un toque innovador. </p>
+            <p> Desde nuestros inicios, hemos trabajado con dedicación para crear un ambiente acogedor donde cada cliente se 
+              sienta como en casa. </p>
+            <p> Nuestro compromiso es brindarte platos deliciosos, un servicio atento y un espacio perfecto para compartir 
+              momentos especiales con familia y amigos. ¡Te invitamos a descubrir el sabor que nos hace únicos! </p>
           </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -58,7 +53,7 @@
     <div class="parallax">
       <div class="position-absolute text-center mt-lg-1" style="top: 0%; width: 100%;">
         <p class="fs-1 nautilus" style="margin-bottom: 0; color:rgb(231, 91, 30);">ESPECIALIDADES</p>
-        <p class="roboto text-white p-lg-4 ">Lo mejor en comida en un solo lugar.</p>
+        <p class="roboto text-white p-lg-4 ">En nuestro restaurante encontrarás platos únicos que representan lo mejor de nuestra cocina. Preparados con ingredientes frescos y mucho cariño.</p>
 
         <div class="container mx-auto d-block">
           <owl-carousel-o [options]="customOptions" #owlCar>
@@ -117,9 +112,7 @@
   <div class="container text-center mt-4">
     <h1 class="nautilus" style="color:rgb(231, 91, 30);">INSTALACIONES</h1>
 
-    <P class="roboto mx-auto d-block w-75 mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam neque
-      atque repellendus odio rerum deleniti voluptatibus praesentium tenetur earum, assumenda, laudantium suscipit nihil
-      et in dolores vero doloribus ducimus quasi.</P>
+    <P class="roboto mx-auto d-block w-75 mt-3">Más que comida, te ofrecemos el espacio ideal. Ya sea para una cena íntima, una reunión familiar o un evento especial, nuestros ambientes cómodos y acogedores están diseñados para que cada momento sea inolvidable. ¡Tu lugar perfecto te espera aquí!</P>
   </div>
 
 
@@ -131,29 +124,29 @@
         <ng-template carouselSlide>
           <button href="#carouselExampleDark" class="active border-0 btn bg-transparent"
             data-bs-target="#carouselExampleDark" data-bs-slide-to="0">
-            <h4 class="roboto">Diapositiva 1</h4>
-            <img src="../../../assets/comida.gif" class="mx-auto d-block w-25" alt="">
+            <h4 class="roboto">{{lugaresEspeciales[0].nombre}}</h4>
+            <img src="../../../assets/salon privado.gif" class="mx-auto d-block w-25" alt="">
           </button>
         </ng-template>
         <ng-template carouselSlide>
           <button href="#carouselExampleDark" class="active border-0 btn bg-transparent"
             data-bs-target="#carouselExampleDark" data-bs-slide-to="1">
-            <h4 class="roboto">Diapositiva 2</h4>
-            <img src="../../../assets/familia.gif" class="mx-auto d-block w-25" alt="">
+            <h4 class="roboto">{{lugaresEspeciales[1].nombre}}</h4>
+            <img src="../../../assets/bar.gif" class="mx-auto d-block w-25" alt="">
           </button>
         </ng-template>
         <ng-template carouselSlide>
           <button href="#carouselExampleDark" class="active border-0 btn bg-transparent"
             data-bs-target="#carouselExampleDark" data-bs-slide-to="2">
-            <h4 class="roboto">Diapositiva 3</h4>
-            <img src="../../../assets/comida.gif" class="mx-auto d-block w-25" alt="">
+            <h4 class="roboto">{{lugaresEspeciales[2].nombre}}</h4>
+            <img src="../../../assets/salon principal.gif" class="mx-auto d-block w-25" alt="">
           </button>
         </ng-template>
         <ng-template carouselSlide>
           <button href="#carouselExampleDark" class="active border-0 btn bg-transparent"
             data-bs-target="#carouselExampleDark" data-bs-slide-to="3">
-            <h4 class="roboto">Diapositiva 4</h4>
-            <img src="../../../assets/comida.gif" class="mx-auto d-block w-25" alt="">
+            <h4 class="roboto">{{lugaresEspeciales[3].nombre}}</h4>
+            <img src="../../../assets/terraza.gif" class="mx-auto d-block w-25" alt="">
           </button>
         </ng-template>
       </owl-carousel-o>
@@ -260,7 +253,8 @@
     <div class="parallax2">
       <div class="position-absolute text-center mt-lg-1" style="top: 0%; width: 100%;">
         <p class="fs-1 nautilus text-white" style="margin-bottom: 0;">PERSONAL</p>
-        <p class="roboto p-lg-4 text-white">Lo mejor en comida en un solo lugarñ.</p>
+        <p class="roboto p-lg-4 text-white">Nuestro equipo es el corazón de FOOD FUNDAY. Apasionados, atentos y siempre dispuestos a brindarte el mejor servicio, trabajan con dedicación para que 
+          tu experiencia sea única y memorable. Aquí, la calidad no solo está en la cocina, sino también en cada sonrisa que te atendemos.</p>
 
         <div class="container mx-auto d-block">
           <owl-carousel-o [options]="customOptions3" #owlCar>
@@ -285,7 +279,7 @@
                 <div class="card-body">
                   <h5 class="card-title">{{personalEspeciales[1].nombre}}</h5>
                   <p class="card-text">{{personalEspeciales[1].descripcion}}</p>
-                  <div class="row"> <!-- Agregamos la clase gx-2 para agregar espacio entre columnas -->
+                  <div class="row">
                     <div class="col">
                       <button class="boton border-0 rounded-2 cursor-pointer"
                         (click)="abrirPopupPersonal(personalEspeciales[1])">info</button>
@@ -322,9 +316,9 @@
     <div class="container text-center mt-4">
       <h1 class="nautilus" style="color:rgb(231, 91, 30);">BEBIDAS</h1>
 
-      <P class="roboto mx-auto d-block w-75 mt-3 text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Ipsam neque atque repellendus odio rerum deleniti voluptatibus praesentium tenetur earum, assumenda, laudantium
-        suscipit nihil et in dolores vero doloribus ducimus quasi.</P>
+      <P class="roboto mx-auto d-block w-75 mt-3 text-white">En nuestro bar, cada bebida es una invitación a disfrutar y relajarte. 
+        Desde clásicos atemporales hasta creaciones originales de nuestros bartenders, nuestras bebidas están diseñadas para complementar 
+        tu experiencia gastronómica y crear momentos memorables. ¡Salud por los buenos momentos y el mejor sabor!</P>
     </div>
 
     <div class="container text-center mt-5">
@@ -420,14 +414,23 @@
                 aria-describedby="nombreHelp" name="nombre" placeholder="Nombre y Apellido" formControlName="nombre">
             </div>
             <div class="text-danger">
-              @if(formulario.get('nombre')?.invalid && (isFormSubmitted || formulario.get('nombre')?.touched ||
-              formulario.get('nombre')?.dirty)){
-              @if(formulario.get('nombre')?.errors?.['required']){
-              Este campo es requerido}
-              @if(formulario.get('nombre')?.errors?.['pattern'])
-              {No ingrese numeros}
-              }
-            </div>
+  @if (formulario.get('nombre')?.invalid && 
+      (isFormSubmitted || formulario.get('nombre')?.touched || formulario.get('nombre')?.dirty)) {
+
+    @if (formulario.get('nombre')?.errors?.['required']) {
+      Este campo es requerido
+    }
+
+    @if (formulario.get('nombre')?.errors?.['pattern']) {
+      No ingrese números
+    }
+
+    @if (formulario.get('nombre')?.errors?.['maxlength']) {
+      Máximo 30 caracteres permitidos
+    }
+  }
+</div>
+
           </div>
         </div>
 
@@ -457,7 +460,7 @@
         <!-- Campo de número de personas -->
         <div class="col-lg-6 col-sm-12 mt-4">
           <div class="form-group">
-            <input type="number" class="form-control" formControlName="n_personas" [max]="capacidades"
+            <input type="number" class="form-control" formControlName="n_personas" min="1" [max]="capacidades"
               placeholder="Número de personas" />
 
             <!-- Texto de capacidad con clase condicional -->
@@ -485,7 +488,7 @@
 
        <div class="col-lg-6 col-sm-12 mt-4">
           <div class="form-group">
-            <input type="date" class="form-control" formControlName="fecha" (change)="onFechaChange($event)">
+            <input type="date" class="form-control" formControlName="fecha" [min]="hoy" (change)="onFechaChange($event)">
             <div class="text-danger">
               @if(formulario.get('fecha')?.invalid && (isFormSubmitted || formulario.get('fecha')?.touched ||
               formulario.get('fecha')?.dirty)){
@@ -495,11 +498,13 @@
             </div>
           </div>
         </div>
+
+        
         <div class="col-lg-6 col-sm-12 mt-4">
           <div class="form-group">
              <select class="form-control" formControlName="hora">
       <option value="">Seleccione el horario disponible para esa fecha</option>
-      <option *ngFor="let h of horarios" [value]="h.id">
+      <option *ngFor="let h of horariosFiltrados" [value]="h.id">
   {{ formatearHorario(h.horaInicio, h.horaFin, h.dia) }}
 </option>
 
@@ -520,14 +525,20 @@
             <input type="email" style="border: 1px dashed #000;" class="form-control" id="exampleInputEmail1"
               aria-describedby="emailHelp" name="email" placeholder="Enter email" formControlName="email">
             <div class="text-danger">
-              @if(formulario.get('email')?.invalid && (isFormSubmitted || formulario.get('email')?.touched ||
-              formulario.get('email')?.dirty)){
-              @if(formulario.get('email')?.errors?.['required']){
-              Este campo es requerido}
-              @if(formulario.get('email')?.errors?.['pattern'])
-              {Ingrese un correo electronico}
-              }
-            </div>
+  @if(formulario.get('email')?.invalid && (isFormSubmitted || formulario.get('email')?.touched || formulario.get('email')?.dirty)){
+
+    @if(formulario.get('email')?.errors?.['required']){
+      Este campo es requerido
+    }
+    @if(formulario.get('email')?.errors?.['pattern']){
+      Ingrese un correo electrónico válido
+    }
+    @if(formulario.get('email')?.errors?.['maxlength']){
+      El correo no puede tener más de 40 caracteres
+    }
+  }
+</div>
+
           </div>
         </div>
 
@@ -543,6 +554,9 @@
               @if(formulario.get('telefono')?.errors?.['pattern'])
               {ingrese un numero de celular valido}
               }
+              @if(formulario.get('telefono')?.errors?.['maxlength']){
+      El telefono no puede tener más de 10 caracteres
+    }
             </div>
           </div>
         </div>
@@ -565,14 +579,29 @@
 
         
 
-        <div class="col-lg-12 col-sm-12 mt-4">
-          <div class="form-group">
-            <label for="detalles" class="form-label">Detalles / Sugerencias</label>
-            <textarea id="detalles" class="form-control" style="border: 1px dashed #000;" name="detalles"
-              placeholder="Deja aquí alguna sugerencia o detalle para tu reserva" formControlName="detalles"
-              rows="4"></textarea>
-          </div>
-        </div>
+        <div class="col-lg-12 col-sm-12 mt-4 position-relative">
+  <div class="form-group">
+    <label for="detalles" class="form-label">Detalles / Sugerencias</label>
+    <textarea 
+      id="detalles" 
+      class="form-control" 
+      style="border: 1px dashed #000;" 
+      name="detalles"
+      placeholder="Deja aquí alguna sugerencia o detalle para tu reserva" 
+      formControlName="detalles"
+      rows="4" 
+      maxlength="{{ maxCaracteres }}"
+      (input)="onInputDetalles()"
+    ></textarea>
+
+    <!-- Contador en la esquina inferior derecha -->
+    <small 
+      style="position: absolute; bottom: 5px; right: 10px; font-size: 0.8rem; color: gray;">
+      {{ caracteresRestantes }} caracteres restantes
+    </small>
+  </div>
+</div>
+
 
       </div>
 
@@ -590,7 +619,7 @@
     <div class="text-center d-flex flex-column align-items-center mx-auto">
       <div class="mt-2">
         <h1 class="nautilus" style="color:rgb(231, 91, 30);">COMENTARIOS</h1>
-        <h6 class="roboto text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h6>
+        <h6 class="roboto text-white">Cada opinión cuenta y nos inspira a seguir mejorando.</h6>
 
         <form [formGroup]="formularioMensaje" class="needs-validation">
           <div class="container">
@@ -635,13 +664,15 @@
           <div class="form-group mt-5">
             <input type="text" style="border: 1px dashed #ffffff;" class="form-control input1" id="comentario"
               aria-describedby="comentarioHelp" name="comentario" placeholder="Deje su comentario"
-              formControlName="comentario">
+              formControlName="comentario" maxlength="151">
             <div class="text-danger">
               @if(formularioMensaje.get('comentario')?.invalid && (FormSubmitted ||
               formularioMensaje.get('comentario')?.touched || formularioMensaje.get('comentario')?.dirty)){
               @if(formularioMensaje.get('comentario')?.errors?.['required']){
               Este campo es requerido}
-              }
+              }@if(formularioMensaje.get('comentario')?.errors?.['maxlength']){
+      Máximo 150 caracteres permitidos
+    }
             </div>
           </div>
 
