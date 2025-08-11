@@ -41,7 +41,7 @@
           <td>{{reserva.nombre}}</td>
           <td>{{reserva.telefono}}</td>
           <td>{{reserva.n_personas}}</td>
-          <td>{{reserva.horario_id}}</td>
+          <td>{{ reserva.horario?.horaInicio }} - {{ reserva.horario?.horaFin }}</td>
           <td>{{reserva.email}}</td>
           <td>{{reserva.fecha}}</td>
           <td>

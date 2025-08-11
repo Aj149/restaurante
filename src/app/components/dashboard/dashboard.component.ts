@@ -385,7 +385,7 @@ onInputDetalles() {
         n_personas: +formValues.n_personas,
         fecha: formValues.fecha,
         horario_id: +formValues.hora,
-        detalles: formValues.detalles
+        detalles: formValues.detalles,
       };
       console.log(nuevaReserva); // Verifica los datos aquí
       this.formularioService.agregarReserva(nuevaReserva).subscribe(

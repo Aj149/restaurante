@@ -13,8 +13,8 @@
       <li class="list-group-item"><strong>Teléfono:</strong> {{ reserva.telefono }}</li>
       <li class="list-group-item"><strong>Correo:</strong> {{ reserva.email }}</li>
       <li class="list-group-item"><strong>Fecha:</strong> {{ reserva.fecha }}</li>
-      <li class="list-group-item"><strong>Hora de la reserva:</strong> {{ reserva.horario_id }}</li>
-      <li class="list-group-item"><strong>Lugar:</strong> {{ reserva.lugar_id }}</li>
+      <li class="list-group-item"><strong>Hora de la reserva:</strong> <td>{{ reserva.horario?.horaInicio }} - {{ reserva.horario?.horaFin }}</td></li>
+      <li class="list-group-item"><strong>Lugar:</strong> {{ reserva.lugar?.nombre }}</li>
       <li class="list-group-item"><strong>Número de personas:</strong> {{ reserva.n_personas }}</li>
       <li class="list-group-item"><strong>Detalles</strong> {{ reserva.detalles }}</li>
     </ul>

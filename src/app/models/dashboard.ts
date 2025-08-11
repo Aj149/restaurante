@@ -9,6 +9,8 @@ export class reserva{
     fecha: string='';
     horario_id: number=0; 
     detalles: string='';
+    horario?: Horario;
+    lugar?: Lugares;
 }
 
 // 2COMENTARIOS

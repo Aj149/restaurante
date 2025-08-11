@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { AdminComponent } from './components/admin/admin.component';
-import { LikesComponent } from './components/admin/likes/likes.component';
 import { ComentariosComponent } from './components/admin/comentarios/comentarios.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ListReservasComponent } from './components/admin/list-reservas/list-reservas.component';
@@ -65,7 +64,6 @@ export const routes: Routes = [
     component: AdminComponent, canActivate: [adminAuthGuard],
     
     children: [
-      { path: 'likes', component: LikesComponent },
       { path: 'comentarios', component: ComentariosComponent },
       { path: 'lista-de-reservas', component: ListReservasComponent },
       { path: 'editar-reserva/:id_reserva', component: EditReservasComponent },

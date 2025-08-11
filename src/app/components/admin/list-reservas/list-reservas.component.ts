@@ -6,8 +6,9 @@ import { BuscadorPipe } from '../../../pipe/buscador.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BehaviorSubject, debounceTime, distinctUntilChanged, timeout } from 'rxjs';
 import Swal from 'sweetalert2';
-import { reserva } from '../../../models/dashboard';
+import { Horario, reserva } from '../../../models/dashboard';
 import { FormsModule } from '@angular/forms';
+import { LugaresService } from '../../../services/lugares.service';
 
 @Component({
   selector: 'app-list-reservas',
@@ -26,7 +27,7 @@ export class ListReservasComponent implements OnInit  {
  
 
   reservas : reserva[] = [];
-  
+  horarios: Horario[] = [];
   reservasFiltradas: reserva[] = [];
 
   filterList(): void {
@@ -51,20 +52,26 @@ export class ListReservasComponent implements OnInit  {
 
 
 constructor(
-  private formularioService: FormularioService
+  private formularioService: FormularioService,
+  private lugaresService: LugaresService,
 ){}
 
 
 listarReservas(): void {
   this.formularioService.obtenerReserva().subscribe({
-    next: (reserva: reserva[]) => {
-      this.reservas = reserva;
+    next: (reservas: reserva[]) => {
+      this.reservas = reservas;
+      this.reservasFiltradas = reservas; // Si quieres, aplica filtros luego
     },
-    error: (err: Error) => {
-      console.log(err);
+    error: (err) => {
+      console.error('Error al obtener reservas', err);
     }
   });
 }
+
+
+
+
 
 ngOnInit(): void {
   this.listarReservas();
