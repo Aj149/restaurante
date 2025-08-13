@@ -31,191 +31,253 @@ import { BebidasService } from '../../services/bebidas.service';
 
 
 export class DashboardComponent {
+// Declaración de formularios reactivos para manejar datos en la UI
+formularioMensaje: FormGroup;
+formulario: FormGroup;
+isFormSubmitted: boolean = false; // Controla si el formulario fue enviado
+FormSubmitted: boolean = false;   // Otro flag para estado de envío (podría unificarse)
 
-  formularioMensaje: FormGroup
-  formulario: FormGroup;
-  isFormSubmitted: boolean = false;
-  FormSubmitted: boolean = false;
+// Variables para controlar el popup de platos especiales
+isPopupVisible = false;           // Controla si el popup está visible o no
+platos: Platos[] = [];            // Lista general de platos
+platosEspeciales: Platos[] = [];  // Lista filtrada de platos especiales
+platoSeleccionado!: Platos;       // Plato seleccionado para mostrar detalles en popup
 
-  // 4popup platos especiales
-
-  isPopupVisible = false;
-  platos: Platos[] = [];
-  platosEspeciales: Platos[] = [];
-  platoSeleccionado!: Platos;
-
-  // 4traer platos, lugares, comentarios y personal
-
-  ngOnInit(): void {
-    if (this.platos) {
-      this.traerPlatos();
-    }
-    if (this.lugares) {
-      this.traerLugares();
-    }
-    if (this.comentario) {
-      this.listarComentarios();
-    }
-    if (this.personal) {
-      this.traerPersonal();
-    }
-    if (this.bebidas) {
-      this.traerBebidas();
-    }
+// Método que se ejecuta al inicializar el componente Angular
+ngOnInit(): void {
+  // Se verifican las variables (posiblemente propiedades que indican si hay datos) y si existen,
+  // se llaman a funciones para cargar los datos necesarios desde servicios
+  if (this.platos) {
+    this.traerPlatos();       // Carga los platos desde el backend o servicio
   }
-
-  traerPersonal(): void {
-    this.PersonalService.obtenerPersonal().subscribe(
-      (data) => {
-        this.personal = data;
-        this.personalEspeciales = this.personal.slice(0, 4);
-      },
-      (error) => {
-        console.error('Error al cargar el personal', error);
-      }
-    );
+  if (this.lugares) {
+    this.traerLugares();      // Carga los lugares
   }
-
-  traerPlatos(): void {
-    this.platosService.obtenerPlatos().subscribe(
-      (data) => {
-        this.platos = data;
-        this.platosEspeciales = this.platos.slice(0, 4); // primeros 4 platos
-      },
-      (error) => {
-        console.error('Error al cargar los platos', error);
-      }
-    );
+  if (this.comentario) {
+    this.listarComentarios(); // Carga comentarios
   }
-
-  traerLugares(): void {
-    this.lugaresService.obtenerLugares().subscribe(
-      (data) => {
-        this.lugares = data;
-        this.lugaresEspeciales = this.lugares.slice(0, 4);
-      },
-      (error) => {
-        console.error('Error al cargar lugares:', error);
-      }
-    );
+  if (this.personal) {
+    this.traerPersonal();     // Carga el personal
   }
-
-  traerBebidas(): void {
-    this.bebidasService.obtenerBebidas().subscribe(
-      (data) => {
-        this.bebidas = data;
-        this.bebidasEspeciales = this.bebidas.slice(0, 6);
-      },
-      (error) => {
-        console.error('Error al cargar bebidas:', error);
-      }
-    );
+  if (this.bebidas) {
+    this.traerBebidas();      // Carga las bebidas
   }
+}
 
-  onLugarChange(event: any) {
-    const lugarId = +event.target.value;
-    const lugarSeleccionado = this.lugares.find(l => l.id_lugar === lugarId);
+// Función para traer datos del personal desde el servicio
+traerPersonal(): void {
+  this.PersonalService.obtenerPersonal().subscribe(
+    (data) => {
+      // Cuando se recibe la respuesta, se asigna a la variable local 'personal'
+      this.personal = data;
 
-    if (lugarSeleccionado) {
-      this.capacidades = lugarSeleccionado.capacidad;
+      // Además, se crea una lista 'personalEspeciales' con los primeros 4 elementos,
+      // probablemente para destacar o mostrar en otra sección
+      this.personalEspeciales = this.personal.slice(0, 4);
+    },
+    (error) => {
+      // En caso de error al obtener datos, se muestra en consola para depuración
+      console.error('Error al cargar el personal', error);
+    }
+  );
+}
 
-      const personasCtrl = this.formulario.get('n_personas');
-      if (personasCtrl && personasCtrl.value > this.capacidades) {
-        personasCtrl.setValue(this.capacidades);
-      }
 
-      // 🔹 Cargar todos los horarios de este lugar
-      this.lugaresService.getHorariosPorLugar(lugarId).subscribe((data: Horario[]) => {
-        this.todosLosHorarios = data; // Guardamos todos
-        this.horarios = [];
-      });
-    } else {
-      this.capacidades = 0;
-      this.todosLosHorarios = [];
+  // Función para obtener la lista completa de platos desde el servicio
+traerPlatos(): void {
+  this.platosService.obtenerPlatos().subscribe(
+    (data) => {
+      // Al recibir los datos, se asignan a la variable 'platos'
+      this.platos = data;
+
+      // Se seleccionan los primeros 4 platos para destacarlos como 'especiales'
+      this.platosEspeciales = this.platos.slice(0, 4);
+    },
+    (error) => {
+      // Si ocurre un error, se muestra en la consola para depurar
+      console.error('Error al cargar los platos', error);
+    }
+  );
+}
+
+// Función para obtener la lista completa de lugares desde el servicio
+traerLugares(): void {
+  this.lugaresService.obtenerLugares().subscribe(
+    (data) => {
+      // Se asignan los datos recibidos a 'lugares'
+      this.lugares = data;
+
+      // Se filtran los primeros 4 lugares para destacarlos como especiales
+      this.lugaresEspeciales = this.lugares.slice(0, 4);
+    },
+    (error) => {
+      // Muestra en consola si hay algún error al cargar los lugares
+      console.error('Error al cargar lugares:', error);
+    }
+  );
+}
+
+// Función para obtener la lista completa de bebidas desde el servicio
+traerBebidas(): void {
+  this.bebidasService.obtenerBebidas().subscribe(
+    (data) => {
+      // Se asignan las bebidas recibidas a la variable local
+      this.bebidas = data;
+
+      // Se seleccionan los primeros 6 para mostrarlos como bebidas especiales
+      this.bebidasEspeciales = this.bebidas.slice(0, 6);
+    },
+    (error) => {
+      // Loguea cualquier error que ocurra al obtener las bebidas
+      console.error('Error al cargar bebidas:', error);
+    }
+  );
+}
+
+  // Se ejecuta cuando cambia la selección de lugar en el formulario
+onLugarChange(event: any) {
+  // Obtener el id del lugar seleccionado y convertirlo a número
+  const lugarId = +event.target.value;
+
+  // Buscar el lugar completo en la lista de lugares usando el id
+  const lugarSeleccionado = this.lugares.find(l => l.id_lugar === lugarId);
+
+  if (lugarSeleccionado) {
+    // Si existe el lugar, asignar su capacidad a la variable local
+    this.capacidades = lugarSeleccionado.capacidad;
+
+    // Obtener el control del formulario que contiene el número de personas
+    const personasCtrl = this.formulario.get('n_personas');
+
+    // Si el número ingresado es mayor a la capacidad, ajustar al máximo permitido
+    if (personasCtrl && personasCtrl.value > this.capacidades) {
+      personasCtrl.setValue(this.capacidades);
+    }
+
+    // 🔹 Obtener todos los horarios disponibles para el lugar seleccionado
+    this.lugaresService.getHorariosPorLugar(lugarId).subscribe((data: Horario[]) => {
+      // Guardar todos los horarios en una variable para uso posterior
+      this.todosLosHorarios = data;
+
+      // Inicializar el arreglo de horarios filtrados vacío porque aún no se ha filtrado por fecha
       this.horarios = [];
-    }
+    });
+  } else {
+    // Si no hay lugar seleccionado o no existe, reiniciar variables relacionadas
+    this.capacidades = 0;
+    this.todosLosHorarios = [];
+    this.horarios = [];
   }
+}
 
+// Se ejecuta cuando cambia la fecha seleccionada en el formulario
+onFechaChange(event: any) {
+  // Obtener la fecha seleccionada en formato "YYYY-MM-DD"
+  const fechaSeleccionada = event.target.value;
 
-  onFechaChange(event: any) {
-  const fechaSeleccionada = event.target.value; // "YYYY-MM-DD"
+  // Si no hay fecha, limpiar listas de horarios y salir
   if (!fechaSeleccionada) {
     this.horarios = [];
     this.horariosFiltrados = [];
     return;
   }
 
-  // Evitar problema de timezone: parse manual
+  // Para evitar problemas con la zona horaria, desglosar la fecha manualmente
   const [anio, mes, dia] = fechaSeleccionada.split('-').map(Number);
-  const dateObj = new Date(anio, mes - 1, dia); // mes - 1 porque en JS los meses van de 0 a 11
 
+  // Crear un objeto Date con año, mes (menos 1 porque JS cuenta meses desde 0) y día
+  const dateObj = new Date(anio, mes - 1, dia);
+
+  // Lista de días de la semana en español, índice 0 es domingo
   const diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+
+  // Obtener el nombre del día de la semana para la fecha seleccionada
   const diaSemana = diasSemana[dateObj.getDay()];
 
-  // Filtrar por día
+  // Filtrar los horarios del lugar para que solo queden los que coinciden con ese día
   this.horarios = this.todosLosHorarios.filter((h: Horario) => h.dia === diaSemana);
 
-  // Filtrar por hora si la fecha es hoy
+  // Aplicar filtrado adicional por hora si la fecha es hoy (función propia)
   this.filtrarHorariosPorFecha(fechaSeleccionada);
 }
 
 
 
-  // para que el cliente no pueda seleccionar un horario pasado
-  filtrarHorariosPorFecha(fechaSeleccionada: string) {
-  const ahora = new Date();
+  /**
+ * Filtra los horarios para que el cliente no pueda seleccionar horarios pasados en la fecha seleccionada.
+ * Además, ordena los horarios disponibles de forma cíclica desde una hora base (8 AM).
+ * 
+ * @param fechaSeleccionada - Fecha en formato "YYYY-MM-DD"
+ */
+filtrarHorariosPorFecha(fechaSeleccionada: string) {
+  const ahora = new Date(); // Fecha y hora actual
 
+  // Crear objeto Date para la fecha seleccionada con horas en 00:00:00.000
   const parts = fechaSeleccionada.split('-');
   const fechaSel = new Date(+parts[0], +parts[1] - 1, +parts[2]);
   fechaSel.setHours(0, 0, 0, 0);
 
-  // Horarios disponibles
+  // Filtrar solo los horarios cuyo estado sea 'Disponible'
   const horariosDisponibles = this.horarios.filter(h => h.estado === 'Disponible');
 
-  // Hora base para ordenar (8am)
+  // Definir hora base para ordenar horarios (8:00 AM convertido a minutos)
   const baseHora = 8 * 60; // 480 minutos
 
-  // Función para convertir hora a minutos cíclicos según baseHora
+  /**
+   * Convierte una hora en formato "HH:mm" a minutos cíclicos,
+   * partiendo desde la baseHora para ordenar horarios después de esa hora primero.
+   * Ejemplo: 7:00 AM sería negativo, se ajusta sumando 1440 minutos (un día).
+   * 
+   * @param hora - string en formato "HH:mm"
+   * @returns minutos cíclicos para ordenar
+   */
   const minutosCiclicos = (hora: string) => {
     const [h, m] = hora.split(':').map(Number);
     let total = h * 60 + m - baseHora;
-    if (total < 0) total += 1440; // suma un día si es negativo
+    if (total < 0) total += 1440; // Ajustar para horas antes de la base
     return total;
   };
 
-  // Filtrar y ordenar según fecha
+  // Si la fecha seleccionada es el día actual
   if (fechaSel.toDateString() === ahora.toDateString()) {
+    // Definir límite como la hora actual + 1 hora para evitar reservar en horarios ya muy próximos o pasados
     let limite = new Date(ahora.getTime() + 1 * 60 * 60 * 1000);
+
+    // Obtener el fin del día para la fecha seleccionada
     const finDia = new Date(fechaSel);
     finDia.setHours(23, 59, 59, 999);
+
+    // Ajustar límite para que no pase del fin del día
     if (limite > finDia) {
       limite = finDia;
     }
 
+    // Filtrar horarios disponibles que sean posteriores o iguales al límite calculado
     const filtrados = horariosDisponibles.filter(h => {
+      // Convertir hora de inicio del horario a un objeto Date en la fecha seleccionada
       const [horaInicio, minutoInicio] = h.horaInicio.split(':').map(Number);
       const fechaHorario = new Date(fechaSel);
       fechaHorario.setHours(horaInicio, minutoInicio, 0, 0);
+      // Retornar solo los horarios que estén después del límite (hora actual + 1h)
       return fechaHorario >= limite;
     });
 
+    // Asignar a horariosFiltrados ordenados usando la función minutosCiclicos
     this.horariosFiltrados = filtrados.sort((a, b) => minutosCiclicos(a.horaInicio) - minutosCiclicos(b.horaInicio));
   } else {
+    // Si la fecha no es hoy, mostrar todos los horarios disponibles ordenados
     this.horariosFiltrados = horariosDisponibles.sort((a, b) => minutosCiclicos(a.horaInicio) - minutosCiclicos(b.horaInicio));
   }
 }
 
-
-
-
-
-
-  horarioActual(event: any) {
-    const fechaSeleccionada = event.target.value;
-    this.filtrarHorariosPorFecha(fechaSeleccionada);
-  }
-
-
+/**
+ * Método que se ejecuta al cambiar la fecha en el input,
+ * llama a la función que filtra los horarios según la fecha.
+ */
+horarioActual(event: any) {
+  const fechaSeleccionada = event.target.value;
+  this.filtrarHorariosPorFecha(fechaSeleccionada);
+}
 
 
 
@@ -430,16 +492,30 @@ onInputDetalles() {
 
 
 
-  formatearHorario(horaInicio: string, horaFin: string, dia: string): string {
-    const formato = (hora: string) => {
-      const [h, m] = hora.split(':').map(Number);
-      const ampm = h >= 12 ? 'pm' : 'am';
-      const hora12 = h % 12 || 12;
-      return `${hora12}${ampm}`;
-    };
+  /**
+ * Convierte una hora de formato 24h a formato 12h y arma un texto con el rango horario y el día.
+ */
+formatearHorario(horaInicio: string, horaFin: string, dia: string): string {
+  
+  // Función interna para dar formato a una hora (ej. "14:30" → "2pm")
+  const formato = (hora: string) => {
+    // Divide la hora en horas y minutos, y convierte a número
+    const [h, m] = hora.split(':').map(Number);
 
-    return `${formato(horaInicio)} a ${formato(horaFin)} (${dia})`;
-  }
+    // Determina si es AM o PM
+    const ampm = h >= 12 ? 'pm' : 'am';
+
+    // Convierte la hora de 24h a 12h (usando 12 en lugar de 0)
+    const hora12 = h % 12 || 12;
+
+    // Retorna la hora formateada con AM o PM (sin minutos en este caso)
+    return `${hora12}${ampm}`;
+  };
+
+  // Devuelve el rango horario y el día (ej. "2pm a 4pm (Lunes)")
+  return `${formato(horaInicio)} a ${formato(horaFin)} (${dia})`;
+}
+
 
 
 

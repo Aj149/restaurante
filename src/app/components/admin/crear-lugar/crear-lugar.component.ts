@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { Lugares } from '../../../models/dashboard';
+import { Horario, Lugares } from '../../../models/dashboard';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LugaresService } from '../../../services/lugares.service';
 import { FormularioService } from '../../../services/formulario.service';
 import { HttpClient } from '@angular/common/http';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-crear-lugar',
@@ -20,11 +21,33 @@ export class CrearLugarComponent {
   FormSubmitted: boolean = false;
   formulario: FormGroup;
   lugar: Lugares = new Lugares();
+  lugares: Lugares = {
+    id_lugar: 0,
+    descripcion: '',
+    nombre: '',
+    imagen: '',
+    precio: 0,
+    capacidad: 0,
+    dia: '',
+    hora: '',
+    estado: ''
+  };
+
+  diasSemana: string[] = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+diaSeleccionado: string = '';
+horariosDelDia: Horario[] = [];
+horarioEditado: Horario | null = null;
+modoEdicion: boolean = false;
+horarios: Horario[] = [];
+   horarioParaEditar: Horario | null = null;
+
 
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
     private router: Router,
+    private toastr: ToastrService,
+    private activatedRoute: ActivatedRoute,
     private lugarService: LugaresService,
     private formularioService: FormularioService
   ) {
@@ -63,6 +86,9 @@ export class CrearLugarComponent {
 });
 
   }
+
+
+
 
   agregarLugar() {
     this.isFormSubmitted = true;
