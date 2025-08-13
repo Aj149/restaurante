@@ -35,59 +35,69 @@ export class UserRegisterComponent {
       password: ['', [ Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&._-]).{8,}$/) ]],
       website: ['']
     });
+  }// Getter para acceder fácilmente a los controles del formulario de registro
+get f() { 
+  return this.registerForm.controls;  // Retorna todos los controles del formulario 'registerForm'
+}
+
+// Función que se ejecuta cuando el usuario envía el formulario de registro
+onSubmit() {
+  // Validación simple para detectar bots: si el campo 'website' tiene valor, se detiene el envío
+  if (this.registerForm.get('website')?.value) {
+    console.warn('Bot detectado: no enviar datos');
+    return;  // No enviar datos si se detecta bot
   }
 
-  get f() { return this.registerForm.controls; }
+  // Si el formulario es inválido, no continuar
+  if (this.registerForm.invalid) return;
 
-  onSubmit() {
-    if (this.registerForm.get('website')?.value) {
-      console.warn('Bot detectado: no enviar datos');
-      return;
-    }
-    if (this.registerForm.invalid) return;
-  
-    this.isLoading = true;
-    this.errorMessage = '';
-  
-    this.authService.register(this.registerForm.value).subscribe({
-      next: (response) => {
-        this.isLoading = false;
-  
-        // Mostrar alerta de éxito cuando el usuario se haya creado
+  this.isLoading = true;  // Muestra indicador de carga (por ejemplo, un spinner)
+  this.errorMessage = ''; // Limpia mensajes de error previos
+
+  // Llama al servicio de autenticación para registrar al usuario con los datos del formulario
+  this.authService.register(this.registerForm.value).subscribe({
+    // Si el registro fue exitoso
+    next: (response) => {
+      this.isLoading = false;  // Quita indicador de carga
+
+      // Muestra alerta de éxito con SweetAlert
+      Swal.fire({
+        icon: 'success',
+        title: '¡Usuario creado!',
+        text: 'Tu cuenta ha sido creada exitosamente.',
+        showConfirmButton: false,
+        timer: 2500  // La alerta se cierra automáticamente después de 2.5 segundos
+      }).then(() => {
+        this.router.navigate(['/login']);  // Redirige a la página de login después de cerrar la alerta
+      });
+    },
+
+    // Si ocurre un error durante el registro
+    error: (err) => {
+      this.isLoading = false;  // Quita indicador de carga
+
+      // Si el error indica que el email ya está registrado
+      if (err.error?.message === 'Email ya registrado') {
         Swal.fire({
-          icon: 'success',
-          title: '¡Usuario creado!',
-          text: 'Tu cuenta ha sido creada exitosamente.',
-          showConfirmButton: false,
-          timer: 2500
-        }).then(() => {
-          this.router.navigate(['/login']); // Redirigir a la página de login después de la alerta
+          icon: 'error',
+          title: 'Error',
+          text: 'El email electrónico ya está registrado. Por favor, usa otro email.',
         });
-      },
-      error: (err) => {
-        this.isLoading = false;
-  
-        // Mostrar alerta si el email ya existe
-        if (err.error?.message === 'Email ya registrado') {
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'El email electrónico ya está registrado. Por favor, usa otro email.',
-          });
-        } else {
-          // Alerta genérica de error
-          this.errorMessage = err.error?.message || 'Error en el registro';
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: this.errorMessage,
-          });
-        }
+      } else {
+        // En caso de otros errores, muestra un mensaje genérico o el mensaje recibido
+        this.errorMessage = err.error?.message || 'Error en el registro';
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: this.errorMessage,
+        });
       }
-    });
-  }
-  
-  togglePasswordVisibility() {
-    this.showPassword = !this.showPassword;
-  }
+    }
+  });
+}
+
+// Función para mostrar u ocultar la contraseña en el formulario
+togglePasswordVisibility() {
+  this.showPassword = !this.showPassword;  // Cambia el estado para mostrar o ocultar la contraseña
+}
 }

@@ -52,9 +52,10 @@ horarios: Horario[] = [];
   this.horarioParaEditar = { ...horario };
 }
 
+  // 1guarda el horario editado
 
  onHorarioGuardado(horarioActualizado: Horario) {
-  console.log('ID del horario:', horarioActualizado.id);  // Verifica que tiene valor
+  console.log('ID del horario:', horarioActualizado.id);  
 
   this.lugaresService.updateHorario(horarioActualizado.id, horarioActualizado)
     .subscribe(() => {
@@ -68,11 +69,7 @@ horarios: Horario[] = [];
 }
 
 
-
-
-
-
-// edit-lugar.component.ts
+// 1 carga todos los horarios de un lugar sin filtro de día.
 
   cargarHorarios() {
   if (!this.lugar?.id_lugar) {
@@ -86,7 +83,7 @@ horarios: Horario[] = [];
 }
 
 
-
+// 1 carga horarios filtrados por lugar y día seleccionado.
   onDiaChange() {
   if (this.diaSeleccionado && this.lugar?.id_lugar) {
     this.lugaresService.getHorariosPorLugarYDia(this.lugar.id_lugar, this.diaSeleccionado)
@@ -105,22 +102,32 @@ horarios: Horario[] = [];
 }
 
 
-  ngOnInit(): void {
+ ngOnInit(): void {
+  // Obtiene el parámetro 'id_lugar' de la URL actual
   const id_lugar = this.activatedRoute.snapshot.params['id_lugar'];
+
+  // Llama al servicio 'lugaresService' para obtener los datos del lugar con ese id
   this.lugaresService.id_lugar(id_lugar).subscribe(
     data => {
+      // 3. Si la respuesta es exitosa, asigna los datos recibidos a la variable 'lugar'
       this.lugar = data;
-      this.cargarHorarios();  // cargar horarios solo de ese lugar
+
+      //  Luego, llama al método cargarHorarios() para cargar los horarios relacionados con ese lugar
+      this.cargarHorarios();
     },
     err => {
+      // 5. Si ocurre un error, muestra un mensaje de error con toastr
       this.toastr.error(err.error.message, 'Fail', {
         timeOut: 3000,
         positionClass: 'toast-top-center',
       });
+
+      // Redirige al usuario a la página principal
       this.router.navigate(['/']);
     }
   );
 }
+
 
 eliminarHorario(horario: any) {
   Swal.fire({

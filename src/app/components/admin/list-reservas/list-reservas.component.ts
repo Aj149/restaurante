@@ -30,6 +30,8 @@ export class ListReservasComponent implements OnInit  {
   horarios: Horario[] = [];
   reservasFiltradas: reserva[] = [];
 
+  // 1 es un buscador para filtrar reservas por nombre
+
   filterList(): void {
     this.searchTerm$
       .pipe(

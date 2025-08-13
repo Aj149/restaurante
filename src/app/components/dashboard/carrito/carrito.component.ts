@@ -46,7 +46,7 @@ usuarios: Usuarios = {
   password: '',
   telefono: '',
   direccion: '',
-  platos: [] // si quieres dejar aquí, pero no es recomendable
+  platos: []
 };
 
 iva: number = 1.50;

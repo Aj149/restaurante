@@ -31,14 +31,14 @@ export class ResetComponent {
     this.resetForm = this.fb.group({
       newPassword: ['',[Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&._-]).{8,}$/)]]
     });
-
+// 1 Se suscribe a los parámetros de la URL para obtener valores que vienen en la consulta (?token=...)
     this.route.queryParams.subscribe(params => {
-      this.token = params['token'];
+      this.token = params['token']; //1 Guarda el valor del parámetro 'token' en la variable 'token'
     });
   }
-
+// 1 Getter para obtener el control del formulario llamado 'newPassword'
   get newPassword() {
-    return this.resetForm.get('newPassword');
+    return this.resetForm.get('newPassword'); // 1 Retorna el control del formulario para la nueva contraseña
   }
 
   onSubmit() {
@@ -58,7 +58,7 @@ export class ResetComponent {
             text: 'Ahora puedes iniciar sesión con tu nueva contraseña.',
             confirmButtonText: 'Ir al login'
           }).then(() => {
-            this.router.navigate(['/login']);
+            this.router.navigate(['/loginAdmin']);
           });
         },
         error: err => {

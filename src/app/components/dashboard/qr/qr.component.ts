@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Platos } from '../../../models/dashboard';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-qr',
@@ -35,6 +37,28 @@ export class QrComponent {
       }
     });
   }
+
+  descargarComprobante() {
+  const elemento = document.querySelector('.factura-container') as HTMLElement;
+  if (!elemento) {
+    alert('No se encontró el comprobante para descargar.');
+    return;
+  }
+
+  html2canvas(elemento).then(canvas => {
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const imgProps = pdf.getImageProperties(imgData);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    pdf.save('comprobante.pdf');
+  }).catch(error => {
+    console.error('Error generando PDF:', error);
+    alert('Error al generar el comprobante.');
+  });
+}
 
 
 

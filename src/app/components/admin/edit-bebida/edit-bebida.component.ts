@@ -31,6 +31,7 @@ export class EditBebidaComponent {
   ) {}
 
 
+  // 1 solicita informacion de la bebida a editar
   ngOnInit(): void {
     const id_bebida = this.ActivatedRoute.snapshot.params['id_bebida'];
     this.bebidasService.id_bebida(id_bebida).subscribe(

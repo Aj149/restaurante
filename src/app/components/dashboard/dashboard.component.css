@@ -30,7 +30,7 @@
       background-size: cover;
       height: 700px;
       @media (max-width: 768px) {
-        height: 600px;
+        height: 750px;
       }
     }
 
@@ -255,7 +255,7 @@
 }
 /* efecto enviar */
 .enviar.clicked {
-  transform: translate(-50%, -150%);
+  transform: translate(-50%, -250%);
 }
 
 @media screen and (max-width: 992px) {
@@ -295,7 +295,7 @@
   .enviar-container {
     width: 50px; /* Reducir aún más el ancho del contenedor de enviar */
     height: 45px; /* Reducir aún más la altura del contenedor de enviar */
-    margin-left: 303px; /* Centrar aún más el contenedor horizontalmente */
+    margin-left: 350px; /* Centrar aún más el contenedor horizontalmente */
     margin-top: -58px; /* Ajustar aún más la posición vertical del contenedor */
   }
 }

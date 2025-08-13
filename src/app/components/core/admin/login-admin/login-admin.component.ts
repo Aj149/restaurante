@@ -39,43 +39,51 @@ export class LoginAdminComponent {
       });
       
     }
-  
-    get cedula() {
-      return this.loginForm.get('cedula');
-    }
-    
-  
-    get password() {
-      return this.loginForm.get('password');
-    }
-  
-    togglePasswordVisibility() {
-      this.showPassword = !this.showPassword;
-    }
-    
-  
-  
-    onSubmit() {
-      if (this.loginForm.invalid) return;
-      this.isLoading = true;
-    
-      const { cedula, password } = this.loginForm.value;
-    
-      this.adminService.login({ cedula, password }).subscribe({
-        next: (response) => {
-          this.router.navigate(['/admin']);
-        },
-        error: (err) => {
-          console.error('Error al iniciar sesión:', err);
-          this.isLoading = false;
-    
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Credenciales inválidas o error de red. Intente nuevamente.',
-            confirmButtonColor: '#d33',
-          });
-        }
+  // Getter para obtener el control del formulario llamado 'cedula'
+get cedula() {
+  return this.loginForm.get('cedula');  // Retorna el control del formulario para la cédula
+}
+
+// Getter para obtener el control del formulario llamado 'password'
+get password() {
+  return this.loginForm.get('password');  // Retorna el control del formulario para la contraseña
+}
+
+// Función que alterna la visibilidad de la contraseña
+togglePasswordVisibility() {
+  this.showPassword = !this.showPassword;  // Cambia el valor booleano para mostrar u ocultar la contraseña
+}
+
+// Función que se ejecuta cuando se envía el formulario (login)
+onSubmit() {
+  // Si el formulario es inválido, no hacer nada (evitar enviar datos erróneos)
+  if (this.loginForm.invalid) return;
+
+  this.isLoading = true;  // Indica que se está procesando el inicio de sesión (puede mostrar un spinner)
+
+  // Extrae los valores 'cedula' y 'password' del formulario
+  const { cedula, password } = this.loginForm.value;
+
+  // Llama al servicio para iniciar sesión enviando las credenciales
+  this.adminService.login({ cedula, password }).subscribe({
+    // Si la respuesta es exitosa
+    next: (response) => {
+      this.router.navigate(['/admin']);  // Redirige a la página de administración
+    },
+
+    // Si ocurre un error al iniciar sesión
+    error: (err) => {
+      console.error('Error al iniciar sesión:', err);  // Muestra el error en consola
+      this.isLoading = false;  // Detiene el indicador de carga
+
+      // Muestra una alerta amigable con SweetAlert para informar del error
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Credenciales inválidas o error de red. Intente nuevamente.',
+        confirmButtonColor: '#d33',
       });
     }
+  });
 }
+ }

@@ -1,7 +1,7 @@
 @if (datosFactura) {
 
   <div class="factura-container">
-    <h2 class="titulo">🍽 Factura Electrónica</h2>
+    <h2 class="titulo">🍽 Comprobante</h2>
     <p><strong>Fecha:</strong> {{ datosFactura.fecha | date:'fullDate' }} {{ datosFactura.fecha | date:'shortTime' }}</p>
 
     <p><strong>Cliente:</strong> 
@@ -46,6 +46,14 @@
     <p class="agradecimiento">¡Gracias por su pedido! 🎉</p>
   </div>
 }
+<div class="d-flex justify-content-center mt-4">
+
+  <button id="btnDescargar" (click)="descargarComprobante()" class="btn-descargar">
+    Descargar Comprobante PDF
+  </button>
+</div>
+
+
 
 @if (!datosFactura) {
 

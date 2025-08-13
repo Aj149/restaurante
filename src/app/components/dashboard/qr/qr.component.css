@@ -45,3 +45,34 @@
   color: #388e3c;
   font-weight: 600;
 }
+
+
+.btn-descargar {
+  background-color: #28a745;      /* Verde agradable */
+  color: white;
+  font-weight: 600;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 4px 6px rgba(40, 167, 69, 0.4);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+}
+
+.btn-descargar:hover {
+  background-color: #218838;      /* Verde un poco más oscuro */
+  box-shadow: 0 6px 8px rgba(33, 136, 56, 0.6);
+}
+
+.btn-descargar:active {
+  background-color: #1e7e34;
+  box-shadow: 0 3px 5px rgba(30, 126, 52, 0.8);
+  transform: translateY(2px);
+}
+
+.btn-descargar:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.5);
+}

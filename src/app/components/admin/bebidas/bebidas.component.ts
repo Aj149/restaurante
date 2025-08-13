@@ -24,6 +24,7 @@ export class BebidasComponent {
       this.listarBebidas();
     }
 
+    // 1trae las bebidas de la base de datos
     listarBebidas(): void {
       this.bebidasService.obtenerBebidas().subscribe({
         next: (bebidas: Bebidas[]) => {
